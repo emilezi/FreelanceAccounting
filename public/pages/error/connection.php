@@ -1,0 +1,1 @@
+<p>La connexion à la base de données n'a pas pu être établie. Pour que la configuration avec la base de données soit valide, assurez-vous d'avoir saisi les bonnes informations de connexion dans le fichier config/db_connexion.php.</p>

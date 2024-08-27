@@ -1,0 +1,1 @@
+<p>Les deux mots de passe ne correspondent pas.</p>
