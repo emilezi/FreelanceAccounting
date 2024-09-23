@@ -21,7 +21,7 @@ class Currency extends Database{
 
         $user = $u->fetch();
 
-        $q = $db->prepare("SELECT * FROM Service WHERE SIREN=:SIREN");
+        $q = $db->prepare("SELECT * FROM Currency WHERE SIREN=:SIREN");
         $q->execute([
             'SIREN' => $user['SIREN']
         ]);
@@ -49,6 +49,28 @@ class Currency extends Database{
 
 
     public function addCurrency(){
+
+        $db = self::getDatabase();
+
+        $u = $db->prepare("SELECT * FROM User WHERE id=:id");
+        $u->execute([
+            'id' => $_SESSION['id']
+            ]);
+
+        $user = $u->fetch();
+
+        $q = $db->prepare("INSERT INTO Currency(`SIREN`,`customer_name`,`service_name`,`start_date`,`end_date`,`hours_days`,`number_days`,`documents`,`description`) VALUES(:SIREN,:customer_name,:service_name,:start_date,:end_date,:hours_days,:number_days,:documents,:description)");
+        $q->execute([
+            'SIREN' => $user['SIREN'],
+            'customer_name'=> $this->currency['customer_name'],
+            'service_name' => $this->currency['service_name'],
+            'start_date' => $this->currency['start_date'],
+            'end_date' => $this->currency['end_date'],
+            'hours_days' => $this->currency['hours_days'],
+            'number_days' => $this->currency['number_days'],
+            'documents' => $this->currency['documents'],
+            'description' => $this->currency['description']
+            ]);
 
     }
 

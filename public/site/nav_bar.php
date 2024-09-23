@@ -3,7 +3,7 @@
   <li><a href="index.php?link=admin">Admin</a></li>
 </ul>
 <nav class="light-blue lighten-1" role="navigation">
-<div class="nav-wrapper container"><a id="logo-container" href="index.php" class="brand-logo">FreelanceManager</a>
+<div class="nav-wrapper container"><a id="logo-container" href="index.php" class="brand-logo">FreelanceAccounting</a>
     <ul class="right hide-on-med-and-down">
     <li><a href="index.php?link=client">Clients</a></li>
     <li><a href="index.php?link=currency">Devises</a></li>

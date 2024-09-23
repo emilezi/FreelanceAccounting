@@ -50,6 +50,25 @@ class Client extends Database{
 
     public function addClient(){
 
+        $db = self::getDatabase();
+
+        $u = $db->prepare("SELECT * FROM User WHERE id=:id");
+        $u->execute([
+            'id' => $_SESSION['id']
+            ]);
+
+        $user = $u->fetch();
+
+        $q = $db->prepare("INSERT INTO Client(`SIREN`,`name`,`email`,`phone`,`state`,`description`) VALUES(:SIREN,:name,:email,:phone,:state,:description)");
+        $q->execute([
+            'SIREN' => $user['SIREN'],
+            'name'=> $this->client['name'],
+            'email' => $this->client['email'],
+            'phone' => $this->client['phone'],
+            'state' => 'active',
+            'description' => $this->client['description']
+            ]);
+
     }
 
 
@@ -61,6 +80,8 @@ class Client extends Database{
 
 
     public function deleteClient(){
+
+        
         
     }
     

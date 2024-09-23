@@ -116,6 +116,7 @@ class Database{
         `email` varchar(128) NOT NULL,
         `phone` varchar(12) NOT NULL,
         `state` varchar(8) NOT NULL,
+        `description` text NULL,
         `date` timestamp NOT NULL DEFAULT current_timestamp()
         ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -129,6 +130,7 @@ class Database{
         `hours_days` varchar(64) NOT NULL,
         `number_days` varchar(64) NOT NULL,
         `documents` varchar(255) NOT NULL,
+        `description` text NULL,
         `date` timestamp NOT NULL DEFAULT current_timestamp()
         ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -138,6 +140,7 @@ class Database{
         `name` varchar(128) NOT NULL,
         `costhour` varchar(64) NOT NULL,
         `documents` varchar(255) NOT NULL,
+        `description` text NULL,
         `date` timestamp NOT NULL DEFAULT current_timestamp()
         ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -177,8 +180,7 @@ class Database{
         ADD PRIMARY KEY (`id`);
 
         ALTER TABLE `Service`
-        ADD PRIMARY KEY (`id`),
-        ADD UNIQUE KEY `SIREN` (`SIREN`);
+        ADD PRIMARY KEY (`id`);
 
         ALTER TABLE `Setting`
         ADD PRIMARY KEY (`id`);

@@ -50,6 +50,24 @@ class Service extends Database{
 
     public function addService(){
 
+        $db = self::getDatabase();
+
+        $u = $db->prepare("SELECT * FROM User WHERE id=:id");
+        $u->execute([
+            'id' => $_SESSION['id']
+            ]);
+
+        $user = $u->fetch();
+
+        $q = $db->prepare("INSERT INTO Service(`SIREN`,`name`,`costhour`,`documents`,`description`) VALUES(:SIREN,:name,:costhour,:documents,:description)");
+        $q->execute([
+            'SIREN' => $user['SIREN'],
+            'name'=> $this->service['name'],
+            'costhour' => $this->service['costhour'],
+            'documents' => $this->service['documents'],
+            'description' => $this->service['description']
+            ]);
+
     }
 
 
@@ -61,6 +79,8 @@ class Service extends Database{
 
 
     public function deleteService(){
+
+        
         
     }
     

@@ -15,7 +15,7 @@ if($Database->setConnection() == 0) {
 
     if($Database->setDatabase() == 0) {
 
-        $db = new PDO("mysql:host=" . DB_HOST . ";dbname=freelancemanager", USER, PASS);
+        $db = new PDO("mysql:host=" . DB_HOST . ";dbname=" . DB_NAME, USER, PASS);
         $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
         global $db;

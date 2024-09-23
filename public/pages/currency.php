@@ -1,11 +1,16 @@
 <?php
+require("class/Client.php");
+require("class/Service.php");
 require("class/Currency.php");
+
+$Client = new Client();
+$Service = new Service();
+$Currency = new Currency();
+
 require("actions/currency/add_quote.php");
 require("actions/currency/bill_customer.php");
 require("actions/currency/cancel_quote.php");
 require("actions/currency/pay_quote.php");
-
-$Currency = new Currency();
 
 echo "<table>
     <thead><tr>
@@ -51,36 +56,54 @@ echo "</tbody>
 echo "<a class='btn btn-floating btn-large waves-effect waves-light red'><i data-target='modal_new' class='material-icons modal-trigger'>add</i></a>";
 
 echo "<div id='modal_new' class='modal modal-fixed-footer'>
-    <div class='modal-content'>
-    <h4>Nouvelle devise</h4>
     <form class='col s6' method='post'>
-      <div class='row'>
+    <div class='modal-content'>
+    <h4>Nouvelle devise</h4>";
+echo "<div class='row'>
+    <div class='input-field col s12'>
+    <select>";
+    if($Client->getClient() != null){
+      echo "<option disabled selected>Nom du client</option>";
+      foreach ($Client->getClient() as $client) {
+        echo "<option>".$client['name']."</option>";
+      }
+    }else{
+      echo "<option disabled selected>Pas de client</option>";
+    }
+echo "</select>
+    <label>Nom du client</label>
+    </div>
+    </div>
+    <div class='row'>
+    <div class='input-field col s12'>
+    <select>";
+    if($Service->getService() != null){
+      echo "<option disabled selected>Nom du service</option>";
+      foreach ($Service->getService() as $service) {
+        echo "<option>".$service['name']."</option>";
+      }
+    }else{
+      echo "<option disabled selected>Pas de service</option>";
+    }
+echo "</select>
+  <label>Nom du service associé</label>
+  </div>
+  </div>";
+echo "<div class='row'>
         <div class='input-field col s12'>
-          <input name='customer_name' id='customer_name' type='text' class='validate'>
-          <label for='customer_name'>Nom du client</label>
-        </div>
-      </div>
-      <div class='row'>
-        <div class='input-field col s12'>
-          <input name='service_name' id='name' type='text' class='validate'>
-          <label for='service_name'>Nom du service associé</label>
-        </div>
-      </div>
-      <div class='row'>
-        <div class='input-field col s12'>
-          <input name='start_date' id='start_date' type='text' class='validate datepicker'>
+          <input name='start_date' id='start_date' type='text' class='datepicker'>
           <label for='start_date'>Date de début</label>
         </div>
       </div>
       <div class='row'>
         <div class='input-field col s12'>
-          <input name='end_date' id='end_date' type='text' class='validate datepicker'>
+          <input name='end_date' id='end_date' type='text' class='datepicker'>
           <label for='end_date'>Date de fin</label>
         </div>
       </div>
       <div class='row'>
         <div class='input-field col s12'>
-          <input name='hours_days' id='hours_days' type='text' class='validate timepicker'>
+          <input name='hours_days' id='hours_days' type='text' class='timepicker'>
           <label for='hours_days'>Nombre d'heures par jour</label>
         </div>
       </div>
@@ -96,11 +119,15 @@ echo "<div id='modal_new' class='modal modal-fixed-footer'>
           <label for='documents'>Documents associés</label>
         </div>
       </div>
-    </form>
+      <div class='row'>
+        <div class='input-field col s12'>
+          <textarea name='description' id='description' class='materialize-textarea'></textarea>
+          <label for='description'>Description de la devise</label>
+        </div>
+      </div>
     </div>
     <div class='modal-footer'>
-        <div class='input-field col s6'>
-            <input class='modal-close waves-effect waves-green btn-flat' id='submit' type='submit' name='submit' value='Créer la devise' class='validate'>
-        </div>
-        </div>
+          <input class='modal-close waves-effect waves-green btn' id='submit' type='submit' name='submit' value='Créer la devise' class='validate'>
+      </div>
+    </form>
     </div>";
