@@ -21,9 +21,10 @@ class Client extends Database{
 
         $user = $u->fetch();
 
-        $q = $db->prepare("SELECT * FROM Client WHERE SIREN=:SIREN");
+        $q = $db->prepare("SELECT * FROM Client WHERE SIREN=:SIREN AND state=:state");
         $q->execute([
-            'SIREN' => $user['SIREN']
+            'SIREN' => $user['SIREN'],
+            'state' => 'active'
         ]);
 
         $client_list = null;
@@ -75,13 +76,29 @@ class Client extends Database{
 
     public function editClient(){
 
+
+
     }
 
 
 
     public function deleteClient(){
 
-        
+        $db = self::getDatabase();
+
+        $u = $db->prepare("SELECT * FROM User WHERE id=:id");
+        $u->execute([
+            'id' => $_SESSION['id']
+            ]);
+
+        $user = $u->fetch();
+
+        $q = $db->prepare("UPDATE `Client` SET state=:state WHERE SIREN=:SIREN AND id=:id");
+        $q->execute([
+        'id' => $this->client['value'],
+        'SIREN' => $user['SIREN'],
+        'state' => "delete"
+        ]);
         
     }
     

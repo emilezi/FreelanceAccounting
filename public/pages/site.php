@@ -9,66 +9,169 @@ $Client = new Client();
 ?>
 
 <div class="container">
-    <div class="section">
+  <div class="section">
       
       <div class="row">
-        <div class="col s12 m4">
-          <div class="icon-block">
-            <h5 class="center">Banque</h5>
+      <div class="col s12 m4">
+      <div class="icon-block">
 
-            <p><b>Trésorerie : 0€</b></p>
-            <p><b>Déclaration d'impôt :</b></p>
-            <p>Prochaine date de déclaration : </p>
-            <p>Montant : 0€</p>
+        <div class='offset-m2 l6 offset-l3'>
+          <div class='card-panel grey lighten-5 z-depth-1'>
+            <div class='row valign-wrapper'>
+              <div class='col s12'>
+                <span class='black-text'>
+                  <h5 class="center">Banque</h5>
+                </span>
+              </div>
+            </div>
           </div>
         </div>
 
-        <div class="col s12 m4">
-          <div class="icon-block">
-            <h5 class="center">Services</h5>
+        <div class='offset-m2 l6 offset-l3'>
+          <div class='card-panel grey lighten-5 z-depth-1'>
+            <div class='row valign-wrapper'>
+              <div class='col s12'>
+                <span class='black-text'>
+                  <p><b>Trésorerie :</b> 0€</p>
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
 
-            <?php
+        <div class='offset-m2 l6 offset-l3'>
+          <div class='card-panel grey lighten-5 z-depth-1'>
+            <div class='row valign-wrapper'>
+              <div class='col s12'>
+                <span class='black-text'>
+                  <p><b>Déclaration d'impôt :</b></p>
+                  <p>Prochaine date de déclaration : </p>
+                  <p>Montant : 0€</p>
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+            
+    </div>
+    </div>
 
-            if($Service->getService() != null){
+    <div class="col s12 m4">
+    <div class="icon-block">
+
+          <div class='offset-m2 l6 offset-l3'>
+            <div class='card-panel grey lighten-5 z-depth-1'>
+              <div class='row valign-wrapper'>
+                <div class='col s12'>
+                  <span class='black-text'>
+                    <h5 class="center">Services</h5>
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <a href='index.php?link=service'>
+
+          <?php
+
+          if($Service->getService() != null){
 
               foreach ($Service->getService() as $service) {
-                  
-                  echo "<p>".$service['name']." - ".$service['date']."</p>";
+
+              echo "<div class='offset-m2 l6 offset-l3'>
+                <div class='card-panel grey lighten-5 z-depth-1'>
+                  <div class='row valign-wrapper'>
+                    <div class='col s12'>
+                      <span class='black-text'>
+                        <p>".$service['name']." - ".$service['date']."</p>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>";
 
               }
 
-              }else{
+            }else{
 
-              echo "<p>Pas de service pour le moment</p>";
+              echo "<div class='offset-m2 l6 offset-l3'>
+                <div class='card-panel grey lighten-5 z-depth-1'>
+                  <div class='row valign-wrapper'>
+                    <div class='col s12'>
+                      <span class='black-text'>
+                        <p>Pas de service pour le moment</p>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>";
 
               }
 
             ?>
+
+          </a>
             
           </div>
         </div>
 
         <div class="col s12 m4">
-          <div class="icon-block">
-            <h5 class="center">Clients</h5>
+        <div class="icon-block">
+          
+          <div class='offset-m2 l6 offset-l3'>
+            <div class='card-panel grey lighten-5 z-depth-1'>
+              <div class='row valign-wrapper'>
+                <div class='col s12'>
+                  <span class='black-text'>
+                    <h5 class="center">Clients</h5>
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
 
-            <?php
+          <a href='index.php?link=client'>
+
+          <?php
 
             if($Client->getClient() != null){
 
               foreach($Client->getClient() as $client) {
 
-                echo "<p>".$client['name']." - ".$client['date']."</p>";
+                echo "<div class='offset-m2 l6 offset-l3'>
+                <div class='card-panel grey lighten-5 z-depth-1'>
+                  <div class='row valign-wrapper'>
+                    <div class='col s12'>
+                      <span class='black-text'>
+                        <p>".$client['name']." - ".$client['date']."</p>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+                </div>";
 
               }
 
               }else{
 
-              echo "<p>Pas de client pour le moment</p>";
+              echo "<div class='offset-m2 l6 offset-l3'>
+                <div class='card-panel grey lighten-5 z-depth-1'>
+                  <div class='row valign-wrapper'>
+                    <div class='col s12'>
+                      <span class='black-text'>
+                        <p>Pas de client pour le moment</p>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>";
 
               }
 
             ?>
+
+            </a>
 
           </div>
         </div>

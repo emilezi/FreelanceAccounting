@@ -78,11 +78,24 @@ class Currency extends Database{
 
     public function editCurrency(){
 
+
+
     }
 
 
 
     public function deleteCurrency(){
+
+        $db = self::getDatabase();
+
+        $u = $db->prepare("SELECT * FROM User WHERE id=:id");
+        $u->execute([
+            'id' => $_SESSION['id']
+            ]);
+
+        $user = $u->fetch();
+
+        
         
     }
     
