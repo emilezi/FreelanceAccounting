@@ -1,5 +1,9 @@
 <?php
-
+/**
+    * Application management class.
+    *
+    * @author Emile Z.
+    */
 class Currency extends Database{
     
     protected $currency;
@@ -8,7 +12,12 @@ class Currency extends Database{
         $this->currency = $_POST;
     }
 
-
+    /**
+        * Currency recoveries
+        *
+        * @return tab currency informations list
+        *
+        */
 
     public function getCurrency(){
 
@@ -46,7 +55,10 @@ class Currency extends Database{
 
     }
 
-
+    /**
+        * New currency method
+        *
+        */
 
     public function addCurrency(){
 
@@ -82,7 +94,10 @@ class Currency extends Database{
 
     }
 
-
+    /**
+        * Delete currency method
+        *
+        */
 
     public function deleteCurrency(){
 

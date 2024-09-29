@@ -1,5 +1,9 @@
 <?php
-
+/**
+    * Application management class.
+    *
+    * @author Emile Z.
+    */
 class Client extends Database{
     
     protected $client;
@@ -8,7 +12,12 @@ class Client extends Database{
         $this->client = $_POST;
     }
 
-
+    /**
+        * Client recoveries
+        *
+        * @return tab clients informations list
+        *
+        */
 
     public function getClient(){
 
@@ -47,7 +56,10 @@ class Client extends Database{
 
     }
 
-
+    /**
+        * New client method
+        *
+        */
 
     public function addClient(){
 
@@ -80,7 +92,10 @@ class Client extends Database{
 
     }
 
-
+    /**
+        * Delete client method
+        *
+        */
 
     public function deleteClient(){
 

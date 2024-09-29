@@ -1,8 +1,18 @@
 <?php
-
+/**
+    * Application management class.
+    *
+    * @author Emile Z.
+    */
 class Database{
 
     private static $pdo = null;
+
+    /**
+        * Get database server connection
+        *
+        * @return array database connection
+        */
 
     protected static function getConnection(){
 
@@ -13,6 +23,12 @@ class Database{
 		
 	}
 
+    /**
+        * Get database
+        *
+        * @return array database
+        */
+
 	protected static function getDatabase(){
 
 		self::$pdo = new PDO("mysql:host=" . DB_HOST . ";dbname=" . DB_NAME, USER, PASS);
@@ -21,6 +37,12 @@ class Database{
 		return self::$pdo;
 		
 	}
+
+    /**
+        * Set database server connection
+        *
+        * @return boolean
+        */
 
 	public function setConnection(){
 
@@ -38,6 +60,12 @@ class Database{
     	
 	}
 
+    /**
+        * Set database
+        *
+        * @return boolean
+        */
+
 	public function setDatabase(){
 
 		try{
@@ -54,6 +82,11 @@ class Database{
 
 	}
 
+    /**
+        * New database method
+        *
+        */
+
 	public function newDatabase(){
 
 		$db = self::getConnection();
@@ -62,6 +95,11 @@ class Database{
     	
 	}
 
+    /**
+        * Delete database method
+        *
+        */
+
 	public function deleteDatabase(){
 
 		$db = self::getConnection();
@@ -69,6 +107,12 @@ class Database{
         $db->exec("DROP DATABASE IF EXISTS " . DB_NAME);
     	
 	}
+
+    /**
+        * Set tables
+        *
+        * @return boolean
+        */
 
 	public function setTables(){
 
@@ -86,6 +130,11 @@ class Database{
         }
 
     }
+
+    /**
+        * New tables method
+        *
+        */
 
 	public function newTables(){
 

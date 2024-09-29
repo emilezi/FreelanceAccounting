@@ -1,5 +1,9 @@
 <?php
-
+/**
+    * Application management class.
+    *
+    * @author Emile Z.
+    */
 class Service extends Database{
     
     protected $service;
@@ -8,7 +12,12 @@ class Service extends Database{
         $this->service = $_POST;
     }
 
-
+    /**
+        * Service recoveries
+        *
+        * @return tab service informations list
+        *
+        */
 
     public function getService(){
 
@@ -47,7 +56,10 @@ class Service extends Database{
 
     }
 
-
+    /**
+        * New service method
+        *
+        */
 
     public function addService(){
 
@@ -78,7 +90,10 @@ class Service extends Database{
 
     }
 
-
+    /**
+        * Delete service method
+        *
+        */
 
     public function deleteService(){
 

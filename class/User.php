@@ -1,5 +1,9 @@
 <?php
-
+/**
+    * Application management class.
+    *
+    * @author Emile Z.
+    */
 class User extends Database{
 
     protected $user;
@@ -7,6 +11,15 @@ class User extends Database{
     public function __construct(){
         $this->user = $_POST;
     }
+
+    /**
+        * Check login verification
+        *
+        * @param array login information
+        *
+        * @return int if the fields are correctly filled in otherwise return the error number
+        *
+        */
 
     public function UserLogin(){
 
@@ -56,6 +69,11 @@ class User extends Database{
         }
     
     }
+
+    /**
+        * First user method
+        *
+        */
 
     public function firstUser(){
 

@@ -1,5 +1,9 @@
 <?php
-
+/**
+    * Application management class.
+    *
+    * @author Emile Z.
+    */
 class Form{
 
     protected $post;
@@ -7,6 +11,15 @@ class Form{
     public function __construct(){
         $this->post = $_POST;
     }
+
+    /**
+        * Authentification verification form
+        *
+        * @param array form post authentification information
+        *
+        * @return int if the fields are correctly filled in otherwise return the error number
+        *
+        */
 
     public function Authentication(){
 
@@ -28,6 +41,15 @@ class Form{
             }
 
     }
+
+    /**
+        * New user verification form
+        *
+        * @param array form post new user information
+        *
+        * @return int if the fields are correctly filled in otherwise return the error number
+        *
+        */
     
     public function newUser(){
 
@@ -73,6 +95,15 @@ class Form{
 
     }
 
+    /**
+        * Check password verification form
+        *
+        * @param array form post check password information
+        *
+        * @return int if the fields are correctly filled in otherwise return the error number
+        *
+        */
+
     public function checkPassword(){
 
         if(
@@ -99,6 +130,15 @@ class Form{
 
     }
 
+    /**
+        * Check client verification form
+        *
+        * @param array form post check client information
+        *
+        * @return int if the fields are correctly filled in otherwise return the error number
+        *
+        */
+
     public function checkClient(){
 
         if(
@@ -116,7 +156,7 @@ class Form{
                 &&
                 preg_match("#^[a-z0-9.]+@[a-z0-9.]+$#i", $this->post['email'])
                 &&
-                preg_match("#^[0-9]+$#i", $this->post['phone'])
+                preg_match("#^[^<>]+$#i", $this->post['phone'])
                 &&
                 preg_match("#^[^<>]+$#i", $this->post['description'])
                 )
@@ -130,6 +170,15 @@ class Form{
             }
 
     }
+
+    /**
+        * Check currency verification form
+        *
+        * @param array form post check currency information
+        *
+        * @return int if the fields are correctly filled in otherwise return the error number
+        *
+        */
 
     public function checkCurrency(){
 
@@ -178,6 +227,15 @@ class Form{
             }
 
     }
+
+    /**
+        * Check service verification form
+        *
+        * @param array form post check service information
+        *
+        * @return int if the fields are correctly filled in otherwise return the error number
+        *
+        */
 
     public function checkService(){
 
