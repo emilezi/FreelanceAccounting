@@ -92,7 +92,7 @@ if($Client->getClient() != null){
       </div>
       <div class='row'>
         <div class='input-field col s12'>
-          <textarea name='description' id='description' value='".$client['description']."' class='materialize-textarea'></textarea>
+          <textarea name='description' id='description' class='materialize-textarea'>".$client['description']."</textarea>
           <label for='description'>Description du client</label>
         </div>
       </div>

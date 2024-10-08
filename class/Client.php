@@ -84,11 +84,31 @@ class Client extends Database{
 
     }
 
-
+    /**
+        * Edit client method
+        *
+        */
 
     public function editClient(){
 
+        $db = self::getDatabase();
 
+        $u = $db->prepare("SELECT * FROM User WHERE id=:id");
+        $u->execute([
+            'id' => $_SESSION['id']
+            ]);
+
+        $user = $u->fetch();
+
+        $q = $db->prepare("UPDATE Client SET name=:name, email=:email, phone=:phone, description=:description WHERE SIREN=:SIREN AND id=:id");
+        $q->execute([
+            'id' => $this->client['value'],
+            'SIREN' => $user['SIREN'],
+            'name'=> $this->client['name'],
+            'email' => $this->client['email'],
+            'phone' => $this->client['phone'],
+            'description' => $this->client['description']
+        ]);
 
     }
 

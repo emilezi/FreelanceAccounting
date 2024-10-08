@@ -11,7 +11,6 @@ echo "<table>
     <thead><tr>
         <th>Nom</th>
         <th>Coût par heure :</th>
-        <th>Documents</th>
         <th>Crée le :</th>
         <th>Action :</th>
     </tr></thead>
@@ -28,7 +27,6 @@ if($Service->getService() != null){
       echo "<tr>
       <td>".$service['name']."</td>
       <td>".$service['costhour']."€</td>
-      <td>".$service['documents']."</td>
       <td>".$service['date']."</td>
       <td><a class='waves-effect waves-light btn red modal-trigger' data-target='modal_delete_".$i."'>Supprimer</a><a class='waves-effect waves-light btn modal-trigger' data-target='modal_edit_".$i."'>Modifier</a></td>
       </tr>";
@@ -86,13 +84,7 @@ if($Service->getService() != null){
         </div>
         <div class='row'>
           <div class='input-field col s12'>
-            <input name='documents' id='documents' type='text' value='".$service['documents']."' class='validate'>
-            <label for='documents'>Documents associés</label>
-          </div>
-        </div>
-        <div class='row'>
-          <div class='input-field col s12'>
-            <textarea name='description' id='description' value='".$service['description']."' class='materialize-textarea'></textarea>
+            <textarea name='description' id='description' class='materialize-textarea'>".$service['description']."</textarea>
             <label for='description'>Description du service</label>
           </div>
         </div>
@@ -100,7 +92,7 @@ if($Service->getService() != null){
       <div class='modal-footer'>
             <input class='modal-close waves-effect waves-green btn' id='submit_edit' type='submit' name='submit_edit' value='Modifier le service' class='validate'>
           </div>
-        <input id='value' type='hidden' name='value' value=".$service['id'].">
+      <input id='value' type='hidden' name='value' value=".$service['id'].">
       </form>
       </div>";
 
@@ -124,12 +116,6 @@ echo "<div id='modal_new' class='modal modal-fixed-footer'>
         <div class='input-field col s12'>
           <input name='costhour' id='costhour' type='text' class='validate'>
           <label for='costhour'>Coût par heure en €</label>
-        </div>
-      </div>
-      <div class='row'>
-        <div class='input-field col s12'>
-          <input name='documents' id='documents' type='text' class='validate'>
-          <label for='documents'>Documents associés</label>
         </div>
       </div>
       <div class='row'>

@@ -96,6 +96,39 @@ class Form{
     }
 
     /**
+        * Edit user verification form
+        *
+        * @param array form post edit user information
+        *
+        * @return int if the fields are correctly filled in otherwise return the error number
+        *
+        */
+    
+    public function editUser(){
+
+        if(
+        !empty($this->post['email'])
+        &&
+        !empty($this->post['phone'])
+        )
+        {
+            if(
+            preg_match("#^[a-z0-9.]+@[a-z0-9.]+$#i", $this->post['email'])
+            &&
+            preg_match("#^[0-9]+$#i", $this->post['phone'])
+            )
+            {
+                return 0;
+            }else{
+                return 1;
+            }
+        }else{
+            return 2;
+        }
+    
+    }
+
+    /**
         * Check password verification form
         *
         * @param array form post check password information
@@ -195,8 +228,6 @@ class Form{
             &&
             !empty($this->post['number_days'])
             &&
-            !empty($this->post['documents'])
-            &&
             !empty($this->post['description'])
             )
             {
@@ -212,8 +243,6 @@ class Form{
                 preg_match("#^[^<>]+$#i", $this->post['hours_days'])
                 &&
                 preg_match("#^[0-9]+$#i", $this->post['number_days'])
-                &&
-                preg_match("#^[^<>]+$#i", $this->post['documents'])
                 &&
                 preg_match("#^[^<>]+$#i", $this->post['description'])
                 )
@@ -244,8 +273,6 @@ class Form{
             &&
             !empty($this->post['costhour'])
             &&
-            !empty($this->post['documents'])
-            &&
             !empty($this->post['description'])
             )
             {
@@ -253,8 +280,6 @@ class Form{
                 preg_match("#^[^<>]+$#i", $this->post['name'])
                 &&
                 preg_match("#^[0-9]+$#i", $this->post['costhour'])
-                &&
-                preg_match("#^[^<>]+$#i", $this->post['documents'])
                 &&
                 preg_match("#^[^<>]+$#i", $this->post['description'])
                 )

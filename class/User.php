@@ -40,6 +40,7 @@ class User extends Database{
 
                     $_SESSION['id'] = $user['id'];
                     $_SESSION['type'] = $user['type'];
+                    $_SESSION['SIREN'] = $user['SIREN'];
                     $_SESSION['first_name'] = $user['first_name'];
                     $_SESSION['last_name'] = $user['last_name'];
                     $_SESSION['identifier'] = $user['identifier'];
@@ -68,6 +69,28 @@ class User extends Database{
 
         }
     
+    }
+
+    /**
+        * Edit user method
+        *
+        */
+
+    public function editUser(){
+
+        $db = parent::getDatabase();
+
+        $options = [
+        'cost' => 12
+        ];
+                    
+        $q = $db->prepare("UPDATE User SET email=:email, phone=:phone WHERE id=:id");
+        $q->execute([
+            'id' => $_SESSION['id'],
+            'email' => $this->user['email'],
+            'phone' => $this->user['phone']
+            ]);
+        
     }
 
     /**

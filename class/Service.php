@@ -72,21 +72,41 @@ class Service extends Database{
 
         $user = $u->fetch();
 
-        $q = $db->prepare("INSERT INTO Service(`SIREN`,`name`,`costhour`,`documents`,`state`,`description`) VALUES(:SIREN,:name,:costhour,:documents,:state,:description)");
+        $q = $db->prepare("INSERT INTO Service(`SIREN`,`name`,`costhour`,`state`,`description`) VALUES(:SIREN,:name,:costhour,:state,:description)");
         $q->execute([
             'SIREN' => $user['SIREN'],
             'name'=> $this->service['name'],
             'costhour' => $this->service['costhour'],
-            'documents' => $this->service['documents'],
             'state' => 'active',
             'description' => $this->service['description']
             ]);
 
     }
 
-
+    /**
+        * Edit service method
+        *
+        */
 
     public function editService(){
+
+        $db = self::getDatabase();
+
+        $u = $db->prepare("SELECT * FROM User WHERE id=:id");
+        $u->execute([
+            'id' => $_SESSION['id']
+            ]);
+
+        $user = $u->fetch();
+
+        $q = $db->prepare("UPDATE Service SET name=:name, costhour=:costhour, description=:description WHERE SIREN=:SIREN AND id=:id");
+        $q->execute([
+            'id' => $this->service['value'],
+            'SIREN' => $user['SIREN'],
+            'name'=> $this->service['name'],
+            'costhour' => $this->service['costhour'],
+            'description' => $this->service['description']
+        ]);
 
     }
 

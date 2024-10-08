@@ -6,7 +6,7 @@ if(isset($_POST['submit_edit'])){
 
     if($Form->checkService() == 0){
 
-        $Client->editService();
+        $Service->editService();
 
     }elseif($Form->checkService() == 1){
 

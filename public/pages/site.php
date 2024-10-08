@@ -84,7 +84,7 @@ $Client = new Client();
                   <div class='row valign-wrapper'>
                     <div class='col s12'>
                       <span class='black-text'>
-                        <p>".$service['name']." - ".$service['date']."</p>
+                        <p>".$service['name']."</p>
                       </span>
                     </div>
                   </div>
@@ -144,7 +144,7 @@ $Client = new Client();
                   <div class='row valign-wrapper'>
                     <div class='col s12'>
                       <span class='black-text'>
-                        <p>".$client['name']." - ".$client['date']."</p>
+                        <p>".$client['name']."</p>
                       </span>
                     </div>
                   </div>

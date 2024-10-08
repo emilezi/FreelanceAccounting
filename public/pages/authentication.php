@@ -18,7 +18,7 @@ require("actions/auth/authentication.php");
       </div>
       <div class='row'>
         <div class='input-field col s6'>
-          <input class='waves-effect waves-light btn' name='submit' id='submit' type='submit'>
+          <input class='waves-effect waves-light btn' name='submit' id='submit' type='submit' value='Connexion'>
         </div>
       </div>
     </form>

@@ -19,7 +19,6 @@ echo "<table>
         <th>Date de fin :</th>
         <th>Nombre d'heures</th>
         <th>Prix</th>
-        <th>Documents</th>
         <th>Crée le :</th>
         <th>Action :</th>
     </tr></thead>
@@ -35,7 +34,6 @@ if($Currency->getCurrency() != null){
         <td>".$currency['end_date']."</td>
         <td>".$currency['hours']."</td>
         <td>".$currency['price']."</td>
-        <td>".$currency['documents']."</td>
         <td>".$currency['date']."</td>
         <td></td>
         </tr>";
@@ -111,12 +109,6 @@ echo "<div class='row'>
         <div class='input-field col s12'>
           <input name='number_days' id='number_days' type='text' class='validate'>
           <label for='number_days'>Nombre de jours</label>
-        </div>
-      </div>
-      <div class='row'>
-        <div class='input-field col s12'>
-          <input name='documents' id='documents' type='text' class='validate'>
-          <label for='documents'>Documents associés</label>
         </div>
       </div>
       <div class='row'>

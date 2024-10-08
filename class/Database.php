@@ -178,7 +178,6 @@ class Database{
         `end_date` varchar(64) NOT NULL,
         `hours_days` varchar(64) NOT NULL,
         `number_days` varchar(64) NOT NULL,
-        `documents` varchar(255) NOT NULL,
         `description` text NULL,
         `date` timestamp NOT NULL DEFAULT current_timestamp()
         ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -188,7 +187,6 @@ class Database{
         `SIREN` varchar(64) NOT NULL,
         `name` varchar(128) NOT NULL,
         `costhour` varchar(64) NOT NULL,
-        `documents` varchar(255) NOT NULL,
         `state` varchar(8) NOT NULL,
         `description` text NULL,
         `date` timestamp NOT NULL DEFAULT current_timestamp()
