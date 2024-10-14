@@ -8,6 +8,8 @@
     <li><a href="index.php?link=client">Clients</a></li>
     <li><a href="index.php?link=currency">Devises</a></li>
     <li><a href="index.php?link=service">Services</a></li>
+    <li><a href="index.php?link=bank">Banque</a></li>
+    <li><a href="index.php?link=apps">Applications</a></li>
     <li><a class="dropdown-trigger" href="#!" data-target="dropdown1">Site<i class="material-icons right">arrow_drop_down</i></a></li>
     </ul>
 

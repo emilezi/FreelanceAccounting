@@ -6,5 +6,6 @@
     */
 class Application extends Database{
     
+    protected $application;
     
 }

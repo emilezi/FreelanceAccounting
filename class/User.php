@@ -119,6 +119,12 @@ class User extends Database{
             'password' => password_hash($this->user['password'], PASSWORD_BCRYPT, $options),
             'user_key' => md5(microtime(TRUE)*100000)
             ]);
+
+        $j = $db->prepare("INSERT INTO Setting(`setting_name`,`setting_set`) VALUES(:setting_name,:setting_set)");
+        $j->execute([
+            'setting_name' => 'tax_value',
+            'setting_set' => '20'
+            ]);
             
         if(!file_exists("uploads/users/" . $this->user['identifier'])){
                 
