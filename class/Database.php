@@ -156,7 +156,7 @@ class Database{
         `id` int(11) NOT NULL,
         `SIREN` varchar(64) NOT NULL,
         `treasury` varchar(64) NOT NULL,
-        `tax_date` varchar(64) NOT NULL
+        `tax_date` varchar(64) NULL
         ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
         CREATE TABLE `Client` (

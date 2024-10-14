@@ -2,9 +2,13 @@
 
 require("class/Service.php");
 require("class/Client.php");
+require("class/Bank.php");
 
 $Service = new Service();
 $Client = new Client();
+$Bank = new Bank();
+
+$bankinfo = $Bank->getBank();
 
 ?>
 
@@ -27,12 +31,14 @@ $Client = new Client();
           </div>
         </div>
 
+        <a href='index.php?link=bank'>
+
         <div class='offset-m2 l6 offset-l3'>
           <div class='card-panel grey lighten-5 z-depth-1'>
             <div class='row valign-wrapper'>
               <div class='col s12'>
                 <span class='black-text'>
-                  <p><b>Trésorerie :</b> 0€</p>
+                  <p><b>Trésorerie :</b> <?=$bankinfo['treasury']?>€</p>
                 </span>
               </div>
             </div>
@@ -46,12 +52,14 @@ $Client = new Client();
                 <span class='black-text'>
                   <p><b>Déclaration d'impôt :</b></p>
                   <p>Prochaine date de déclaration : </p>
-                  <p>Montant : 0€</p>
+                  <p>Montant : </p>
                 </span>
               </div>
             </div>
           </div>
         </div>
+
+        </a>
             
     </div>
     </div>

@@ -119,6 +119,12 @@ class User extends Database{
             'password' => password_hash($this->user['password'], PASSWORD_BCRYPT, $options),
             'user_key' => md5(microtime(TRUE)*100000)
             ]);
+        
+        $i = $db->prepare("INSERT INTO Bank(`SIREN`,`treasury`) VALUES(:SIREN,:treasury)");
+        $i->execute([
+            'SIREN' => $this->user['SIREN'],
+            'treasury' => '0'
+            ]);
 
         $j = $db->prepare("INSERT INTO Setting(`setting_name`,`setting_set`) VALUES(:setting_name,:setting_set)");
         $j->execute([

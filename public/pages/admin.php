@@ -1,6 +1,7 @@
 <?php
 
 require("class/Application.php");
+require("class/Setting.php");
 require("class/User.php");
 
 $Application = new Application();
