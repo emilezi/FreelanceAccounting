@@ -263,6 +263,22 @@ class Database{
 
         $q->execute();
 
+    }
+
+    /**
+        * Set setting method
+        *
+        */
+
+    public function setSetting(){
+
+        $db = self::getDatabase();
+
+        $q = $db->prepare("INSERT INTO Setting(`setting_name`,`setting_set`) VALUES(:setting_name,:setting_set)");
+        $q->execute([
+        'setting_name' => 'tax_value',
+        'setting_set' => '20'
+        ]);
 
     }
     

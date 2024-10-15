@@ -34,13 +34,14 @@ class User extends Database{
 
         if($user == TRUE){
 
-            if($user['type'] == 'user'){
+            if($user['type'] == 'admin' || $user['type'] == 'user'){
 
                 if(password_verify($this->user['password'], $user['password'])){
 
                     $_SESSION['id'] = $user['id'];
                     $_SESSION['type'] = $user['type'];
                     $_SESSION['SIREN'] = $user['SIREN'];
+                    $_SESSION['status'] = $user['status'];
                     $_SESSION['first_name'] = $user['first_name'];
                     $_SESSION['last_name'] = $user['last_name'];
                     $_SESSION['identifier'] = $user['identifier'];
@@ -94,11 +95,11 @@ class User extends Database{
     }
 
     /**
-        * First user method
+        * New user method
         *
         */
 
-    public function firstUser(){
+    public function newUser(){
 
         $db = parent::getDatabase();
 
@@ -106,8 +107,8 @@ class User extends Database{
         'cost' => 12
         ];
                     
-        $q = $db->prepare("INSERT INTO User(`status`,`type`,`SIREN`,`first_name`,`last_name`,`identifier`,`email`,`phone`,`password`,`user_key`) VALUES(:status,:type,:SIREN,:first_name,:last_name,:identifier,:email,:phone,:password,:user_key)");
-        $q->execute([
+        $i = $db->prepare("INSERT INTO User(`status`,`type`,`SIREN`,`first_name`,`last_name`,`identifier`,`email`,`phone`,`password`,`user_key`) VALUES(:status,:type,:SIREN,:first_name,:last_name,:identifier,:email,:phone,:password,:user_key)");
+        $i->execute([
             'status' => 'eirl',
             'type'=> 'user',
             'SIREN' => $this->user['SIREN'],
@@ -120,16 +121,51 @@ class User extends Database{
             'user_key' => md5(microtime(TRUE)*100000)
             ]);
         
-        $i = $db->prepare("INSERT INTO Bank(`SIREN`,`treasury`) VALUES(:SIREN,:treasury)");
-        $i->execute([
+        $j = $db->prepare("INSERT INTO Bank(`SIREN`,`treasury`) VALUES(:SIREN,:treasury)");
+        $j->execute([
             'SIREN' => $this->user['SIREN'],
             'treasury' => '0'
             ]);
+            
+        if(!file_exists("uploads/users/" . $this->user['identifier'])){
+                
+            mkdir("uploads/users/" . $this->user['identifier']);
 
-        $j = $db->prepare("INSERT INTO Setting(`setting_name`,`setting_set`) VALUES(:setting_name,:setting_set)");
+            }
+        
+    }
+
+    /**
+        * First user method
+        *
+        */
+
+    public function firstUser(){
+
+        $db = parent::getDatabase();
+
+        $options = [
+        'cost' => 12
+        ];
+                    
+        $i = $db->prepare("INSERT INTO User(`status`,`type`,`SIREN`,`first_name`,`last_name`,`identifier`,`email`,`phone`,`password`,`user_key`) VALUES(:status,:type,:SIREN,:first_name,:last_name,:identifier,:email,:phone,:password,:user_key)");
+        $i->execute([
+            'status' => 'eirl',
+            'type'=> 'admin',
+            'SIREN' => $this->user['SIREN'],
+            'first_name' => $this->user['first_name'],
+            'last_name' => $this->user['last_name'],
+            'identifier' => $this->user['identifier'],
+            'email' => $this->user['email'],
+            'phone' => $this->user['phone'],
+            'password' => password_hash($this->user['password'], PASSWORD_BCRYPT, $options),
+            'user_key' => md5(microtime(TRUE)*100000)
+            ]);
+        
+        $j = $db->prepare("INSERT INTO Bank(`SIREN`,`treasury`) VALUES(:SIREN,:treasury)");
         $j->execute([
-            'setting_name' => 'tax_value',
-            'setting_set' => '20'
+            'SIREN' => $this->user['SIREN'],
+            'treasury' => '0'
             ]);
             
         if(!file_exists("uploads/users/" . $this->user['identifier'])){

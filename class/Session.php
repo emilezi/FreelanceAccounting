@@ -23,7 +23,11 @@ class Session extends Database{
         (
             isset($_SESSION['id'])
             &&
+            isset($_SESSION['status'])
+            &&
             isset($_SESSION['type'])
+            &&
+            isset($_SESSION['SIREN'])
             &&
             isset($_SESSION['first_name'])
             &&
@@ -63,7 +67,11 @@ class Session extends Database{
         (
         isset($_SESSION['id'])
         ||
+        isset($_SESSION['status'])
+        ||
         isset($_SESSION['type'])
+        ||
+        isset($_SESSION['SIREN'])
         ||
         isset($_SESSION['first_name'])
         ||

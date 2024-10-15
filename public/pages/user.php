@@ -32,6 +32,7 @@ require("actions/user/user_edit.php");
                 <span class='black-text'>
                     <h5>Informations personnelles</h5>
                     <p><b>N° SIREN :</b> <?=$_SESSION['SIREN']?></p>
+                    <p><b>Statut juridique :</b> <?=$_SESSION['status']?></p>
                     <p><b>Identifiant :</b> <?=$_SESSION['identifier']?></p>
                     <p><b>Email :</b> <?=$_SESSION['email']?></p>
                     <p><b>Téléphone :</b> <?=$_SESSION['phone']?></p>

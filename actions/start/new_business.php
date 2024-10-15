@@ -14,7 +14,11 @@ if(isset($_POST['submit'])){
 
             $Database -> newTables();
 
+            $Database -> setSetting();
+
             $User -> firstUser();
+
+            header('Location: index.php');
 
         }else{
 
