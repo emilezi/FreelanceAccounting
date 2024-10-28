@@ -71,7 +71,7 @@ class Currency extends Database{
 
         $user = $u->fetch();
 
-        $q = $db->prepare("INSERT INTO Currency(`SIREN`,`customer_name`,`service_name`,`start_date`,`end_date`,`hours_days`,`number_days`,`description`) VALUES(:SIREN,:customer_name,:service_name,:start_date,:end_date,:hours_days,:number_days,:description)");
+        $q = $db->prepare("INSERT INTO Currency(`SIREN`,`customer_name`,`service_name`,`start_date`,`end_date`,`hours_days`,`number_days`,`state`,`description`) VALUES(:SIREN,:customer_name,:service_name,:start_date,:end_date,:hours_days,:number_days,:state,:description)");
         $q->execute([
             'SIREN' => $user['SIREN'],
             'customer_name'=> $this->currency['customer_name'],
@@ -80,6 +80,7 @@ class Currency extends Database{
             'end_date' => $this->currency['end_date'],
             'hours_days' => $this->currency['hours_days'],
             'number_days' => $this->currency['number_days'],
+            'state' => 'unpaid',
             'description' => $this->currency['description']
             ]);
 

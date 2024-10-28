@@ -155,8 +155,9 @@ class Database{
         CREATE TABLE `Bank` (
         `id` int(11) NOT NULL,
         `SIREN` varchar(64) NOT NULL,
-        `treasury` varchar(64) NOT NULL,
-        `tax_date` varchar(64) NULL
+        `bic_excluding_tax` varchar(64) NOT NULL,
+        `bnc_excluding_tax` varchar(64) NOT NULL,
+        `treasury` varchar(64) NOT NULL
         ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
         CREATE TABLE `Client` (
@@ -179,6 +180,7 @@ class Database{
         `end_date` varchar(64) NOT NULL,
         `hours_days` varchar(64) NOT NULL,
         `number_days` varchar(64) NOT NULL,
+        `state` varchar(8) NOT NULL,
         `description` text NULL,
         `date` timestamp NOT NULL DEFAULT current_timestamp()
         ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -187,6 +189,7 @@ class Database{
         `id` int(11) NOT NULL,
         `SIREN` varchar(64) NOT NULL,
         `name` varchar(128) NOT NULL,
+        `category` varchar(64) NOT NULL,
         `costhour` varchar(64) NOT NULL,
         `state` varchar(8) NOT NULL,
         `description` text NULL,
@@ -276,8 +279,38 @@ class Database{
 
         $q = $db->prepare("INSERT INTO Setting(`setting_name`,`setting_set`) VALUES(:setting_name,:setting_set)");
         $q->execute([
-        'setting_name' => 'tax_value',
-        'setting_set' => '20'
+        'setting_name' => 'turnover_max',
+        'setting_set' => '77700'
+        ]);
+
+        $q = $db->prepare("INSERT INTO Setting(`setting_name`,`setting_set`) VALUES(:setting_name,:setting_set)");
+        $q->execute([
+        'setting_name' => 'turnover_bic_max',
+        'setting_set' => '188700'
+        ]);
+
+        $q = $db->prepare("INSERT INTO Setting(`setting_name`,`setting_set`) VALUES(:setting_name,:setting_set)");
+        $q->execute([
+        'setting_name' => 'turnover_bnc_max',
+        'setting_set' => '77700'
+        ]);
+
+        $q = $db->prepare("INSERT INTO Setting(`setting_name`,`setting_set`) VALUES(:setting_name,:setting_set)");
+        $q->execute([
+        'setting_name' => 'bic_1_rate',
+        'setting_set' => '12.3'
+        ]);
+
+        $q = $db->prepare("INSERT INTO Setting(`setting_name`,`setting_set`) VALUES(:setting_name,:setting_set)");
+        $q->execute([
+        'setting_name' => 'bic_2_rate',
+        'setting_set' => '21.2'
+        ]);
+
+        $q = $db->prepare("INSERT INTO Setting(`setting_name`,`setting_set`) VALUES(:setting_name,:setting_set)");
+        $q->execute([
+        'setting_name' => 'bnc_rate',
+        'setting_set' => '21.2'
         ]);
 
     }

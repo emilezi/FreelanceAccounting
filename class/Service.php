@@ -72,10 +72,11 @@ class Service extends Database{
 
         $user = $u->fetch();
 
-        $q = $db->prepare("INSERT INTO Service(`SIREN`,`name`,`costhour`,`state`,`description`) VALUES(:SIREN,:name,:costhour,:state,:description)");
+        $q = $db->prepare("INSERT INTO Service(`SIREN`,`name`,`category`,`costhour`,`state`,`description`) VALUES(:SIREN,:name,:category,:costhour,:state,:description)");
         $q->execute([
             'SIREN' => $user['SIREN'],
             'name'=> $this->service['name'],
+            'category'=> $this->service['category'],
             'costhour' => $this->service['costhour'],
             'state' => 'active',
             'description' => $this->service['description']
@@ -99,11 +100,12 @@ class Service extends Database{
 
         $user = $u->fetch();
 
-        $q = $db->prepare("UPDATE Service SET name=:name, costhour=:costhour, description=:description WHERE SIREN=:SIREN AND id=:id");
+        $q = $db->prepare("UPDATE Service SET name=:name, category=:category, costhour=:costhour, description=:description WHERE SIREN=:SIREN AND id=:id");
         $q->execute([
             'id' => $this->service['value'],
             'SIREN' => $user['SIREN'],
             'name'=> $this->service['name'],
+            'category'=> $this->service['category'],
             'costhour' => $this->service['costhour'],
             'description' => $this->service['description']
         ]);

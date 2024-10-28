@@ -10,6 +10,7 @@ require("actions/service/delete_service.php");
 echo "<table>
     <thead><tr>
         <th>Nom</th>
+        <th>Catégorie</th>
         <th>Coût par heure :</th>
         <th>Crée le :</th>
         <th>Action :</th>
@@ -26,6 +27,7 @@ if($Service->getService() != null){
         
       echo "<tr>
       <td>".$service['name']."</td>
+      <td>".$service['category']."</td>
       <td>".$service['costhour']."€</td>
       <td>".$service['date']."</td>
       <td><a class='waves-effect waves-light btn red modal-trigger' data-target='modal_delete_".$i."'>Supprimer</a><a class='waves-effect waves-light btn modal-trigger' data-target='modal_edit_".$i."'>Modifier</a></td>
@@ -69,13 +71,14 @@ if($Service->getService() != null){
       echo "<div id='modal_edit_".$i."' class='modal modal-fixed-footer'>
       <form class='col s6' method='post'>
       <div class='modal-content'>
-      <h4>Nouveau service</h4>
+      <h4>Modifier le service</h4>
         <div class='row'>
           <div class='input-field col s12'>
             <input name='name' id='name' type='text' value='".$service['name']."' class='validate'>
             <label for='name'>Nom du service</label>
           </div>
         </div>
+        <input name='category' id='category' type='hidden' value='".$service['category']."' class='validate'>
         <div class='row'>
           <div class='input-field col s12'>
             <input name='costhour' id='costhour' type='text' value='".$service['costhour']."' class='validate'>
@@ -112,6 +115,16 @@ echo "<div id='modal_new' class='modal modal-fixed-footer'>
           <label for='name'>Nom du service</label>
         </div>
       </div>
+      <div class='row'>
+      <div class='input-field col s12'>
+      <select name='category'>
+        <option value='BIC-1'>Activité achat-vente de marchandises (BIC)</option>
+        <option value='BIC-2'>Prestations de services commerciales et artisanales (BIC)</option>
+        <option value='BNC'>Prestations de services et professions libérales (BNC)</option>
+      </select>
+      <label>Nom de la catégorie</label>
+    </div>
+    </div>
       <div class='row'>
         <div class='input-field col s12'>
           <input name='costhour' id='costhour' type='text' class='validate'>

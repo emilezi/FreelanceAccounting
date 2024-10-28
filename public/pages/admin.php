@@ -9,7 +9,9 @@ $Setting = new Setting();
 $User = new User();
 
 require("actions/admin/interface/reset.php");
-require("actions/admin/tax/edit_tax.php");
+require("actions/admin/rate/edit_bic1_rate.php");
+require("actions/admin/rate/edit_bic2_rate.php");
+require("actions/admin/rate/edit_bnc_rate.php");
 
 ?>
 
@@ -62,9 +64,15 @@ require("actions/admin/tax/edit_tax.php");
             <div class='row valign-wrapper'>
               <div class='col s12'>
                 <span class='black-text'>
-                    <h5>Imposition</h5>
-                    <p>Pourcentage du taux d'imposition : <?=$Setting->getTaxPercentage()?>%</p>
-                    <a class='waves-effect waves-light btn modal-trigger' data-target='modal_tax_edit'>Modifier le taux d'imposition</a>
+                    <h5>Taux d'imposition des activités en %</h5>
+                    <p>Pour des raisons juridiques les taux doit être conforme au statut micro entrepreneur.</p>
+                    <p>Les modifications sont exclusivement réservées en cas de changement imposé par l'évolution du statut</p>
+                    <p>Activité achat-vente de marchandises (BIC-1) : <?=$Setting->getBIC1Rate()?>%</p>
+                    <a class='waves-effect waves-light btn modal-trigger' data-target='modal_bic1_edit'>Modifier</a>
+                    <p>Prestations de services commerciales et artisanales (BIC-2) : <?=$Setting->getBIC2Rate()?>%</p>
+                    <a class='waves-effect waves-light btn modal-trigger' data-target='modal_bic2_edit'>Modifier</a>
+                    <p>Prestations de services et professions libérales (BNC) : <?=$Setting->getBNCRate()?>%</p>
+                    <a class='waves-effect waves-light btn modal-trigger' data-target='modal_bnc_edit'>Modifier</a>
                 </span>
               </div>
             </div>
@@ -93,19 +101,53 @@ require("actions/admin/tax/edit_tax.php");
     </div>
 </div>
 
-<div id='modal_tax_edit' class='modal modal-fixed-footer'>
+<div id='modal_bic1_edit' class='modal modal-fixed-footer'>
     <form class='col s6' method='post'>
     <div class='modal-content'>
       <h4>Modifier le taux d'imposition</h4>
       <div class='row'>
         <div class='input-field col s12'>
-          <input name='tax_value' id='tax_value' type='text' value='<?=$Setting->getTaxPercentage()?>' class='validate'>
-          <label for='tax_value'>Taux d'imposition en %</label>
+          <input name='bic_1_rate' id='bic_1_rate' type='text' value='<?=$Setting->getBIC1Rate()?>' class='validate'>
+          <label for='bic_1_rate'>Taux d'imposition en %</label>
         </div>
       </div>
     </div>
     <div class='modal-footer'>
-        <input class='waves-effect waves-green btn' id='submit_tax_edit' type='submit' name='submit_tax_edit' value='Modifier' class='validate'>
+        <input class='waves-effect waves-green btn' id='submit_bic1_rate_edit' type='submit' name='submit_bic1_rate_edit' value='Modifier' class='validate'>
+    </div>
+    </form>
+</div>
+
+<div id='modal_bic2_edit' class='modal modal-fixed-footer'>
+    <form class='col s6' method='post'>
+    <div class='modal-content'>
+      <h4>Modifier le taux d'imposition</h4>
+      <div class='row'>
+        <div class='input-field col s12'>
+          <input name='bic_2_rate' id='bic_2_rate' type='text' value='<?=$Setting->getBIC2Rate()?>' class='validate'>
+          <label for='bic_2_rate'>Taux d'imposition en %</label>
+        </div>
+      </div>
+    </div>
+    <div class='modal-footer'>
+        <input class='waves-effect waves-green btn' id='submit_bic2_rate_edit' type='submit' name='submit_bic2_rate_edit' value='Modifier' class='validate'>
+    </div>
+    </form>
+</div>
+
+<div id='modal_bnc_edit' class='modal modal-fixed-footer'>
+    <form class='col s6' method='post'>
+    <div class='modal-content'>
+      <h4>Modifier le taux d'imposition</h4>
+      <div class='row'>
+        <div class='input-field col s12'>
+          <input name='bnc_rate' id='bnc_rate' type='text' value='<?=$Setting->getBNCRate()?>' class='validate'>
+          <label for='bnc_rate'>Taux d'imposition en %</label>
+        </div>
+      </div>
+    </div>
+    <div class='modal-footer'>
+        <input class='waves-effect waves-green btn' id='submit_bnc_rate_edit' type='submit' name='submit_bnc_rate_edit' value='Modifier' class='validate'>
     </div>
     </form>
 </div>

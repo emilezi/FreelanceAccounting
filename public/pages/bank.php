@@ -1,8 +1,12 @@
 <?php
 
+require("class/Setting.php");
 require("class/Bank.php");
 
+$Setting = new Setting();
 $Bank = new Bank();
+
+$turnovermax = $Setting->getTurnover();
 $bankinfo = $Bank->getBank();
 
 ?>
@@ -45,9 +49,8 @@ $bankinfo = $Bank->getBank();
             <div class='row valign-wrapper'>
               <div class='col s12'>
                 <span class='black-text'>
-                    <h5>Déclaration d'impôt :</h5>
-                    <p>Prochaine date de déclaration : </p>
                     <p>Montant : </p>
+                    <p>Montant maximum annuel  : <?=$turnovermax?>€ hors taxes</p>
                 </span>
               </div>
             </div>

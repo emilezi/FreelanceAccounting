@@ -61,7 +61,7 @@ echo "<div class='row'>
     <div class='input-field col s12'>
     <select>";
     if($Client->getClient() != null){
-      echo "<option disabled selected>Nom du client</option>";
+        echo "<option disabled selected>Nom du client</option>";
       foreach ($Client->getClient() as $client) {
         echo "<option>".$client['name']."</option>";
       }
@@ -76,7 +76,7 @@ echo "</select>
     <div class='input-field col s12'>
     <select>";
     if($Service->getService() != null){
-      echo "<option disabled selected>Nom du service</option>";
+        echo "<option disabled selected>Nom du service</option>";
       foreach ($Service->getService() as $service) {
         echo "<option>".$service['name']."</option>";
       }
@@ -84,9 +84,9 @@ echo "</select>
       echo "<option disabled selected>Pas de service</option>";
     }
 echo "</select>
-  <label>Nom du service associé</label>
-  </div>
-  </div>";
+    <label>Nom du service associé</label>
+    </div>
+    </div>";
 echo "<div class='row'>
         <div class='input-field col s12'>
           <input name='start_date' id='start_date' type='text' class='datepicker'>

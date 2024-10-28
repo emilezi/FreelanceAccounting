@@ -1,13 +1,16 @@
 <?php
 
 require("class/Service.php");
+require("class/Setting.php");
 require("class/Client.php");
 require("class/Bank.php");
 
 $Service = new Service();
+$Setting = new Setting();
 $Client = new Client();
 $Bank = new Bank();
 
+$turnovermax = $Setting->getTurnover();
 $bankinfo = $Bank->getBank();
 
 ?>
@@ -50,9 +53,9 @@ $bankinfo = $Bank->getBank();
             <div class='row valign-wrapper'>
               <div class='col s12'>
                 <span class='black-text'>
-                  <p><b>Déclaration d'impôt :</b></p>
-                  <p>Prochaine date de déclaration : </p>
+                  <p><b>Chiffre d'affaire :</b></p>
                   <p>Montant : </p>
+                  <p>Montant maximum annuel  : <?=$turnovermax?>€ hors taxes</p>
                 </span>
               </div>
             </div>
