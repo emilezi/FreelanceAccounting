@@ -1,6 +1,6 @@
 <?php
 /**
-    * Application management class.
+    * Currency management class.
     *
     * @author Emile Z.
     */

@@ -1,6 +1,6 @@
 <?php
 /**
-    * Application management class.
+    * Form management class.
     *
     * @author Emile Z.
     */
@@ -66,6 +66,8 @@ class Form{
         &&
         !empty($this->post['SIREN'])
         &&
+        !empty($this->post['SIRET'])
+        &&
         !empty($this->post['password'])
         &&
         !empty($this->post['repassword'])
@@ -83,6 +85,8 @@ class Form{
             preg_match("#^[0-9]+$#i", $this->post['phone'])
             &&
             preg_match("#^[a-z0-9]+$#i", $this->post['SIREN'])
+            &&
+            preg_match("#^[a-z0-9]+$#i", $this->post['SIRET'])
             )
             {
                 return 0;
@@ -160,6 +164,39 @@ class Form{
         return 2;
 
     }
+
+    }
+
+    /**
+        * Check charge verification form
+        *
+        * @param array form post check charge information
+        *
+        * @return int if the fields are correctly filled in otherwise return the error number
+        *
+        */
+
+    public function checkCharge(){
+
+        if(
+            !empty($this->post['name'])
+            &&
+            !empty($this->post['price'])
+            )
+            {
+                if(
+                preg_match("#^[^<>]+$#i", $this->post['name'])
+                &&
+                preg_match("#^[0-9]+$#i", $this->post['price'])
+                )
+                {
+                    return 0;
+                }else{
+                    return 1;
+                }
+            }else{
+                return 2;
+            }
 
     }
 

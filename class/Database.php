@@ -1,6 +1,6 @@
 <?php
 /**
-    * Application management class.
+    * Database management class.
     *
     * @author Emile Z.
     */
@@ -155,9 +155,18 @@ class Database{
         CREATE TABLE `Bank` (
         `id` int(11) NOT NULL,
         `SIREN` varchar(64) NOT NULL,
-        `bic_excluding_tax` varchar(64) NOT NULL,
-        `bnc_excluding_tax` varchar(64) NOT NULL,
-        `treasury` varchar(64) NOT NULL
+        `bic_excluding_tax` varchar(16) NOT NULL,
+        `bnc_excluding_tax` varchar(16) NOT NULL,
+        `treasury` varchar(16) NOT NULL
+        ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+        CREATE TABLE `Charge` (
+        `id` int(11) NOT NULL,
+        `SIREN` varchar(64) NOT NULL,
+        `name` varchar(128) NOT NULL,
+        `price` varchar(8) NOT NULL,
+        `state` varchar(8) NOT NULL,
+        `date` timestamp NOT NULL DEFAULT current_timestamp()
         ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
         CREATE TABLE `Client` (
@@ -165,7 +174,7 @@ class Database{
         `SIREN` varchar(64) NOT NULL,
         `name` varchar(128) NOT NULL,
         `email` varchar(128) NOT NULL,
-        `phone` varchar(12) NOT NULL,
+        `phone` varchar(15) NOT NULL,
         `state` varchar(8) NOT NULL,
         `description` text NULL,
         `date` timestamp NOT NULL DEFAULT current_timestamp()
@@ -174,12 +183,12 @@ class Database{
         CREATE TABLE `Currency` (
         `id` int(11) NOT NULL,
         `SIREN` varchar(64) NOT NULL,
-        `customer_name` varchar(64) NOT NULL,
-        `service_name` varchar(64) NOT NULL,
-        `start_date` varchar(64) NOT NULL,
-        `end_date` varchar(64) NOT NULL,
-        `hours_days` varchar(64) NOT NULL,
-        `number_days` varchar(64) NOT NULL,
+        `customer_name` varchar(128) NOT NULL,
+        `service_name` varchar(128) NOT NULL,
+        `start_date` varchar(32) NOT NULL,
+        `end_date` varchar(32) NOT NULL,
+        `hours_days` varchar(8) NOT NULL,
+        `number_days` varchar(4) NOT NULL,
         `state` varchar(8) NOT NULL,
         `description` text NULL,
         `date` timestamp NOT NULL DEFAULT current_timestamp()
@@ -190,7 +199,7 @@ class Database{
         `SIREN` varchar(64) NOT NULL,
         `name` varchar(128) NOT NULL,
         `category` varchar(64) NOT NULL,
-        `costhour` varchar(64) NOT NULL,
+        `costhour` varchar(8) NOT NULL,
         `state` varchar(8) NOT NULL,
         `description` text NULL,
         `date` timestamp NOT NULL DEFAULT current_timestamp()
@@ -207,6 +216,7 @@ class Database{
         `status` varchar(16) NOT NULL,
         `type` varchar(16) NOT NULL,
         `SIREN` varchar(64) NOT NULL,
+        `SIRET` varchar(64) NOT NULL,
         `first_name` varchar(128) NOT NULL,
         `last_name` varchar(128) NOT NULL,
         `identifier` varchar(128) NOT NULL,
@@ -224,6 +234,9 @@ class Database{
         ALTER TABLE `Bank`
         ADD PRIMARY KEY (`id`),
         ADD UNIQUE KEY `SIREN` (`SIREN`);
+
+        ALTER TABLE `Charge`
+        ADD PRIMARY KEY (`id`);
 
         ALTER TABLE `Client`
         ADD PRIMARY KEY (`id`);
@@ -246,6 +259,9 @@ class Database{
         MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
         ALTER TABLE `Bank`
+        MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+        ALTER TABLE `Charge`
         MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
         ALTER TABLE `Client`

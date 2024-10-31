@@ -1,6 +1,6 @@
 <?php
 /**
-    * Application management class.
+    * Setting management class.
     *
     * @author Emile Z.
     */

@@ -46,6 +46,12 @@ require("actions/start/new_business.php");
       </div>
       <div class='row'>
         <div class='input-field col s12'>
+          <input name='SIRET' id='SIRET' type='text' class='validate'>
+          <label for='SIRET'>SIRET</label>
+        </div>
+      </div>
+      <div class='row'>
+        <div class='input-field col s12'>
           <input name='password' id='password' type='password' class='validate'>
           <label for='password'>Mot de passe</label>
         </div>

@@ -47,6 +47,10 @@ if($Database->setConnection() == 0) {
 						include("public/pages/bank.php");
 						break;
 					}
+					case 'charge':{
+						include("public/pages/charge.php");
+						break;
+					}
 					case 'client':{
 						include("public/pages/client.php");
 						break;

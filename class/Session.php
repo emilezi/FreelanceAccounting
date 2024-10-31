@@ -1,6 +1,6 @@
 <?php
 /**
-    * Application management class.
+    * Session management class.
     *
     * @author Emile Z.
     */

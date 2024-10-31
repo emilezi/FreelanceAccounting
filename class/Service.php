@@ -1,6 +1,6 @@
 <?php
 /**
-    * Application management class.
+    * Service management class.
     *
     * @author Emile Z.
     */

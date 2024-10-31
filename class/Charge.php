@@ -1,25 +1,25 @@
 <?php
 /**
-    * Client management class.
+    * Charge management class.
     *
     * @author Emile Z.
     */
-class Client extends Database{
+class Charge extends Database{
     
-    protected $client;
+    protected $charge;
 
     public function __construct(){
-        $this->client = $_POST;
+        $this->charge = $_POST;
     }
 
     /**
-        * Client recoveries
+        * Charge recoveries
         *
-        * @return tab clients informations list
+        * @return tab Charges informations list
         *
         */
 
-    public function getClient(){
+    public function getCharge(){
 
         $db = self::getDatabase();
 
@@ -30,38 +30,38 @@ class Client extends Database{
 
         $user = $u->fetch();
 
-        $q = $db->prepare("SELECT * FROM Client WHERE SIREN=:SIREN AND state=:state");
+        $q = $db->prepare("SELECT * FROM Charge WHERE SIREN=:SIREN AND state=:state");
         $q->execute([
             'SIREN' => $user['SIREN'],
             'state' => 'active'
         ]);
 
-        $client_list = null;
+        $charge_list = null;
 
         if($q->rowCount() > 0){
 
             $i = 0;
 
-            while($client = $q->fetch(PDO::FETCH_ASSOC)){
+            while($charge = $q->fetch(PDO::FETCH_ASSOC)){
 
                 $i = $i + 1;
 
-                $client_list[$i] = $client;
+                $charge_list[$i] = $charge;
         
             }
         
         }
 
-        return $client_list;
+        return $charge_list;
 
     }
 
     /**
-        * New client method
+        * New charge method
         *
         */
 
-    public function addClient(){
+    public function addCharge(){
 
         $db = self::getDatabase();
 
@@ -72,24 +72,22 @@ class Client extends Database{
 
         $user = $u->fetch();
 
-        $q = $db->prepare("INSERT INTO Client(`SIREN`,`name`,`email`,`phone`,`state`,`description`) VALUES(:SIREN,:name,:email,:phone,:state,:description)");
+        $q = $db->prepare("INSERT INTO Charge(`SIREN`,`name`,`price`,`state`) VALUES(:SIREN,:name,:price,:state)");
         $q->execute([
             'SIREN' => $user['SIREN'],
-            'name'=> $this->client['name'],
-            'email' => $this->client['email'],
-            'phone' => $this->client['phone'],
-            'state' => 'active',
-            'description' => $this->client['description']
+            'name'=> $this->charge['name'],
+            'price'=> $this->charge['price'],
+            'state' => 'active'
             ]);
 
     }
 
     /**
-        * Edit client method
+        * Edit charge method
         *
         */
 
-    public function editClient(){
+    public function editCharge(){
 
         $db = self::getDatabase();
 
@@ -100,24 +98,22 @@ class Client extends Database{
 
         $user = $u->fetch();
 
-        $q = $db->prepare("UPDATE Client SET name=:name, email=:email, phone=:phone, description=:description WHERE SIREN=:SIREN AND id=:id");
+        $q = $db->prepare("UPDATE Charge SET name=:name, price=:price WHERE SIREN=:SIREN AND id=:id");
         $q->execute([
-            'id' => $this->client['value'],
+            'id' => $this->charge['value'],
             'SIREN' => $user['SIREN'],
-            'name'=> $this->client['name'],
-            'email' => $this->client['email'],
-            'phone' => $this->client['phone'],
-            'description' => $this->client['description']
+            'name'=> $this->charge['name'],
+            'price'=> $this->charge['price']
         ]);
 
     }
 
     /**
-        * Delete client method
+        * Delete charge method
         *
         */
 
-    public function deleteClient(){
+    public function deleteCharge(){
 
         $db = self::getDatabase();
 
@@ -128,9 +124,9 @@ class Client extends Database{
 
         $user = $u->fetch();
 
-        $q = $db->prepare("UPDATE `Client` SET state=:state WHERE SIREN=:SIREN AND id=:id");
+        $q = $db->prepare("UPDATE `Charge` SET state=:state WHERE SIREN=:SIREN AND id=:id");
         $q->execute([
-        'id' => $this->client['value'],
+        'id' => $this->charge['value'],
         'SIREN' => $user['SIREN'],
         'state' => "delete"
         ]);

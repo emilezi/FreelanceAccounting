@@ -1,6 +1,6 @@
 <?php
 /**
-    * Application management class.
+    * User management class.
     *
     * @author Emile Z.
     */
@@ -41,6 +41,7 @@ class User extends Database{
                     $_SESSION['id'] = $user['id'];
                     $_SESSION['type'] = $user['type'];
                     $_SESSION['SIREN'] = $user['SIREN'];
+                    $_SESSION['SIRET'] = $user['SIRET'];
                     $_SESSION['status'] = $user['status'];
                     $_SESSION['first_name'] = $user['first_name'];
                     $_SESSION['last_name'] = $user['last_name'];
@@ -107,11 +108,12 @@ class User extends Database{
         'cost' => 12
         ];
                     
-        $i = $db->prepare("INSERT INTO User(`status`,`type`,`SIREN`,`first_name`,`last_name`,`identifier`,`email`,`phone`,`password`,`user_key`) VALUES(:status,:type,:SIREN,:first_name,:last_name,:identifier,:email,:phone,:password,:user_key)");
+        $i = $db->prepare("INSERT INTO User(`status`,`type`,`SIREN`,`SIRET`,`first_name`,`last_name`,`identifier`,`email`,`phone`,`password`,`user_key`) VALUES(:status,:type,:SIREN,:SIRET,:first_name,:last_name,:identifier,:email,:phone,:password,:user_key)");
         $i->execute([
             'status' => 'eirl',
             'type'=> 'user',
             'SIREN' => $this->user['SIREN'],
+            'SIRET' => $this->user['SIRET'],
             'first_name' => $this->user['first_name'],
             'last_name' => $this->user['last_name'],
             'identifier' => $this->user['identifier'],
@@ -150,11 +152,12 @@ class User extends Database{
         'cost' => 12
         ];
                     
-        $i = $db->prepare("INSERT INTO User(`status`,`type`,`SIREN`,`first_name`,`last_name`,`identifier`,`email`,`phone`,`password`,`user_key`) VALUES(:status,:type,:SIREN,:first_name,:last_name,:identifier,:email,:phone,:password,:user_key)");
+        $i = $db->prepare("INSERT INTO User(`status`,`type`,`SIREN`,`SIRET`,`first_name`,`last_name`,`identifier`,`email`,`phone`,`password`,`user_key`) VALUES(:status,:type,:SIREN,:SIRET,:first_name,:last_name,:identifier,:email,:phone,:password,:user_key)");
         $i->execute([
             'status' => 'eirl',
             'type'=> 'admin',
             'SIREN' => $this->user['SIREN'],
+            'SIRET' => $this->user['SIRET'],
             'first_name' => $this->user['first_name'],
             'last_name' => $this->user['last_name'],
             'identifier' => $this->user['identifier'],

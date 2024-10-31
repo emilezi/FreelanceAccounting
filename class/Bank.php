@@ -1,6 +1,6 @@
 <?php
 /**
-    * Application management class.
+    * Bank management class.
     *
     * @author Emile Z.
     */
