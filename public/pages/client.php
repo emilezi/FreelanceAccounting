@@ -90,6 +90,33 @@ if($Client->getClient() != null){
           <label for='phone'>Numéro de téléphone</label>
         </div>
       </div>
+      <input type='hidden' name='category' value=".$client['category'].">
+      <input type='hidden' name='langue' value=".$client['langue'].">
+      <input type='hidden' name='country' value=".$client['country'].">
+      <div class='row'>
+        <div class='input-field col s12'>
+          <input name='address' id='address' type='text' value='".$client['address']."' class='validate'>
+          <label for='address'>Adresse du client</label>
+        </div>
+      </div>
+      <div class='row'>
+        <div class='input-field col s12'>
+          <input name='address_supplement' id='address_supplement' type='text' value='".$client['address_supplement']."' class='validate'>
+          <label for='address_supplement'>Supplément d'adresse</label>
+        </div>
+      </div>
+      <div class='row'>
+        <div class='input-field col s12'>
+          <input name='postal_code' id='postal_code' type='text' value='".$client['postal_code']."' class='validate'>
+          <label for='postal_code'>Code postal</label>
+        </div>
+      </div>
+      <div class='row'>
+        <div class='input-field col s12'>
+          <input name='city' id='city' type='text' value='".$client['city']."' class='validate'>
+          <label for='city'>Ville</label>
+        </div>
+      </div>
       <div class='row'>
         <div class='input-field col s12'>
           <textarea name='description' id='description' class='materialize-textarea'>".$client['description']."</textarea>
@@ -130,6 +157,67 @@ echo "<div id='modal_new' class='modal modal-fixed-footer'>
         <div class='input-field col s12'>
           <input name='phone' id='phone' type='text' class='validate'>
           <label for='phone'>Numéro de téléphone</label>
+        </div>
+      </div>
+      <div class='row'>
+        <div class='input-field col s12'>
+        <select name='category'>
+          <option value='individual' selected>Particulier</option>
+          <option value='business'>Entreprise</option>
+        </select>
+        <label>Catégorie associée</label>
+        </div>
+      </div>
+      <div class='row'>
+        <div class='input-field col s12'>
+        <select name='langue'>
+          <option value='english' selected>Anglais</option>
+          <option value='french'>Français</option>
+        </select>
+        <label>Langue</label>
+        </div>
+      </div>
+      <div class='row'>
+        <div class='input-field col s12'>
+        <select name='country'>
+          <option value='germany' selected>Allemagne</option>
+          <option value='belgium'>Belgique</option>
+          <option value='canada'>Canada</option>
+          <option value='espagne'>Espagne</option>
+          <option value='united_states'>États-Unis</option>
+          <option value='france'>France</option>
+          <option value='italy'>Italie</option>
+          <option value='luxembourg'>Luxembourg</option>
+          <option value='malta'>Malte</option>
+          <option value='netherlands'>Pays-Bas</option>
+          <option value='portugal'>Portugal</option>
+          <option value='united_kingdom'>Royaume-Uni</option>
+        </select>
+        <label>Pays</label>
+        </div>
+      </div>
+      <div class='row'>
+        <div class='input-field col s12'>
+          <input name='address' id='address' type='text' class='validate'>
+          <label for='address'>Adresse du client</label>
+        </div>
+      </div>
+      <div class='row'>
+        <div class='input-field col s12'>
+          <input name='address_supplement' id='address_supplement' type='text' class='validate'>
+          <label for='address_supplement'>Supplément d'adresse</label>
+        </div>
+      </div>
+      <div class='row'>
+        <div class='input-field col s12'>
+          <input name='postal_code' id='postal_code' type='text' class='validate'>
+          <label for='postal_code'>Code postal</label>
+        </div>
+      </div>
+      <div class='row'>
+        <div class='input-field col s12'>
+          <input name='city' id='city' type='text' class='validate'>
+          <label for='city'>Ville</label>
         </div>
       </div>
       <div class='row'>

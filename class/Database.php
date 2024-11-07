@@ -160,10 +160,29 @@ class Database{
         `treasury` varchar(16) NOT NULL
         ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+        CREATE TABLE `Business` (
+        `id` int(11) NOT NULL,
+        `SIREN` varchar(64) NOT NULL,
+        `company_name` varchar(128) NOT NULL,
+        `trade_name` varchar(128) NOT NULL,
+        `SIRET` varchar(64) NOT NULL,
+        `vat_number` varchar(16) NOT NULL,
+        `langue` varchar(16) NOT NULL,
+        `country` varchar(16) NOT NULL,
+        `address` varchar(64) NOT NULL,
+        `address_supplement` varchar(16) NOT NULL,
+        `postal_code` varchar(8) NOT NULL,
+        `city` varchar(64) NOT NULL,
+        `state` varchar(8) NOT NULL,
+        `description` text NULL,
+        `date` timestamp NOT NULL DEFAULT current_timestamp()
+        ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
         CREATE TABLE `Charge` (
         `id` int(11) NOT NULL,
         `SIREN` varchar(64) NOT NULL,
         `name` varchar(128) NOT NULL,
+        `category` varchar(64) NOT NULL,
         `price` varchar(8) NOT NULL,
         `state` varchar(8) NOT NULL,
         `date` timestamp NOT NULL DEFAULT current_timestamp()
@@ -175,6 +194,13 @@ class Database{
         `name` varchar(128) NOT NULL,
         `email` varchar(128) NOT NULL,
         `phone` varchar(15) NOT NULL,
+        `category` varchar(64) NOT NULL,
+        `langue` varchar(16) NOT NULL,
+        `country` varchar(16) NOT NULL,
+        `address` varchar(64) NOT NULL,
+        `address_supplement` varchar(16) NOT NULL,
+        `postal_code` varchar(8) NOT NULL,
+        `city` varchar(64) NOT NULL,
         `state` varchar(8) NOT NULL,
         `description` text NULL,
         `date` timestamp NOT NULL DEFAULT current_timestamp()

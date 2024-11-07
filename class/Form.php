@@ -168,6 +168,75 @@ class Form{
     }
 
     /**
+        * Check business verification form
+        *
+        * @param array form post check business information
+        *
+        * @return int if the fields are correctly filled in otherwise return the error number
+        *
+        */
+
+    public function checkBusiness(){
+
+        if(
+            !empty($this->post['company_name'])
+            &&
+            !empty($this->post['trade_name'])
+            &&
+            !empty($this->post['SIRET'])
+            &&
+            !empty($this->post['vat_number'])
+            &&
+            !empty($this->post['langue'])
+            &&
+            !empty($this->post['country'])
+            &&
+            !empty($this->post['address'])
+            &&
+            !empty($this->post['address_supplement'])
+            &&
+            !empty($this->post['postal_code'])
+            &&
+            !empty($this->post['city'])
+            &&
+            !empty($this->post['description'])
+            )
+            {
+                if(
+                preg_match("#^[^<>]+$#i", $this->post['company_name'])
+                &&
+                preg_match("#^[^<>]+$#i", $this->post['trade_name'])
+                &&
+                preg_match("#^[^<>]+$#i", $this->post['SIRET'])
+                &&
+                preg_match("#^[^<>]+$#i", $this->post['vat_number'])
+                &&
+                preg_match("#^[^<>]+$#i", $this->post['langue'])
+                &&
+                preg_match("#^[^<>]+$#i", $this->post['country'])
+                &&
+                preg_match("#^[^<>]+$#i", $this->post['address'])
+                &&
+                preg_match("#^[^<>]+$#i", $this->post['address_supplement'])
+                &&
+                preg_match("#^[^<>]+$#i", $this->post['postal_code'])
+                &&
+                preg_match("#^[^<>]+$#i", $this->post['city'])
+                &&
+                preg_match("#^[^<>]+$#i", $this->post['description'])
+                )
+                {
+                    return 0;
+                }else{
+                    return 1;
+                }
+            }else{
+                return 2;
+            }
+
+    }
+
+    /**
         * Check charge verification form
         *
         * @param array form post check charge information
@@ -218,6 +287,20 @@ class Form{
             &&
             !empty($this->post['phone'])
             &&
+            !empty($this->post['category'])
+            &&
+            !empty($this->post['langue'])
+            &&
+            !empty($this->post['country'])
+            &&
+            !empty($this->post['address'])
+            &&
+            !empty($this->post['address_supplement'])
+            &&
+            !empty($this->post['postal_code'])
+            &&
+            !empty($this->post['city'])
+            &&
             !empty($this->post['description'])
             )
             {
@@ -227,6 +310,20 @@ class Form{
                 preg_match("#^[a-z0-9.]+@[a-z0-9.]+$#i", $this->post['email'])
                 &&
                 preg_match("#^[^<>]+$#i", $this->post['phone'])
+                &&
+                preg_match("#^[^<>]+$#i", $this->post['category'])
+                &&
+                preg_match("#^[^<>]+$#i", $this->post['langue'])
+                &&
+                preg_match("#^[^<>]+$#i", $this->post['country'])
+                &&
+                preg_match("#^[^<>]+$#i", $this->post['address'])
+                &&
+                preg_match("#^[^<>]+$#i", $this->post['address_supplement'])
+                &&
+                preg_match("#^[^<>]+$#i", $this->post['postal_code'])
+                &&
+                preg_match("#^[^<>]+$#i", $this->post['city'])
                 &&
                 preg_match("#^[^<>]+$#i", $this->post['description'])
                 )
