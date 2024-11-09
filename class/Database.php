@@ -340,19 +340,43 @@ class Database{
         $q = $db->prepare("INSERT INTO Setting(`setting_name`,`setting_set`) VALUES(:setting_name,:setting_set)");
         $q->execute([
         'setting_name' => 'bic_1_rate',
-        'setting_set' => '12.3'
+        'setting_set' => '21.2'
         ]);
 
         $q = $db->prepare("INSERT INTO Setting(`setting_name`,`setting_set`) VALUES(:setting_name,:setting_set)");
         $q->execute([
         'setting_name' => 'bic_2_rate',
-        'setting_set' => '21.2'
+        'setting_set' => '12.3'
         ]);
 
         $q = $db->prepare("INSERT INTO Setting(`setting_name`,`setting_set`) VALUES(:setting_name,:setting_set)");
         $q->execute([
         'setting_name' => 'bnc_rate',
-        'setting_set' => '21.2'
+        'setting_set' => '23.1'
+        ]);
+
+        $q = $db->prepare("INSERT INTO Setting(`setting_name`,`setting_set`) VALUES(:setting_name,:setting_set)");
+        $q->execute([
+        'setting_name' => 'bic_pay_1_rate',
+        'setting_set' => '1.7'
+        ]);
+
+        $q = $db->prepare("INSERT INTO Setting(`setting_name`,`setting_set`) VALUES(:setting_name,:setting_set)");
+        $q->execute([
+        'setting_name' => 'bic_pay_2_rate',
+        'setting_set' => '1.0'
+        ]);
+
+        $q = $db->prepare("INSERT INTO Setting(`setting_name`,`setting_set`) VALUES(:setting_name,:setting_set)");
+        $q->execute([
+        'setting_name' => 'bnc_pay_rate',
+        'setting_set' => '2.2'
+        ]);
+
+        $q = $db->prepare("INSERT INTO Setting(`setting_name`,`setting_set`) VALUES(:setting_name,:setting_set)");
+        $q->execute([
+        'setting_name' => 'professional_training_rate',
+        'setting_set' => '0.2'
         ]);
 
     }

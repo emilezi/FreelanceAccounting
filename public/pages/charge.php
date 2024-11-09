@@ -76,6 +76,7 @@ if($Charge->getCharge() != null){
             <label for='name'>Nom de la charge</label>
             </div>
         </div>
+        <input type='hidden' name='category' value=".$charge['category'].">
         <div class='row'>
           <div class='input-field col s12'>
             <input name='price' id='price' type='text' value='".$charge['price']."' class='validate'>
@@ -106,6 +107,15 @@ echo "<div id='modal_new' class='modal modal-fixed-footer'>
         <label for='name'>Nom de la charge</label>
         </div>
     </div>
+    <div class='row'>
+        <div class='input-field col s12'>
+        <select name='category'>
+          <option value='pay' selected>Versement liberatoire</option>
+          <option value='invoice'>Facture</option>
+        </select>
+        <label>Catégorie</label>
+        </div>
+      </div>
     <div class='row'>
         <div class='input-field col s12'>
         <input name='price' id='price' type='text' class='validate'>

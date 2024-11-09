@@ -73,6 +73,14 @@ require("actions/admin/rate/edit_bnc_rate.php");
                     <a class='waves-effect waves-light btn modal-trigger' data-target='modal_bic2_edit'>Modifier</a>
                     <p>Prestations de services et professions libérales (BNC) : <?=$Setting->getBNCRate()?>%</p>
                     <a class='waves-effect waves-light btn modal-trigger' data-target='modal_bnc_edit'>Modifier</a>
+                    <p>Versement liberatoire de l'impot sur le revenu (Prestations BIC) : <?=$Setting->getBIC1PayRate()?>%</p>
+                    <a class='waves-effect waves-light btn modal-trigger' data-target='modal_bic1_pay_edit'>Modifier</a>
+                    <p>Versement liberatoire de l'impot sur le revenu (vente BIC) : <?=$Setting->getBIC2PayRate()?>%</p>
+                    <a class='waves-effect waves-light btn modal-trigger' data-target='modal_bic2_pay_edit'>Modifier</a>
+                    <p>Versement liberatoire de l'impot sur le revenu (Prestations BNC) : <?=$Setting->getBNCPayRate()?>%</p>
+                    <a class='waves-effect waves-light btn modal-trigger' data-target='modal_bnc_pay_edit'>Modifier</a>
+                    <p>Formation prof.liberale obligatoire : <?=$Setting->getProfessionalTrainingRate()?>%</p>
+                    <a class='waves-effect waves-light btn modal-trigger' data-target='modal_professional_training_edit'>Modifier</a>
                 </span>
               </div>
             </div>
@@ -148,6 +156,74 @@ require("actions/admin/rate/edit_bnc_rate.php");
     </div>
     <div class='modal-footer'>
         <input class='waves-effect waves-green btn' id='submit_bnc_rate_edit' type='submit' name='submit_bnc_rate_edit' value='Modifier' class='validate'>
+    </div>
+    </form>
+</div>
+
+<div id='modal_bic1_pay_edit' class='modal modal-fixed-footer'>
+    <form class='col s6' method='post'>
+    <div class='modal-content'>
+      <h4>Modifier le taux d'imposition</h4>
+      <div class='row'>
+        <div class='input-field col s12'>
+          <input name='bic_pay_1_rate' id='bic_pay_1_rate' type='text' value='<?=$Setting->getBIC1PayRate()?>' class='validate'>
+          <label for='bic_pay_1_rate'>Taux d'imposition en %</label>
+        </div>
+      </div>
+    </div>
+    <div class='modal-footer'>
+        <input class='waves-effect waves-green btn' id='submit_bic1_pay_rate_edit' type='submit' name='submit_bic1_pay_rate_edit' value='Modifier' class='validate'>
+    </div>
+    </form>
+</div>
+
+<div id='modal_bic2_pay_edit' class='modal modal-fixed-footer'>
+    <form class='col s6' method='post'>
+    <div class='modal-content'>
+      <h4>Modifier le taux d'imposition</h4>
+      <div class='row'>
+        <div class='input-field col s12'>
+          <input name='bic_pay_2_rate' id='bic_pay_2_rate' type='text' value='<?=$Setting->getBIC2PayRate()?>' class='validate'>
+          <label for='bic_pay_2_rate'>Taux d'imposition en %</label>
+        </div>
+      </div>
+    </div>
+    <div class='modal-footer'>
+        <input class='waves-effect waves-green btn' id='submit_bic2_pay_rate_edit' type='submit' name='submit_bic2_pay_rate_edit' value='Modifier' class='validate'>
+    </div>
+    </form>
+</div>
+
+<div id='modal_bnc_pay_edit' class='modal modal-fixed-footer'>
+    <form class='col s6' method='post'>
+    <div class='modal-content'>
+      <h4>Modifier le taux d'imposition</h4>
+      <div class='row'>
+        <div class='input-field col s12'>
+          <input name='bnc_pay_rate' id='bnc_pay_rate' type='text' value='<?=$Setting->getBNCPayRate()?>' class='validate'>
+          <label for='bnc_pay_rate'>Taux d'imposition en %</label>
+        </div>
+      </div>
+    </div>
+    <div class='modal-footer'>
+        <input class='waves-effect waves-green btn' id='submit_bnc_pay_rate_edit' type='submit' name='submit_bnc_pay_rate_edit' value='Modifier' class='validate'>
+    </div>
+    </form>
+</div>
+
+<div id='modal_professional_training_edit' class='modal modal-fixed-footer'>
+    <form class='col s6' method='post'>
+    <div class='modal-content'>
+      <h4>Modifier le taux d'imposition</h4>
+      <div class='row'>
+        <div class='input-field col s12'>
+          <input name='professional_training_rate' id='professional_training_rate' type='text' value='<?=$Setting->getProfessionalTrainingRate()?>' class='validate'>
+          <label for='professional_training_rate'>Taux d'imposition en %</label>
+        </div>
+      </div>
+    </div>
+    <div class='modal-footer'>
+        <input class='waves-effect waves-green btn' id='submit_protraining_rate_edit' type='submit' name='submit_protraining_rate_edit' value='Modifier' class='validate'>
     </div>
     </form>
 </div>

@@ -246,4 +246,162 @@ class Setting extends Database{
 
     }
 
+    /**
+        * BIC pay rate information
+        *
+        * @return string BIC pay rate value
+        *
+        */
+
+    public function getBIC1PayRate(){
+
+        $db = self::getDatabase();
+
+        $q = $db->prepare("SELECT * FROM Setting WHERE setting_name=:setting_name");
+        $q->execute([
+            'setting_name' => 'bic_pay_1_rate'
+        ]);
+
+        $ratevalue = $q->fetch();
+
+        return $ratevalue['setting_set'];
+
+    }
+
+    /**
+        * Change BIC pay rate method
+        *
+        */
+
+    public function editBIC1PayRate(){
+
+        $db = self::getDatabase();
+
+        $q = $db->prepare("UPDATE Setting SET setting_set=:setting_set WHERE setting_name=:setting_name");
+        $q->execute([
+            'setting_name' => 'bic_pay_1_rate',
+            'setting_set' => $this->setting['bnc_rate']
+        ]);
+
+    }
+    
+    /**
+        * BIC rate information
+        *
+        * @return string BIC rate value
+        *
+        */
+
+    public function getBIC2PayRate(){
+
+        $db = self::getDatabase();
+
+        $q = $db->prepare("SELECT * FROM Setting WHERE setting_name=:setting_name");
+        $q->execute([
+            'setting_name' => 'bic_pay_2_rate'
+        ]);
+
+        $ratevalue = $q->fetch();
+
+        return $ratevalue['setting_set'];
+
+    }
+
+    /**
+        * Change BIC rate method
+        *
+        */
+
+    public function editBIC2PayRate(){
+
+        $db = self::getDatabase();
+
+        $q = $db->prepare("UPDATE Setting SET setting_set=:setting_set WHERE setting_name=:setting_name");
+        $q->execute([
+            'setting_name' => 'bic_pay_2_rate',
+            'setting_set' => $this->setting['bnc_rate']
+        ]);
+
+    }
+    
+    /**
+        * BNC pay rate information
+        *
+        * @return string BNC pay rate value
+        *
+        */
+
+    public function getBNCPayRate(){
+
+        $db = self::getDatabase();
+
+        $q = $db->prepare("SELECT * FROM Setting WHERE setting_name=:setting_name");
+        $q->execute([
+            'setting_name' => 'bnc_pay_rate'
+        ]);
+
+        $ratevalue = $q->fetch();
+
+        return $ratevalue['setting_set'];
+
+    }
+    
+    /**
+        * Change BNC pay rate method
+        *
+        */
+
+    public function editBNCPayRate(){
+
+        $db = self::getDatabase();
+
+        $q = $db->prepare("UPDATE Setting SET setting_set=:setting_set WHERE setting_name=:setting_name");
+        $q->execute([
+            'setting_name' => 'bnc_pay_rate',
+            'setting_set' => $this->setting['bnc_rate']
+        ]);
+
+    }
+    
+    /**
+        * Professional training rate information
+        *
+        * @return string professional training rate value
+        *
+        */
+
+    public function getProfessionalTrainingRate(){
+
+        $db = self::getDatabase();
+
+        $q = $db->prepare("SELECT * FROM Setting WHERE setting_name=:setting_name");
+        $q->execute([
+            'setting_name' => 'professional_training_rate'
+        ]);
+
+        $ratevalue = $q->fetch();
+
+        return $ratevalue['setting_set'];
+
+    }
+
+    /**
+        * Change professional training rate method
+        *
+        */
+
+    public function editProfessionalTrainingRate(){
+
+        $db = self::getDatabase();
+
+        $q = $db->prepare("UPDATE Setting SET setting_set=:setting_set WHERE setting_name=:setting_name");
+        $q->execute([
+            'setting_name' => 'professional_training_rate',
+            'setting_set' => $this->setting['bnc_rate']
+        ]);
+
+    }
+    
+    
+
 }

@@ -72,10 +72,11 @@ class Charge extends Database{
 
         $user = $u->fetch();
 
-        $q = $db->prepare("INSERT INTO Charge(`SIREN`,`name`,`price`,`state`) VALUES(:SIREN,:name,:price,:state)");
+        $q = $db->prepare("INSERT INTO Charge(`SIREN`,`name`,`category`,`price`,`state`) VALUES(:SIREN,:name,:category,:price,:state)");
         $q->execute([
             'SIREN' => $user['SIREN'],
             'name'=> $this->charge['name'],
+            'category'=> $this->charge['category'],
             'price'=> $this->charge['price'],
             'state' => 'active'
             ]);
@@ -98,11 +99,12 @@ class Charge extends Database{
 
         $user = $u->fetch();
 
-        $q = $db->prepare("UPDATE Charge SET name=:name, price=:price WHERE SIREN=:SIREN AND id=:id");
+        $q = $db->prepare("UPDATE Charge SET name=:name, category=:category, price=:price WHERE SIREN=:SIREN AND id=:id");
         $q->execute([
             'id' => $this->charge['value'],
             'SIREN' => $user['SIREN'],
             'name'=> $this->charge['name'],
+            'category'=> $this->charge['category'],
             'price'=> $this->charge['price']
         ]);
 
