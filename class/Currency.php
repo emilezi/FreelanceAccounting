@@ -109,8 +109,13 @@ class Currency extends Database{
             ]);
 
         $user = $u->fetch();
-
         
+        $q = $db->prepare("UPDATE `Currency` SET state=:state WHERE SIREN=:SIREN AND id=:id");
+        $q->execute([
+        'id' => $this->currency['value'],
+        'SIREN' => $user['SIREN'],
+        'state' => "cancel"
+        ]);
         
     }
     

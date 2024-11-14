@@ -30,7 +30,7 @@ if($Client->getClient() != null){
         <td>".$client['email']."</td>
         <td>".$client['phone']."</td>
         <td>".$client['date']."</td>
-        <td><a class='waves-effect waves-light btn red modal-trigger' data-target='modal_delete_".$i."'>Supprimer</a><a class='waves-effect waves-light btn modal-trigger' data-target='modal_edit_".$i."'>Modifier</a></td>
+        <td><a class='waves-effect waves-light btn red modal-trigger' data-target='modal_delete_".$i."'>Supprimer</a><a class='waves-effect waves-light btn modal-trigger' data-target='modal_edit_".$i."'>Modifier</a><a class='waves-effect waves-light btn modal-trigger' data-target='modal_description_".$i."'>Information</a></td>
         </tr>";
 
     }
@@ -86,7 +86,7 @@ if($Client->getClient() != null){
       </div>
       <div class='row'>
         <div class='input-field col s12'>
-          <input name='phone' id='phone' type='text' value='".$client['phone']."' class='validate'>
+          <input name='phone' id='phone' type='tel' value='".$client['phone']."' class='validate'>
           <label for='phone'>Numéro de téléphone</label>
         </div>
       </div>
@@ -131,6 +131,35 @@ if($Client->getClient() != null){
     </form>
     </div>";
 
+    echo "<div id='modal_description_".$i."' class='modal modal-fixed-footer'>
+    <div class='modal-content'>
+      <h4>Informations sur le client</h4>
+      <br/>
+      <h6><b>Nom du client : </b>".$client['name']."</h6>
+      <br/>
+      <h6><b>Adresse email : </b>".$client['email']."</h6>
+      <br/>
+      <h6><b>Numéro de téléphone : </b>".$client['phone']."</h6>
+      <br/>
+      <h6><b>Catégorie associée : </b>".$client['category']."</h6>
+      <br/>
+      <h6><b>Langue : </b>".$client['langue']."</h6>
+      <br/>
+      <h6><b>Pays : </b>".$client['country']."</h6>
+      <br/>
+      <h6><b>Adresse du client : </b>".$client['address']."</h6>
+      <br/>
+      <h6><b>Supplément d'adresse : </b>".$client['address_supplement']."</h6>
+      <br/>
+      <h6><b>Code postal : </b>".$client['postal_code']."</h6>
+      <br/>
+      <h6><b>Ville : </b>".$client['city']."</h6>
+      <br/>
+      <h6><b>Description du client : </b></h6>
+      <p>".$client['description']."</p>
+    </div>
+    </div>";
+
   }
     
 }
@@ -155,15 +184,14 @@ echo "<div id='modal_new' class='modal modal-fixed-footer'>
       </div>
       <div class='row'>
         <div class='input-field col s12'>
-          <input name='phone' id='phone' type='text' class='validate'>
+          <input name='phone' id='phone' type='tel' class='validate'>
           <label for='phone'>Numéro de téléphone</label>
         </div>
       </div>
       <div class='row'>
         <div class='input-field col s12'>
         <select name='category'>
-          <option value='individual' selected>Particulier</option>
-          <option value='business'>Entreprise</option>
+          <option value='individual' selected>Particulier (client individuel)</option>
         </select>
         <label>Catégorie associée</label>
         </div>
@@ -204,7 +232,7 @@ echo "<div id='modal_new' class='modal modal-fixed-footer'>
       </div>
       <div class='row'>
         <div class='input-field col s12'>
-          <input name='address_supplement' id='address_supplement' type='text' class='validate'>
+          <input name='address_supplement' id='address_supplement' type='text' class='validate' value='(aucun)'>
           <label for='address_supplement'>Supplément d'adresse</label>
         </div>
       </div>

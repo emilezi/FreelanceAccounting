@@ -40,6 +40,7 @@ $bankinfo = $Bank->getBank();
                     <h5>Chiffre d'affaire :</h5>
                     <p>Montant : </p>
                     <p>Montant maximum annuel  : <?=$turnovermax?>€ hors taxes</p>
+                    <p>Prochaine date d'imposition :</p>
                 </span>
               </div>
             </div>
@@ -52,13 +53,20 @@ $bankinfo = $Bank->getBank();
               <div class='col s12'>
                 <span class='black-text'>
                     <h5>Taux d'imposition actuel</h5>
-                    <p>Activité achat-vente de marchandises (BIC-1) : <?=$Setting->getBIC1Rate()?>%</p>
-                    <p>Prestations de services commerciales et artisanales (BIC-2) : <?=$Setting->getBIC2Rate()?>%</p>
-                    <p>Prestations de services et professions libérales (BNC) : <?=$Setting->getBNCRate()?>%</p>
-                    <p>Versement liberatoire de l'impot sur le revenu (Prestations BIC) : <?=$Setting->getBIC1PayRate()?>%</p>
-                    <p>Versement liberatoire de l'impot sur le revenu (vente BIC) : <?=$Setting->getBIC2PayRate()?>%</p>
-                    <p>Versement liberatoire de l'impot sur le revenu (Prestations BNC) : <?=$Setting->getBNCPayRate()?>%</p>
-                    <p>Formation prof.liberale obligatoire : <?=$Setting->getProfessionalTrainingRate()?>%</p>
+                    <p><b>Activité achat-vente de marchandises (BIC-1) : <?=$Setting->getBIC1Rate()?>%</b></p>
+                    <p>Montant à déclarer :</p>
+                    <p><b>Prestations de services commerciales et artisanales (BIC-2) : <?=$Setting->getBIC2Rate()?>%</b></p>
+                    <p>Montant à déclarer :</p>
+                    <p><b>Prestations de services et professions libérales (BNC) : <?=$Setting->getBNCRate()?>%</b></p>
+                    <p>Montant à déclarer :</p>
+                    <p><b>Versement liberatoire de l'impot sur le revenu (Prestations BIC) : <?=$Setting->getBIC1PayRate()?>%</b></p>
+                    <p>Montant à déclarer :</p>
+                    <p><b>Versement liberatoire de l'impot sur le revenu (vente BIC) : <?=$Setting->getBIC2PayRate()?>%</b></p>
+                    <p>Montant à déclarer :</p>
+                    <p><b>Versement liberatoire de l'impot sur le revenu (Prestations BNC) : <?=$Setting->getBNCPayRate()?>%</b></p>
+                    <p>Montant à déclarer :</p>
+                    <p><b>Formation prof.liberale obligatoire : <?=$Setting->getProfessionalTrainingRate()?>%</b></p>
+                    <p>Montant à déclarer :</p>
                 </span>
               </div>
             </div>

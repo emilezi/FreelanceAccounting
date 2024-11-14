@@ -4,7 +4,7 @@
 </ul>
 <ul id="dropdown2" class="dropdown-content">
   <li><a href="index.php?link=bank">Banque</a></li>
-  <li><a href="index.php?link=currency">Devises</a></li>
+  <li><a href="index.php?link=currency">Factures</a></li>
   <li><a href="index.php?link=charge">Charges</a></li>
 </ul>
 <nav class="light-blue lighten-1" role="navigation">

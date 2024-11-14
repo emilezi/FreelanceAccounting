@@ -155,7 +155,8 @@ class Database{
         CREATE TABLE `Bank` (
         `id` int(11) NOT NULL,
         `SIREN` varchar(64) NOT NULL,
-        `bic_excluding_tax` varchar(16) NOT NULL,
+        `bic1_excluding_tax` varchar(16) NOT NULL,
+        `bic2_excluding_tax` varchar(16) NOT NULL,
         `bnc_excluding_tax` varchar(16) NOT NULL,
         `treasury` varchar(16) NOT NULL
         ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -185,6 +186,7 @@ class Database{
         `category` varchar(64) NOT NULL,
         `price` varchar(8) NOT NULL,
         `state` varchar(8) NOT NULL,
+        `description` text NULL,
         `date` timestamp NOT NULL DEFAULT current_timestamp()
         ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 

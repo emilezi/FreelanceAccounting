@@ -123,10 +123,11 @@ class User extends Database{
             'user_key' => md5(microtime(TRUE)*100000)
             ]);
         
-        $j = $db->prepare("INSERT INTO Bank(`SIREN`,`bic_excluding_tax`,`bnc_excluding_tax`,`treasury`) VALUES(:SIREN,:bic_excluding_tax,:bnc_excluding_tax,:treasury)");
+        $j = $db->prepare("INSERT INTO Bank(`SIREN`,`bic1_excluding_tax`,`bic2_excluding_tax`,`bnc_excluding_tax`,`treasury`) VALUES(:SIREN,:bic1_excluding_tax,:bic2_excluding_tax,:bnc_excluding_tax,:treasury)");
         $j->execute([
             'SIREN' => $this->user['SIREN'],
-            'bic_excluding_tax' => '0',
+            'bic1_excluding_tax' => '0',
+            'bic2_excluding_tax' => '0',
             'bnc_excluding_tax' => '0',
             'treasury' => '0'
             ]);
@@ -167,10 +168,11 @@ class User extends Database{
             'user_key' => md5(microtime(TRUE)*100000)
             ]);
         
-        $j = $db->prepare("INSERT INTO Bank(`SIREN`,`bic_excluding_tax`,`bnc_excluding_tax`,`treasury`) VALUES(:SIREN,:bic_excluding_tax,:bnc_excluding_tax,:treasury)");
+        $j = $db->prepare("INSERT INTO Bank(`SIREN`,`bic1_excluding_tax`,`bic2_excluding_tax`,`bnc_excluding_tax`,`treasury`) VALUES(:SIREN,:bic1_excluding_tax,:bic2_excluding_tax,:bnc_excluding_tax,:treasury)");
         $j->execute([
             'SIREN' => $this->user['SIREN'],
-            'bic_excluding_tax' => '0',
+            'bic1_excluding_tax' => '0',
+            'bic2_excluding_tax' => '0',
             'bnc_excluding_tax' => '0',
             'treasury' => '0'
             ]);

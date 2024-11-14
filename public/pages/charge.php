@@ -10,7 +10,7 @@ require("actions/charge/remove_charge.php");
 echo "<table>
     <thead><tr>
         <th>Nom</th>
-        <th>Prix</th>
+        <th>Prix en €</th>
         <th>Crée le :</th>
         <th>Action :</th>
     </tr></thead>
@@ -26,9 +26,9 @@ if($Charge->getCharge() != null){
 
         echo "<tr>
         <td>".$charge['name']."</td>
-        <td>".$charge['price']."</td>
+        <td>".$charge['price']."€</td>
         <td>".$charge['date']."</td>
-        <td><a class='waves-effect waves-light btn red modal-trigger' data-target='modal_delete_".$i."'>Supprimer</a><a class='waves-effect waves-light btn modal-trigger' data-target='modal_edit_".$i."'>Modifier</a></td>
+        <td><a class='waves-effect waves-light btn red modal-trigger' data-target='modal_delete_".$i."'>Supprimer</a><a class='waves-effect waves-light btn modal-trigger' data-target='modal_edit_".$i."'>Modifier</a><a class='waves-effect waves-light btn modal-trigger' data-target='modal_description_".$i."'>Information</a></td>
         </tr>";
     
     }
@@ -79,9 +79,15 @@ if($Charge->getCharge() != null){
         <input type='hidden' name='category' value=".$charge['category'].">
         <div class='row'>
           <div class='input-field col s12'>
-            <input name='price' id='price' type='text' value='".$charge['price']."' class='validate'>
+            <input name='price' id='price' type='number' value='".$charge['price']."' class='validate'>
             <label for='price'>Prix</label>
           </div>
+        </div>
+        <div class='row'>
+            <div class='input-field col s12'>
+            <textarea name='description' id='description' class='materialize-textarea'>".$charge['description']."</textarea>
+            <label for='description'>Description de la charge</label>
+            </div>
         </div>
         </div>
         <div class='modal-footer'>
@@ -90,6 +96,12 @@ if($Charge->getCharge() != null){
         <input id='value' type='hidden' name='value' value=".$charge['id'].">
         </form>
         </div>";
+
+        echo "<div id='modal_description_".$i."' class='modal modal-fixed-footer'>
+                <div class='modal-content'>
+                    <h4>Informations sur la charge</h4>
+                </div>
+            </div>";
     
     }
         
@@ -118,10 +130,16 @@ echo "<div id='modal_new' class='modal modal-fixed-footer'>
       </div>
     <div class='row'>
         <div class='input-field col s12'>
-        <input name='price' id='price' type='text' class='validate'>
+        <input name='price' id='price' type='number' class='validate'>
         <label for='price'>Prix</label>
         </div>
     </div>
+    <div class='row'>
+            <div class='input-field col s12'>
+            <textarea name='description' id='description' class='materialize-textarea'></textarea>
+            <label for='description'>Description de la charge</label>
+            </div>
+        </div>
     </div>
     <div class='modal-footer'>
         <input class='waves-effect waves-green btn' id='submit' type='submit' name='submit' value='Effectuer la charge' class='validate'>

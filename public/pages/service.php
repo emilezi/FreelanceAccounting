@@ -11,7 +11,7 @@ echo "<table>
     <thead><tr>
         <th>Nom</th>
         <th>Catégorie</th>
-        <th>Coût par heure :</th>
+        <th>Coût par heure en € :</th>
         <th>Crée le :</th>
         <th>Action :</th>
     </tr></thead>
@@ -30,7 +30,7 @@ if($Service->getService() != null){
       <td>".$service['category']."</td>
       <td>".$service['costhour']."€</td>
       <td>".$service['date']."</td>
-      <td><a class='waves-effect waves-light btn red modal-trigger' data-target='modal_delete_".$i."'>Supprimer</a><a class='waves-effect waves-light btn modal-trigger' data-target='modal_edit_".$i."'>Modifier</a></td>
+      <td><a class='waves-effect waves-light btn red modal-trigger' data-target='modal_delete_".$i."'>Supprimer</a><a class='waves-effect waves-light btn modal-trigger' data-target='modal_edit_".$i."'>Modifier</a><a class='waves-effect waves-light btn modal-trigger' data-target='modal_description_".$i."'>Information</a></td>
       </tr>";
 
     }
@@ -81,7 +81,7 @@ if($Service->getService() != null){
         <input name='category' id='category' type='hidden' value='".$service['category']."' class='validate'>
         <div class='row'>
           <div class='input-field col s12'>
-            <input name='costhour' id='costhour' type='text' value='".$service['costhour']."' class='validate'>
+            <input name='costhour' id='costhour' type='number' value='".$service['costhour']."' class='validate'>
             <label for='costhour'>Coût par heure en €</label>
           </div>
         </div>
@@ -98,6 +98,21 @@ if($Service->getService() != null){
       <input id='value' type='hidden' name='value' value=".$service['id'].">
       </form>
       </div>";
+
+      echo "<div id='modal_description_".$i."' class='modal modal-fixed-footer'>
+          <div class='modal-content'>
+            <h4>Informations sur le service</h4>
+            <br/>
+            <h6><b>Nom du service : </b>".$service['name']."</h6>
+            <br/>
+            <h6><b>Nom de la catégorie : </b>".$service['category']."</h6>
+            <br/>
+            <h6><b>Coût par heure en € : </b>".$service['costhour']."€</h6>
+            <br/>
+            <h6><b>Description :</b></h6>
+            <p>".$service['description']."</p>
+          </div>
+        </div>";
 
     }
 
@@ -127,7 +142,7 @@ echo "<div id='modal_new' class='modal modal-fixed-footer'>
     </div>
       <div class='row'>
         <div class='input-field col s12'>
-          <input name='costhour' id='costhour' type='text' class='validate'>
+          <input name='costhour' id='costhour' type='number' class='validate'>
           <label for='costhour'>Coût par heure en €</label>
         </div>
       </div>

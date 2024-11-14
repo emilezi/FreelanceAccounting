@@ -253,6 +253,8 @@ class Form{
             !empty($this->post['category'])
             &&
             !empty($this->post['price'])
+            &&
+            !empty($this->post['description'])
             )
             {
                 if(
@@ -261,6 +263,8 @@ class Form{
                 preg_match("#^[^<>]+$#i", $this->post['category'])
                 &&
                 preg_match("#^[0-9]+$#i", $this->post['price'])
+                &&
+                preg_match("#^[^<>]+$#i", $this->post['description'])
                 )
                 {
                     return 0;
