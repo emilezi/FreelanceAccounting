@@ -1,37 +1,39 @@
 <?php
-require("class/Client.php");
+require("class/Business.php");
 
-$Client = new Client();
+$Business = new Business();
 
-require("actions/client/add_client.php");
-require("actions/client/edit_client.php");
-require("actions/client/remove_client.php");
+require("actions/business/add_business.php");
+require("actions/business/edit_business.php");
+require("actions/business/remove_business.php");
 
 echo "<table>
     <thead><tr>
-        <th>Nom</th>
-        <th>Email</th>
-        <th>Téléphone</th>
+        <th>Nom de l'entreprise</th>
+        <th>Nom commercial</th>
+        <th>N° SIRET</th>
+        <th>Numéro de TVA</th>
         <th>Pays</th>
         <th>Ajoutée le :</th>
         <th>Action :</th>
     </tr></thead>
     <tbody>";
 
-if($Client->getClient() != null){
+if($Business->getBusiness() != null){
 
   $i = 0;
 
-    foreach($Client->getClient() as $client) {
+    foreach($Business->getBusiness() as $business) {
 
       $i = $i + 1;
         
         echo "<tr>
-        <td>".$client['name']."</td>
-        <td>".$client['email']."</td>
-        <td>".$client['phone']."</td>
-        <td>".$client['country']."</td>
-        <td>".$client['date']."</td>
+        <td>".$business['company_name']."</td>
+        <td>".$business['trade_name']."</td>
+        <td>".$business['SIRET']."</td>
+        <td>".$business['vat_number']."</td>
+        <td>".$business['country']."</td>
+        <td>".$business['date']."</td>
         <td><a class='waves-effect waves-light btn red modal-trigger' data-target='modal_delete_".$i."'>Supprimer</a><a class='waves-effect waves-light btn modal-trigger' data-target='modal_edit_".$i."'>Modifier</a><a class='waves-effect waves-light btn modal-trigger' data-target='modal_description_".$i."'>Information</a></td>
         </tr>";
 
@@ -40,7 +42,7 @@ if($Client->getClient() != null){
 }else{
 
     echo "<tr>
-        <td>Pas de client pour le moment</td>
+        <td>Pas d'entreprise pour le moment</td>
         </tr>";
 
 }
@@ -48,117 +50,122 @@ if($Client->getClient() != null){
 echo "</tbody>
     </table>";
 
-if($Client->getClient() != null){
+if($Business->getBusiness() != null){
 
   $i = 0;
     
-  foreach($Client->getClient() as $client) {
+  foreach($Business->getBusiness() as $business) {
 
     $i = $i + 1;
 
     echo "<div id='modal_delete_".$i."' class='modal modal-fixed-footer'>
     <form class='col s6' method='post'>
     <div class='modal-content'>
-      <h4>Suppression du client</h4>
-      <p>Êtes-vous sûr de vouloir supprimer le client sélectionné ?</p>
+      <h4>Suppression de l'entreprise</h4>
+      <p>Êtes-vous sûr de vouloir supprimer l'entreprise sélectionné ?</p>
     </div>
     <div class='modal-footer'>
         <input class='waves-effect waves-green btn' id='submit_delete' type='submit' name='submit_delete' value='Oui' class='validate'>
         <input class='modal-close waves-effect waves-green btn red' id='cancel' type='submit' name='cancel' value='Non' class='validate'>
     </div>
-    <input id='value' type='hidden' name='value' value=".$client['id'].">
+    <input id='value' type='hidden' name='value' value=".$business['id'].">
     </form>
     </div>";
 
     echo "<div id='modal_edit_".$i."' class='modal modal-fixed-footer'>
     <form class='col s6' method='post'>
     <div class='modal-content'>
-    <h4>Modifier le client</h4>
+    <h4>Modifier l'entreprise</h4>
       <div class='row'>
         <div class='input-field col s12'>
-          <input name='name' id='name' type='text' value='".$client['name']."' class='validate'>
-          <label for='name'>Nom du client</label>
+          <input name='company_name' id='company_name' type='text' value='".$business['company_name']."' class='validate'>
+          <label for='company_name'>Nom de l'entreprise</label>
         </div>
       </div>
       <div class='row'>
         <div class='input-field col s12'>
-          <input name='email' id='email' type='text' value='".$client['email']."' class='validate'>
-          <label for='email'>Adresse email</label>
+          <input name='trade_name' id='trade_name' type='text' value='".$business['trade_name']."' class='validate'>
+          <label for='trade_name'>Nom commercial</label>
         </div>
       </div>
       <div class='row'>
         <div class='input-field col s12'>
-          <input name='phone' id='phone' type='tel' value='".$client['phone']."' class='validate'>
-          <label for='phone'>Numéro de téléphone</label>
-        </div>
-      </div>
-      <input type='hidden' name='category' value=".$client['category'].">
-      <input type='hidden' name='langue' value=".$client['langue'].">
-      <input type='hidden' name='country' value=".$client['country'].">
-      <div class='row'>
-        <div class='input-field col s12'>
-          <input name='address' id='address' type='text' value='".$client['address']."' class='validate'>
-          <label for='address'>Adresse du client</label>
+          <input name='SIRET' id='SIRET' type='text' value='".$business['SIRET']."' class='validate'>
+          <label for='SIRET'>N° SIRET</label>
         </div>
       </div>
       <div class='row'>
         <div class='input-field col s12'>
-          <input name='address_supplement' id='address_supplement' type='text' value='".$client['address_supplement']."' class='validate'>
+          <input name='vat_number' id='vat_number' type='text' value='".$business['vat_number']."' class='validate'>
+          <label for='vat_number'>Numéro de TVA</label>
+        </div>
+      </div>
+      <input type='hidden' name='langue' value=".$business['langue'].">
+      <input type='hidden' name='country' value=".$business['country'].">
+      <div class='row'>
+        <div class='input-field col s12'>
+          <input name='address' id='address' type='text' value='".$business['address']."' class='validate'>
+          <label for='address'>Adresse de l'entreprise</label>
+        </div>
+      </div>
+      <div class='row'>
+        <div class='input-field col s12'>
+          <input name='address_supplement' id='address_supplement' type='text' value='".$business['address_supplement']."' class='validate'>
           <label for='address_supplement'>Supplément d'adresse</label>
         </div>
       </div>
       <div class='row'>
         <div class='input-field col s12'>
-          <input name='postal_code' id='postal_code' type='text' value='".$client['postal_code']."' class='validate'>
+          <input name='postal_code' id='postal_code' type='text' value='".$business['postal_code']."' class='validate'>
           <label for='postal_code'>Code postal</label>
         </div>
       </div>
       <div class='row'>
         <div class='input-field col s12'>
-          <input name='city' id='city' type='text' value='".$client['city']."' class='validate'>
+          <input name='city' id='city' type='text' value='".$business['city']."' class='validate'>
           <label for='city'>Ville</label>
         </div>
       </div>
       <div class='row'>
         <div class='input-field col s12'>
-          <textarea name='description' id='description' class='materialize-textarea'>".$client['description']."</textarea>
-          <label for='description'>Description du client</label>
+          <textarea name='description' id='description' class='materialize-textarea'>".$business['description']."</textarea>
+          <label for='description'>Description de l'entreprise</label>
         </div>
       </div>
     </div>
     <div class='modal-footer'>
-          <input class='waves-effect waves-green btn' id='submit_edit' type='submit' name='submit_edit' value='Modifier le client' class='validate'>
+          <input class='waves-effect waves-green btn' id='submit_edit' type='submit' name='submit_edit' value='Modifier' class='validate'>
       </div>
-    <input id='value' type='hidden' name='value' value=".$client['id'].">
+    <input id='value' type='hidden' name='value' value=".$business['id'].">
     </form>
     </div>";
 
     echo "<div id='modal_description_".$i."' class='modal modal-fixed-footer'>
     <div class='modal-content'>
-      <h4>Informations sur le client</h4>
+      <h4>Informations sur l'entreprise</h4>
       <br/>
-      <h6><b>Nom du client : </b>".$client['name']."</h6>
+      <h6><b>Nom de l'entreprise : </b>".$business['company_name']."</h6>
       <br/>
-      <h6><b>Adresse email : </b>".$client['email']."</h6>
+      <h6><b>Nom commercial : </b>".$business['trade_name']."</h6>
       <br/>
-      <h6><b>Numéro de téléphone : </b>".$client['phone']."</h6>
+      <h6><b>SIRET : </b>".$business['SIRET']."</h6>
       <br/>
-      <h6><b>Catégorie associée : </b>".$client['category']."</h6>
+      <h6><b>Numéro de TVA : </b>".$business['vat_number']."</h6>
       <br/>
-      <h6><b>Langue : </b>".$client['langue']."</h6>
+      <h6><b>Langue : </b>".$business['langue']."</h6>
       <br/>
-      <h6><b>Pays : </b>".$client['country']."</h6>
+      <h6><b>Pays : </b>".$business['country']."</h6>
       <br/>
-      <h6><b>Adresse du client : </b>".$client['address']."</h6>
+      <h6><b>Adresse de l'entreprise : </b>".$business['address']."</h6>
       <br/>
-      <h6><b>Supplément d'adresse : </b>".$client['address_supplement']."</h6>
+      <h6><b>Supplément d'adresse : </b>".$business['address_supplement']."</h6>
       <br/>
-      <h6><b>Code postal : </b>".$client['postal_code']."</h6>
+      <h6><b>Code postal : </b>".$business['postal_code']."</h6>
       <br/>
-      <h6><b>Ville : </b>".$client['city']."</h6>
+      <h6><b>Ville : </b>".$business['city']."</h6>
       <br/>
-      <h6><b>Description du client : </b></h6>
-      <p>".$client['description']."</p>
+      <h6><b>Description de l'entreprise : </b></h6>
+      <p>".$business['description']."</p>
     </div>
     </div>";
 
@@ -171,31 +178,29 @@ echo "<a class='btn btn-floating btn-large waves-effect waves-light red'><i data
 echo "<div id='modal_new' class='modal modal-fixed-footer'>
     <form class='col s6' method='post'>
     <div class='modal-content'>
-    <h4>Nouveau client</h4>
-      <div class='row'>
+    <h4>Nouvelle entreprise</h4>
+    <div class='row'>
         <div class='input-field col s12'>
-          <input name='name' id='name' type='text' class='validate'>
-          <label for='name'>Nom du client</label>
+          <input name='company_name' id='company_name' type='text' class='validate'>
+          <label for='company_name'>Nom de l'entreprise</label>
         </div>
       </div>
       <div class='row'>
         <div class='input-field col s12'>
-          <input name='email' id='email' type='text' class='validate'>
-          <label for='email'>Adresse email</label>
+          <input name='trade_name' id='trade_name' type='text' class='validate'>
+          <label for='trade_name'>Nom commercial</label>
         </div>
       </div>
       <div class='row'>
         <div class='input-field col s12'>
-          <input name='phone' id='phone' type='tel' class='validate'>
-          <label for='phone'>Numéro de téléphone</label>
+          <input name='SIRET' id='SIRET' type='text' class='validate'>
+          <label for='SIRET'>N° SIRET</label>
         </div>
       </div>
       <div class='row'>
         <div class='input-field col s12'>
-        <select name='category'>
-          <option value='individual' selected>Particulier (client individuel)</option>
-        </select>
-        <label>Catégorie associée</label>
+          <input name='vat_number' id='vat_number' type='text' class='validate'>
+          <label for='vat_number'>Numéro de TVA</label>
         </div>
       </div>
       <div class='row'>
@@ -229,7 +234,7 @@ echo "<div id='modal_new' class='modal modal-fixed-footer'>
       <div class='row'>
         <div class='input-field col s12'>
           <input name='address' id='address' type='text' class='validate'>
-          <label for='address'>Adresse du client</label>
+          <label for='address'>Adresse de l'entreprise</label>
         </div>
       </div>
       <div class='row'>
@@ -253,12 +258,12 @@ echo "<div id='modal_new' class='modal modal-fixed-footer'>
       <div class='row'>
         <div class='input-field col s12'>
           <textarea name='description' id='description' class='materialize-textarea'></textarea>
-          <label for='description'>Description du client</label>
+          <label for='description'>Description de l'entreprise</label>
         </div>
       </div>
     </div>
     <div class='modal-footer'>
-          <input class='waves-effect waves-green btn' id='submit' type='submit' name='submit' value='Créer le client' class='validate'>
+          <input class='waves-effect waves-green btn' id='submit' type='submit' name='submit' value='Ajouter' class='validate'>
       </div>
     </form>
     </div>";

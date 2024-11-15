@@ -72,7 +72,7 @@ class Business extends Database{
 
         $user = $u->fetch();
 
-        $q = $db->prepare("INSERT INTO Business(`SIREN`, `company_name`, `trade_name`, `SIRET`, `vat_number`, `langue`, `country`,`address`,`address_supplement`,`postal_code`,`city`,`state`,`description`) VALUES(:SIREN,:company_name,:trade_name,:SIRET,:vat_number,:langue,:country,:address,:address_supplement,:postal_code,:city,:state,:description)");
+        $q = $db->prepare("INSERT INTO Business(`SIREN`, `company_name`, `trade_name`, `SIRET`, `vat_number`, `langue`, `country`, `address`, `address_supplement`, `postal_code`, `city`, `state`, `description`) VALUES(:SIREN,:company_name,:trade_name,:SIRET,:vat_number,:langue,:country,:address,:address_supplement,:postal_code,:city,:state,:description)");
         $q->execute([
             'SIREN' => $user['SIREN'],
             'company_name' => $this->business['company_name'],

@@ -167,7 +167,7 @@ class Database{
         `company_name` varchar(128) NOT NULL,
         `trade_name` varchar(128) NOT NULL,
         `SIRET` varchar(64) NOT NULL,
-        `vat_number` varchar(16) NOT NULL,
+        `vat_number` varchar(64) NOT NULL,
         `langue` varchar(16) NOT NULL,
         `country` varchar(16) NOT NULL,
         `address` varchar(64) NOT NULL,
@@ -263,6 +263,9 @@ class Database{
         ADD PRIMARY KEY (`id`),
         ADD UNIQUE KEY `SIREN` (`SIREN`);
 
+        ALTER TABLE `Business`
+        ADD PRIMARY KEY (`id`);
+
         ALTER TABLE `Charge`
         ADD PRIMARY KEY (`id`);
 
@@ -287,6 +290,9 @@ class Database{
         MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
         ALTER TABLE `Bank`
+        MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+        ALTER TABLE `Business`
         MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
         ALTER TABLE `Charge`

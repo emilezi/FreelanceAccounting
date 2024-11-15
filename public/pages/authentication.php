@@ -19,13 +19,13 @@ require("actions/auth/authentication.php");
               <div class='row'>
                 <form class='col s12' method='post'>
                   <div class='row'>
-                    <div class='input-field col s3'>
+                    <div class='input-field col s12'>
                       <input name='email' id='email' type='email' class='validate'>
                       <label for='email'>Email</label>
                     </div>
                   </div>
                   <div class='row'>
-                    <div class='input-field col s3'>
+                    <div class='input-field col s12'>
                       <input name='password' id='password' type='password' class='validate'>
                       <label for='password'>Mot de passe</label>
                     </div>

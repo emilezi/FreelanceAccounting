@@ -56,6 +56,7 @@ $bankinfo = $Bank->getBank();
                   <p><b>Chiffre d'affaire :</b></p>
                   <p>Montant : </p>
                   <p>Montant maximum annuel  : <?=$turnovermax?>€ hors taxes</p>
+                  <p>Prochaine date d'imposition :</p>
                 </span>
               </div>
             </div>

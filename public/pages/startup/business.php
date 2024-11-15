@@ -17,13 +17,15 @@ require("actions/start/new_business.php");
               <span class='black-text'>
               <h4>Créez votre nouvelle entreprise</h4>
               <div class='row'>
-                <form class='col s8' method='post'>
+                <form class='col s12' method='post'>
                   <div class='row'>
-                    <div class='input-field col s6'>
+                    <div class='input-field col s12'>
                       <input name='first_name' id='first_name' type='text' class='validate'>
                       <label for='first_name'>Prénom</label>
                     </div>
-                    <div class='input-field col s6'>
+                  </div>
+                  <div class='row'>
+                    <div class='input-field col s12'>
                       <input name='last_name' id='last_name' type='text' class='validate'>
                       <label for='last_name'>Nom</label>
                     </div>

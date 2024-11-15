@@ -59,6 +59,10 @@ if($Database->setConnection() == 0) {
 						include("public/pages/currency.php");
 						break;
 					}
+					case 'business':{
+						include("public/pages/business.php");
+						break;
+					}
 					case 'service':{
 						include("public/pages/service.php");
 						break;

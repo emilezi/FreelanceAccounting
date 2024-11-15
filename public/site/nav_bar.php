@@ -7,12 +7,16 @@
   <li><a href="index.php?link=currency">Factures</a></li>
   <li><a href="index.php?link=charge">Charges</a></li>
 </ul>
+<ul id="dropdown3" class="dropdown-content">
+  <li><a href="index.php?link=apps">Applications</a></li>
+  <li><a href="index.php?link=business">Entreprises</a></li>
+  <li><a href="index.php?link=service">Services</a></li>
+  <li><a href="index.php?link=client">Clients</a></li>
+</ul>
 <nav class="light-blue lighten-1" role="navigation">
 <div class="nav-wrapper container"><a id="logo-container" href="index.php" class="brand-logo">FreelanceAccounting</a>
     <ul class="right hide-on-med-and-down">
-    <li><a href="index.php?link=client">Clients</a></li>
-    <li><a href="index.php?link=service">Services</a></li>
-    <li><a href="index.php?link=apps">Applications</a></li>
+    <li><a class="dropdown-trigger" href="#!" data-target="dropdown3">Micro-entreprise<i class="material-icons right">arrow_drop_down</i></a></li>
     <li><a class="dropdown-trigger" href="#!" data-target="dropdown2">Comptabilité<i class="material-icons right">arrow_drop_down</i></a></li>
     <li><a class="dropdown-trigger" href="#!" data-target="dropdown1">Site<i class="material-icons right">arrow_drop_down</i></a></li>
     </ul>
