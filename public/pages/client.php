@@ -1,7 +1,9 @@
 <?php
 require("class/Client.php");
+require("class/Business.php");
 
 $Client = new Client();
+$Business = new Business();
 
 require("actions/client/add_client.php");
 require("actions/client/edit_client.php");
@@ -30,7 +32,33 @@ if($Client->getClient() != null){
         <td>".$client['name']."</td>
         <td>".$client['email']."</td>
         <td>".$client['phone']."</td>
-        <td>".$client['country']."</td>
+        <td>";
+        if($client['country'] === 'germany'){
+          echo 'Allemagne';
+        }elseif($client['country'] === 'belgium'){
+          echo 'Belgique';
+        }elseif($client['country'] === 'canada'){
+          echo 'Canada';
+        }elseif($client['country'] === 'espagne'){
+          echo 'Espagne';
+        }elseif($client['country'] === 'united_states'){
+          echo 'États-Unis';
+        }elseif($client['country'] === 'france'){
+          echo 'France';
+        }elseif($client['country'] === 'italy'){
+          echo 'Italie';
+        }elseif($client['country'] === 'luxembourg'){
+          echo 'Luxembourg';
+        }elseif($client['country'] === 'malta'){
+          echo 'Malte';
+        }elseif($client['country'] === 'netherlands'){
+          echo 'Pays-Bas';
+        }elseif($client['country'] === 'portugal'){
+          echo 'Portugal';
+        }elseif($client['country'] === 'united_kingdom'){
+          echo 'Royaume-Uni';
+        }
+        echo "</td>
         <td>".$client['date']."</td>
         <td><a class='waves-effect waves-light btn red modal-trigger' data-target='modal_delete_".$i."'>Supprimer</a><a class='waves-effect waves-light btn modal-trigger' data-target='modal_edit_".$i."'>Modifier</a><a class='waves-effect waves-light btn modal-trigger' data-target='modal_description_".$i."'>Information</a></td>
         </tr>";
@@ -143,11 +171,43 @@ if($Client->getClient() != null){
       <br/>
       <h6><b>Numéro de téléphone : </b>".$client['phone']."</h6>
       <br/>
-      <h6><b>Catégorie associée : </b>".$client['category']."</h6>
+      <h6><b>Entreprise associée : </b>".$client['category']."</h6>
       <br/>
-      <h6><b>Langue : </b>".$client['langue']."</h6>
+      <h6>";
+      if($client['langue'] === 'english'){
+        echo '<p><b>Langue : </b> Anglais</p>';
+      }elseif($client['langue'] === 'french'){
+        echo '<p><b>Langue : </b> France</p>';
+      }
+      echo "</h6>
       <br/>
-      <h6><b>Pays : </b>".$client['country']."</h6>
+      <h6>";
+      if($client['country'] === 'germany'){
+        echo '<p><b>Pays : </b> Allemagne</p>';
+      }elseif($client['country'] === 'belgium'){
+        echo '<p><b>Pays : </b> Belgique</p>';
+      }elseif($client['country'] === 'canada'){
+        echo '<p><b>Pays : </b> Canada</p>';
+      }elseif($client['country'] === 'espagne'){
+        echo '<p><b>Pays : </b> Espagne</p>';
+      }elseif($client['country'] === 'united_states'){
+        echo '<p><b>Pays : </b> États-Unis</p>';
+      }elseif($client['country'] === 'france'){
+        echo '<p><b>Pays : </b> France</p>';
+      }elseif($client['country'] === 'italy'){
+        echo '<p><b>Pays : </b> Italie</p>';
+      }elseif($client['country'] === 'luxembourg'){
+        echo '<p><b>Pays : </b> Luxembourg</p>';
+      }elseif($client['country'] === 'malta'){
+        echo '<p><b>Pays : </b> Malte</p>';
+      }elseif($client['country'] === 'netherlands'){
+        echo '<p><b>Pays : </b> Pays-Bas</p>';
+      }elseif($client['country'] === 'portugal'){
+        echo '<p><b>Pays : </b> Portugal</p>';
+      }elseif($client['country'] === 'united_kingdom'){
+        echo '<p><b>Pays : </b> Royaume-Uni</p>';
+      }
+      echo "</h6>
       <br/>
       <h6><b>Adresse du client : </b>".$client['address']."</h6>
       <br/>
@@ -191,11 +251,16 @@ echo "<div id='modal_new' class='modal modal-fixed-footer'>
         </div>
       </div>
       <div class='row'>
-        <div class='input-field col s12'>
-        <select name='category'>
-          <option value='individual' selected>Particulier (client individuel)</option>
-        </select>
-        <label>Catégorie associée</label>
+      <div class='input-field col s12'>
+      <select name='category'>
+          <option value='individual' selected>Particulier (client individuel)</option>";
+      if($Business->getBusiness() != null){
+        foreach ($Business->getBusiness() as $business) {
+          echo "<option value='".$business['company_name']."'>".$business['company_name']."</option>";
+        }
+      }
+echo "</select>
+        <label>Entreprise associée</label>
         </div>
       </div>
       <div class='row'>

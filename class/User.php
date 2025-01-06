@@ -42,6 +42,8 @@ class User extends Database{
                     $_SESSION['type'] = $user['type'];
                     $_SESSION['SIREN'] = $user['SIREN'];
                     $_SESSION['SIRET'] = $user['SIRET'];
+                    $_SESSION['date_creation'] = $user['date_creation'];
+                    $_SESSION['taxation'] = $user['taxation'];
                     $_SESSION['status'] = $user['status'];
                     $_SESSION['first_name'] = $user['first_name'];
                     $_SESSION['last_name'] = $user['last_name'];
@@ -108,12 +110,14 @@ class User extends Database{
         'cost' => 12
         ];
                     
-        $i = $db->prepare("INSERT INTO User(`status`,`type`,`SIREN`,`SIRET`,`first_name`,`last_name`,`identifier`,`email`,`phone`,`password`,`user_key`) VALUES(:status,:type,:SIREN,:SIRET,:first_name,:last_name,:identifier,:email,:phone,:password,:user_key)");
+        $i = $db->prepare("INSERT INTO User(`status`,`type`,`SIREN`,`SIRET`,`date_creation`,`taxation`,`first_name`,`last_name`,`identifier`,`email`,`phone`,`password`,`user_key`) VALUES(:status,:type,:SIREN,:SIRET,:date_creation,:taxation,:first_name,:last_name,:identifier,:email,:phone,:password,:user_key)");
         $i->execute([
-            'status' => 'eirl',
+            'status' => $this->user['status'],
             'type'=> 'user',
             'SIREN' => $this->user['SIREN'],
             'SIRET' => $this->user['SIRET'],
+            'date_creation' => $this->user['date_creation'],
+            'taxation' => $this->user['taxation'],
             'first_name' => $this->user['first_name'],
             'last_name' => $this->user['last_name'],
             'identifier' => $this->user['identifier'],
@@ -123,9 +127,10 @@ class User extends Database{
             'user_key' => md5(microtime(TRUE)*100000)
             ]);
         
-        $j = $db->prepare("INSERT INTO Bank(`SIREN`,`bic1_excluding_tax`,`bic2_excluding_tax`,`bnc_excluding_tax`,`treasury`) VALUES(:SIREN,:bic1_excluding_tax,:bic2_excluding_tax,:bnc_excluding_tax,:treasury)");
+        $j = $db->prepare("INSERT INTO Bank(`SIREN`,`turnover_excluding_tax`,`bic1_excluding_tax`,`bic2_excluding_tax`,`bnc_excluding_tax`,`treasury`) VALUES(:SIREN,:bic1_excluding_tax,:bic2_excluding_tax,:bnc_excluding_tax,:treasury)");
         $j->execute([
             'SIREN' => $this->user['SIREN'],
+            'turnover_excluding_tax' => '0',
             'bic1_excluding_tax' => '0',
             'bic2_excluding_tax' => '0',
             'bnc_excluding_tax' => '0',
@@ -153,12 +158,14 @@ class User extends Database{
         'cost' => 12
         ];
                     
-        $i = $db->prepare("INSERT INTO User(`status`,`type`,`SIREN`,`SIRET`,`first_name`,`last_name`,`identifier`,`email`,`phone`,`password`,`user_key`) VALUES(:status,:type,:SIREN,:SIRET,:first_name,:last_name,:identifier,:email,:phone,:password,:user_key)");
+        $i = $db->prepare("INSERT INTO User(`status`,`type`,`SIREN`,`SIRET`,`date_creation`,`taxation`,`first_name`,`last_name`,`identifier`,`email`,`phone`,`password`,`user_key`) VALUES(:status,:type,:SIREN,:SIRET,:date_creation,:taxation,:first_name,:last_name,:identifier,:email,:phone,:password,:user_key)");
         $i->execute([
-            'status' => 'eirl',
+            'status' => $this->user['status'],
             'type'=> 'admin',
             'SIREN' => $this->user['SIREN'],
             'SIRET' => $this->user['SIRET'],
+            'date_creation' => $this->user['date_creation'],
+            'taxation' => $this->user['taxation'],
             'first_name' => $this->user['first_name'],
             'last_name' => $this->user['last_name'],
             'identifier' => $this->user['identifier'],
@@ -168,9 +175,10 @@ class User extends Database{
             'user_key' => md5(microtime(TRUE)*100000)
             ]);
         
-        $j = $db->prepare("INSERT INTO Bank(`SIREN`,`bic1_excluding_tax`,`bic2_excluding_tax`,`bnc_excluding_tax`,`treasury`) VALUES(:SIREN,:bic1_excluding_tax,:bic2_excluding_tax,:bnc_excluding_tax,:treasury)");
+        $j = $db->prepare("INSERT INTO Bank(`SIREN`,`turnover_excluding_tax`,`bic1_excluding_tax`,`bic2_excluding_tax`,`bnc_excluding_tax`,`treasury`) VALUES(:SIREN,:turnover_excluding_tax,:bic1_excluding_tax,:bic2_excluding_tax,:bnc_excluding_tax,:treasury)");
         $j->execute([
             'SIREN' => $this->user['SIREN'],
+            'turnover_excluding_tax' => '0',
             'bic1_excluding_tax' => '0',
             'bic2_excluding_tax' => '0',
             'bnc_excluding_tax' => '0',

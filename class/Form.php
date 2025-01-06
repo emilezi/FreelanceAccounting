@@ -64,9 +64,15 @@ class Form{
         &&
         !empty($this->post['phone'])
         &&
+        !empty($this->post['status'])
+        &&
         !empty($this->post['SIREN'])
         &&
         !empty($this->post['SIRET'])
+        &&
+        !empty($this->post['date_creation'])
+        &&
+        !empty($this->post['taxation'])
         &&
         !empty($this->post['password'])
         &&
@@ -187,8 +193,6 @@ class Form{
             &&
             !empty($this->post['vat_number'])
             &&
-            !empty($this->post['langue'])
-            &&
             !empty($this->post['country'])
             &&
             !empty($this->post['address'])
@@ -210,8 +214,6 @@ class Form{
                 preg_match("#^[^<>]+$#i", $this->post['SIRET'])
                 &&
                 preg_match("#^[^<>]+$#i", $this->post['vat_number'])
-                &&
-                preg_match("#^[^<>]+$#i", $this->post['langue'])
                 &&
                 preg_match("#^[^<>]+$#i", $this->post['country'])
                 &&

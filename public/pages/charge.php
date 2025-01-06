@@ -4,12 +4,14 @@ require("class/Charge.php");
 $Charge = new Charge();
 
 require("actions/charge/add_charge.php");
+require("actions/charge/cancel_charge.php");
 require("actions/charge/edit_charge.php");
-require("actions/charge/remove_charge.php");
+require("actions/charge/validate_charge.php");
 
 echo "<table>
     <thead><tr>
         <th>Nom</th>
+        <th>Catégorie</th>
         <th>Prix en €</th>
         <th>Crée le :</th>
         <th>Action :</th>
@@ -26,10 +28,19 @@ if($Charge->getCharge() != null){
 
         echo "<tr>
         <td>".$charge['name']."</td>
+        <td>";
+        if($charge['category'] === 'invoice'){
+            echo "Facture";
+          }elseif($charge['category'] === 'pay'){
+            echo "Versement liberatoire";
+          }
+        echo "</td>
         <td>".$charge['price']."€</td>
-        <td>".$charge['date']."</td>
-        <td><a class='waves-effect waves-light btn red modal-trigger' data-target='modal_delete_".$i."'>Supprimer</a><a class='waves-effect waves-light btn modal-trigger' data-target='modal_edit_".$i."'>Modifier</a><a class='waves-effect waves-light btn modal-trigger' data-target='modal_description_".$i."'>Information</a></td>
-        </tr>";
+        <td>".$charge['date']."</td>";
+        if($charge['state'] === 'active'){
+            echo "<td><a class='waves-effect waves-light btn red modal-trigger' data-target='modal_cancel_".$i."'>Annuler la charge</a><a class='waves-effect waves-light btn modal-trigger' data-target='modal_edit_".$i."'>Modifier</a><a class='waves-effect waves-light btn modal-trigger' data-target='modal_description_".$i."'>Information</a><a class='waves-effect waves-light btn modal-trigger' data-target='modal_validate_".$i."'>Valider la charge</a></td>";
+        }
+        echo "</tr>";
     
     }
         
@@ -52,14 +63,14 @@ if($Charge->getCharge() != null){
     
         $i = $i + 1;
     
-        echo "<div id='modal_delete_".$i."' class='modal modal-fixed-footer'>
+        echo "<div id='modal_cancel_".$i."' class='modal modal-fixed-footer'>
         <form class='col s6' method='post'>
         <div class='modal-content'>
-        <h4>Suppression de la charge</h4>
-        <p>Êtes-vous sûr de vouloir supprimer la charge sélectionnée ?</p>
+        <h4>Annuler de la charge</h4>
+        <p>Êtes-vous sûr de vouloir annuler la charge sélectionnée ?</p>
         </div>
         <div class='modal-footer'>
-            <input class='waves-effect waves-green btn' id='submit_delete' type='submit' name='submit_delete' value='Oui' class='validate'>
+            <input class='waves-effect waves-green btn' id='submit_cancel' type='submit' name='submit_cancel' value='Oui' class='validate'>
             <input class='modal-close waves-effect waves-green btn red' id='cancel' type='submit' name='cancel' value='Non' class='validate'>
         </div>
         <input id='value' type='hidden' name='value' value=".$charge['id'].">
@@ -100,6 +111,21 @@ if($Charge->getCharge() != null){
         echo "<div id='modal_description_".$i."' class='modal modal-fixed-footer'>
                 <div class='modal-content'>
                     <h4>Informations sur la charge</h4>
+                    <br/>
+                    <h6><b>Nom de la charge : </b>".$charge['name']."</h6>
+                    <br/>
+                    <h6><b>Catégorie : </b>";
+                    if($charge['category'] === 'invoice'){
+                      echo "Facture";
+                    }elseif($charge['category'] === 'pay'){
+                      echo "Versement liberatoire";
+                    }
+                    echo "</h6>
+                    <br/>
+                    <h6><b>Prix en € : </b>".$charge['price']."€</h6>
+                    <br/>
+                    <h6><b>Description :</b></h6>
+                    <p>".$charge['description']."</p>
                 </div>
             </div>";
     

@@ -72,14 +72,13 @@ class Business extends Database{
 
         $user = $u->fetch();
 
-        $q = $db->prepare("INSERT INTO Business(`SIREN`, `company_name`, `trade_name`, `SIRET`, `vat_number`, `langue`, `country`, `address`, `address_supplement`, `postal_code`, `city`, `state`, `description`) VALUES(:SIREN,:company_name,:trade_name,:SIRET,:vat_number,:langue,:country,:address,:address_supplement,:postal_code,:city,:state,:description)");
+        $q = $db->prepare("INSERT INTO Business(`SIREN`, `company_name`, `trade_name`, `SIRET`, `vat_number`, `country`, `address`, `address_supplement`, `postal_code`, `city`, `state`, `description`) VALUES(:SIREN,:company_name,:trade_name,:SIRET,:vat_number,:country,:address,:address_supplement,:postal_code,:city,:state,:description)");
         $q->execute([
             'SIREN' => $user['SIREN'],
             'company_name' => $this->business['company_name'],
             'trade_name' => $this->business['trade_name'],
             'SIRET' => $this->business['SIRET'],
             'vat_number' => $this->business['vat_number'],
-            'langue' => $this->business['langue'],
             'country' => $this->business['country'],
             'address' => $this->business['address'],
             'address_supplement' => $this->business['address_supplement'],
@@ -107,7 +106,7 @@ class Business extends Database{
 
         $user = $u->fetch();
 
-        $q = $db->prepare("UPDATE Business SET company_name=:company_name, trade_name=:trade_name, SIRET=:SIRET, vat_number=:vat_number, langue=:langue, country=:country, address=:address, address_supplement=:address_supplement, postal_code=:postal_code, city=:city WHERE SIREN=:SIREN AND id=:id");
+        $q = $db->prepare("UPDATE Business SET company_name=:company_name, trade_name=:trade_name, SIRET=:SIRET, vat_number=:vat_number, country=:country, address=:address, address_supplement=:address_supplement, postal_code=:postal_code, city=:city WHERE SIREN=:SIREN AND id=:id");
         $q->execute([
             'id' => $this->business['value'],
             'SIREN' => $user['SIREN'],
@@ -115,7 +114,6 @@ class Business extends Database{
             'trade_name' => $this->business['trade_name'],
             'SIRET' => $this->business['SIRET'],
             'vat_number' => $this->business['vat_number'],
-            'langue' => $this->business['langue'],
             'country' => $this->business['country'],
             'address' => $this->business['address'],
             'address_supplement' => $this->business['address_supplement'],

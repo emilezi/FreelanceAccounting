@@ -29,6 +29,10 @@ class Session extends Database{
             &&
             isset($_SESSION['SIREN'])
             &&
+            isset($_SESSION['SIRET'])
+            &&
+            isset($_SESSION['taxation'])
+            &&
             isset($_SESSION['first_name'])
             &&
             isset($_SESSION['last_name'])
@@ -72,6 +76,10 @@ class Session extends Database{
         isset($_SESSION['type'])
         ||
         isset($_SESSION['SIREN'])
+        ||
+        isset($_SESSION['SIRET'])
+        ||
+        isset($_SESSION['taxation'])
         ||
         isset($_SESSION['first_name'])
         ||

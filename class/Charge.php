@@ -113,6 +113,56 @@ class Charge extends Database{
     }
 
     /**
+        * Validate charge method
+        *
+        */
+
+    public function validateCharge(){
+
+        $db = self::getDatabase();
+
+        $u = $db->prepare("SELECT * FROM User WHERE id=:id");
+        $u->execute([
+            'id' => $_SESSION['id']
+            ]);
+
+        $user = $u->fetch();
+
+        $q = $db->prepare("UPDATE `Charge` SET state=:state WHERE SIREN=:SIREN AND id=:id");
+        $q->execute([
+        'id' => $this->charge['value'],
+        'SIREN' => $user['SIREN'],
+        'state' => "validated"
+        ]);
+
+    }
+
+    /**
+        * Cancel charge method
+        *
+        */
+
+    public function cancelCharge(){
+
+        $db = self::getDatabase();
+
+        $u = $db->prepare("SELECT * FROM User WHERE id=:id");
+        $u->execute([
+            'id' => $_SESSION['id']
+            ]);
+
+        $user = $u->fetch();
+
+        $q = $db->prepare("UPDATE `Charge` SET state=:state WHERE SIREN=:SIREN AND id=:id");
+        $q->execute([
+        'id' => $this->charge['value'],
+        'SIREN' => $user['SIREN'],
+        'state' => "cancel"
+        ]);
+        
+    }
+
+    /**
         * Delete charge method
         *
         */

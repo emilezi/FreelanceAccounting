@@ -280,7 +280,7 @@ class Setting extends Database{
         $q = $db->prepare("UPDATE Setting SET setting_set=:setting_set WHERE setting_name=:setting_name");
         $q->execute([
             'setting_name' => 'bic_pay_1_rate',
-            'setting_set' => $this->setting['bnc_rate']
+            'setting_set' => $this->setting['bic_pay_1_rate']
         ]);
 
     }
@@ -319,7 +319,7 @@ class Setting extends Database{
         $q = $db->prepare("UPDATE Setting SET setting_set=:setting_set WHERE setting_name=:setting_name");
         $q->execute([
             'setting_name' => 'bic_pay_2_rate',
-            'setting_set' => $this->setting['bnc_rate']
+            'setting_set' => $this->setting['bic_pay_2_rate']
         ]);
 
     }
@@ -358,7 +358,7 @@ class Setting extends Database{
         $q = $db->prepare("UPDATE Setting SET setting_set=:setting_set WHERE setting_name=:setting_name");
         $q->execute([
             'setting_name' => 'bnc_pay_rate',
-            'setting_set' => $this->setting['bnc_rate']
+            'setting_set' => $this->setting['bnc_pay_rate']
         ]);
 
     }
@@ -397,7 +397,163 @@ class Setting extends Database{
         $q = $db->prepare("UPDATE Setting SET setting_set=:setting_set WHERE setting_name=:setting_name");
         $q->execute([
             'setting_name' => 'professional_training_rate',
-            'setting_set' => $this->setting['bnc_rate']
+            'setting_set' => $this->setting['professional_training_rate']
+        ]);
+
+    }
+
+    /**
+        * Monthly tax date start information
+        *
+        * @return string monthly date start value
+        *
+        */
+
+    public function getMonthlyTaxDateStart(){
+
+        $db = self::getDatabase();
+
+        $q = $db->prepare("SELECT * FROM Setting WHERE setting_name=:setting_name");
+        $q->execute([
+            'setting_name' => 'monthly_tax_date_start'
+        ]);
+
+        $ratevalue = $q->fetch();
+
+        return $ratevalue['setting_set'];
+
+    }
+
+    /**
+        * Change monthly tax date start method
+        *
+        */
+
+    public function editMonthlyTaxDateStart(){
+
+        $db = self::getDatabase();
+
+        $q = $db->prepare("UPDATE Setting SET setting_set=:setting_set WHERE setting_name=:setting_name");
+        $q->execute([
+            'setting_name' => 'monthly_tax_date_start',
+            'setting_set' => $this->setting['monthly_date_start']
+        ]);
+
+    }
+
+    /**
+        * Monthly tax date end information
+        *
+        * @return string monthly date end value
+        *
+        */
+
+    public function getMonthlyTaxDateEnd(){
+
+        $db = self::getDatabase();
+
+        $q = $db->prepare("SELECT * FROM Setting WHERE setting_name=:setting_name");
+        $q->execute([
+            'setting_name' => 'monthly_tax_date_end'
+        ]);
+
+        $ratevalue = $q->fetch();
+
+        return $ratevalue['setting_set'];
+
+    }
+
+    /**
+        * Change monthly tax date end method
+        *
+        */
+
+    public function editMonthlyTaxDateEnd(){
+
+        $db = self::getDatabase();
+
+        $q = $db->prepare("UPDATE Setting SET setting_set=:setting_set WHERE setting_name=:setting_name");
+        $q->execute([
+            'setting_name' => 'monthly_tax_date_end',
+            'setting_set' => $this->setting['monthly_date_end']
+        ]);
+
+    }
+
+    /**
+        * Quarterly tax date start information
+        *
+        * @return string quarterly date start value
+        *
+        */
+
+    public function getQuarterlyTaxDateStart(){
+
+        $db = self::getDatabase();
+
+        $q = $db->prepare("SELECT * FROM Setting WHERE setting_name=:setting_name");
+        $q->execute([
+            'setting_name' => 'quarterly_tax_date_start'
+        ]);
+
+        $ratevalue = $q->fetch();
+
+        return $ratevalue['setting_set'];
+
+    }
+
+    /**
+        * Change quarterly tax date start method
+        *
+        */
+
+    public function editQuarterlyTaxDateStart(){
+
+        $db = self::getDatabase();
+
+        $q = $db->prepare("UPDATE Setting SET setting_set=:setting_set WHERE setting_name=:setting_name");
+        $q->execute([
+            'setting_name' => 'quarterly_tax_date_start',
+            'setting_set' => $this->setting['quarterly_date_start']
+        ]);
+
+    }
+
+    /**
+        * Quarterly tax date end information
+        *
+        * @return string quarterly date end value
+        *
+        */
+
+    public function getQuarterlyTaxDateEnd(){
+
+        $db = self::getDatabase();
+
+        $q = $db->prepare("SELECT * FROM Setting WHERE setting_name=:setting_name");
+        $q->execute([
+            'setting_name' => 'quarterly_tax_date_end'
+        ]);
+
+        $ratevalue = $q->fetch();
+
+        return $ratevalue['setting_set'];
+
+    }
+
+    /**
+        * Change quarterly tax date end method
+        *
+        */
+
+    public function editQuarterlyTaxDateEnd(){
+
+        $db = self::getDatabase();
+
+        $q = $db->prepare("UPDATE Setting SET setting_set=:setting_set WHERE setting_name=:setting_name");
+        $q->execute([
+            'setting_name' => 'quarterly_tax_date_end',
+            'setting_set' => $this->setting['quarterly_date_end']
         ]);
 
     }

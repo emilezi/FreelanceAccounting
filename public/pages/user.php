@@ -34,8 +34,22 @@ require("actions/user/user_edit.php");
                     <p><b>N° SIREN :</b> <?=$_SESSION['SIREN']?></p>
                     <p><b>N° SIRET :</b> <?=$_SESSION['SIRET']?></p>
                     <?php
-                    if($_SESSION['status'] === 'eirl'){
-                      echo '<p><b>Statut juridique :</b> EIRL (Entreprise individuelle à responsabilité limitée)</p>';
+                    if($_SESSION['status'] === 'ei'){
+                      echo '<p><b>Statut juridique :</b> EI (Entrepreneur individuel)</p>';
+                    }elseif($_SESSION['status'] === 'eurl'){
+                      echo '<p><b>Statut juridique :</b> EURL (Entreprise unipersonnelle à responsabilité limitée, possibilité de commutation vers SARL)</p>';
+                    }else{
+                      echo '<p><b>Statut juridique :</b> Nulle</p>';
+                    }
+                    ?>
+                    <p><b>Date de création de l'entreprise :</b> <?=$_SESSION['date_creation']?></p>
+                    <?php
+                    if($_SESSION['taxation'] === 'month'){
+                      echo "<p><b>Période d'imposition :</b> Chaque mois</p>";
+                    }elseif($_SESSION['taxation'] === 'quarterly'){
+                      echo "<p><b>Période d'imposition :</b> Trimestriel</p>";
+                    }else{
+                      echo "<p><b>Période d'imposition :</b> Nulle</p>";
                     }
                     ?>
                     <p><b>Identifiant :</b> <?=$_SESSION['identifier']?></p>

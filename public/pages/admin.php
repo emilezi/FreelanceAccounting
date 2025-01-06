@@ -9,9 +9,17 @@ $Setting = new Setting();
 $User = new User();
 
 require("actions/admin/interface/reset.php");
+require("actions/admin/date/edit_monthly_start.php");
+require("actions/admin/date/edit_monthly_end.php");
+require("actions/admin/date/edit_quarterly_start.php");
+require("actions/admin/date/edit_quarterly_end.php");
 require("actions/admin/rate/edit_bic1_rate.php");
 require("actions/admin/rate/edit_bic2_rate.php");
 require("actions/admin/rate/edit_bnc_rate.php");
+require("actions/admin/rate/edit_bic1_pay.php");
+require("actions/admin/rate/edit_bic2_pay.php");
+require("actions/admin/rate/edit_bnc_pay.php");
+require("actions/admin/rate/edit_protraining_rate.php");
 
 ?>
 
@@ -53,6 +61,26 @@ require("actions/admin/rate/edit_bnc_rate.php");
               <div class='col s12'>
                 <span class='black-text'>
                     <h5>Utilisateurs</h5>
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class='offset-m2 l6 offset-l3'>
+          <div class='card-panel grey lighten-5 z-depth-1'>
+            <div class='row valign-wrapper'>
+              <div class='col s12'>
+                <span class='black-text'>
+                    <h5>Date des prochains paiements d'impôts</h5>
+                    <p>Date de début de la déclaration mensuelle : <?=$Setting->getMonthlyTaxDateStart()?></p>
+                    <a class='waves-effect waves-light btn modal-trigger' data-target='modal_monthly_start_edit'>Modifier</a>
+                    <p>Date de fin de la déclaration mensuelle : <?=$Setting->getMonthlyTaxDateEnd()?></p>
+                    <a class='waves-effect waves-light btn modal-trigger' data-target='modal_monthly_end_edit'>Modifier</a>
+                    <p>Date de début trimestriel : <?=$Setting->getQuarterlyTaxDateStart()?></p>
+                    <a class='waves-effect waves-light btn modal-trigger' data-target='modal_quarterly_start_edit'>Modifier</a>
+                    <p>Date de fin trimestriel : <?=$Setting->getQuarterlyTaxDateEnd()?></p>
+                    <a class='waves-effect waves-light btn modal-trigger' data-target='modal_quarterly_end_edit'>Modifier</a>
                 </span>
               </div>
             </div>
@@ -107,6 +135,74 @@ require("actions/admin/rate/edit_bnc_rate.php");
     </div>
 
     </div>
+</div>
+
+<div id='modal_monthly_start_edit' class='modal modal-fixed-footer'>
+    <form class='col s6' method='post'>
+    <div class='modal-content'>
+      <h4>Modifier la date de début</h4>
+      <div class='row'>
+        <div class='input-field col s12'>
+          <input name='monthly_date_start' id='monthly_date_start' type='date' value='<?=$Setting->getMonthlyTaxDateStart()?>' class='validate'>
+          <label for='monthly_date_start'>Date de début</label>
+        </div>
+      </div>
+    </div>
+    <div class='modal-footer'>
+        <input class='waves-effect waves-green btn' id='submit_monthly_date_start_edit' type='submit' name='submit_monthly_date_start_edit' value='Modifier' class='validate'>
+    </div>
+    </form>
+</div>
+
+<div id='modal_monthly_end_edit' class='modal modal-fixed-footer'>
+    <form class='col s6' method='post'>
+    <div class='modal-content'>
+      <h4>Modifier la date de fin</h4>
+      <div class='row'>
+        <div class='input-field col s12'>
+          <input name='monthly_date_end' id='monthly_date_end' type='date' value='<?=$Setting->getMonthlyTaxDateEnd()?>' class='validate'>
+          <label for='monthly_date_end'>Date de fin</label>
+        </div>
+      </div>
+    </div>
+    <div class='modal-footer'>
+        <input class='waves-effect waves-green btn' id='submit_monthly_date_end_edit' type='submit' name='submit_monthly_date_end_edit' value='Modifier' class='validate'>
+    </div>
+    </form>
+</div>
+
+<div id='modal_quarterly_start_edit' class='modal modal-fixed-footer'>
+    <form class='col s6' method='post'>
+    <div class='modal-content'>
+      <h4>Modifier la date de début</h4>
+      <div class='row'>
+        <div class='input-field col s12'>
+          <input name='quarterly_date_start' id='quarterly_date_start' type='date' value='<?=$Setting->getQuarterlyTaxDateStart()?>' class='validate'>
+          <label for='quarterly_date_start'>Date de début</label>
+        </div>
+      </div>
+    </div>
+    <div class='modal-footer'>
+        <input class='waves-effect waves-green btn' id='submit_quarterly_date_start_edit' type='submit' name='submit_quarterly_date_start_edit' value='Modifier' class='validate'>
+    </div>
+    </form>
+</div>
+
+<div id='modal_quarterly_end_edit' class='modal modal-fixed-footer'>
+    <form class='col s6' method='post'>
+    <div class='modal-content'>
+      <h4>Modifier la date de fin</h4>
+      <div class='row'>
+        <div class='input-field col s12'>
+          <input name='quarterly_date_end' id='quarterly_date_end' type='date' value='<?=$Setting->getQuarterlyTaxDateEnd()?>' class='validate'>
+          <label for='quarterly_date_end'>Date de fin</label>
+        </div>
+      </div>
+    </div>
+    <div class='modal-footer'>
+        <input class='waves-effect waves-green btn' id='submit_quarterly_date_end_edit' type='submit' name='submit_quarterly_date_end_edit' value='Modifier' class='validate'>
+    </div>
+    </form>
 </div>
 
 <div id='modal_bic1_edit' class='modal modal-fixed-footer'>

@@ -11,6 +11,10 @@ $Client = new Client();
 $Bank = new Bank();
 
 $turnovermax = $Setting->getTurnover();
+$startmonthlydate = $Setting->getMonthlyTaxDateStart();
+$endmonthlydate = $Setting->getMonthlyTaxDateEnd();
+$startquarterlydate = $Setting->getQuarterlyTaxDateStart();
+$endquarterlydate = $Setting->getQuarterlyTaxDateEnd();
 $bankinfo = $Bank->getBank();
 
 ?>
@@ -54,9 +58,21 @@ $bankinfo = $Bank->getBank();
               <div class='col s12'>
                 <span class='black-text'>
                   <p><b>Chiffre d'affaire :</b></p>
-                  <p>Montant : </p>
+                  <p>Montant : <?=$bankinfo['turnover_excluding_tax']?>€</p>
                   <p>Montant maximum annuel  : <?=$turnovermax?>€ hors taxes</p>
-                  <p>Prochaine date d'imposition :</p>
+                  <?php
+                  if($_SESSION['taxation'] === 'month'){
+                    echo "<p><b>Début de la prochaine imposition : </b></p>";
+                    echo "<p>Date : ".$startmonthlydate."</p>";
+                    echo "<p><b>Fin de la prochaine imposition : </b></p>";
+                    echo "<p>Date : ".$endmonthlydate."</p>";
+                  }elseif($_SESSION['taxation'] === 'quarterly'){
+                    echo "<p><b>Début de la prochaine imposition : </b></p>";
+                    echo "<p>Date : ".$startquarterlydate."</p>";
+                    echo "<p><b>Fin de la prochaine imposition : </b></p>";
+                    echo "<p>Date : ".$endquarterlydate."</p>";
+                  }
+                  ?>
                 </span>
               </div>
             </div>

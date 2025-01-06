@@ -32,7 +32,33 @@ if($Business->getBusiness() != null){
         <td>".$business['trade_name']."</td>
         <td>".$business['SIRET']."</td>
         <td>".$business['vat_number']."</td>
-        <td>".$business['country']."</td>
+        <td>";
+        if($business['country'] === 'germany'){
+          echo 'Allemagne';
+        }elseif($business['country'] === 'belgium'){
+          echo 'Belgique';
+        }elseif($business['country'] === 'canada'){
+          echo 'Canada';
+        }elseif($business['country'] === 'espagne'){
+          echo 'Espagne';
+        }elseif($business['country'] === 'united_states'){
+          echo 'États-Unis';
+        }elseif($business['country'] === 'france'){
+          echo 'France';
+        }elseif($business['country'] === 'italy'){
+          echo 'Italie';
+        }elseif($business['country'] === 'luxembourg'){
+          echo 'Luxembourg';
+        }elseif($business['country'] === 'malta'){
+          echo 'Malte';
+        }elseif($business['country'] === 'netherlands'){
+          echo 'Pays-Bas';
+        }elseif($business['country'] === 'portugal'){
+          echo 'Portugal';
+        }elseif($business['country'] === 'united_kingdom'){
+          echo 'Royaume-Uni';
+        }
+        echo "</td>
         <td>".$business['date']."</td>
         <td><a class='waves-effect waves-light btn red modal-trigger' data-target='modal_delete_".$i."'>Supprimer</a><a class='waves-effect waves-light btn modal-trigger' data-target='modal_edit_".$i."'>Modifier</a><a class='waves-effect waves-light btn modal-trigger' data-target='modal_description_".$i."'>Information</a></td>
         </tr>";
@@ -100,7 +126,6 @@ if($Business->getBusiness() != null){
           <label for='vat_number'>Numéro de TVA</label>
         </div>
       </div>
-      <input type='hidden' name='langue' value=".$business['langue'].">
       <input type='hidden' name='country' value=".$business['country'].">
       <div class='row'>
         <div class='input-field col s12'>
@@ -152,9 +177,33 @@ if($Business->getBusiness() != null){
       <br/>
       <h6><b>Numéro de TVA : </b>".$business['vat_number']."</h6>
       <br/>
-      <h6><b>Langue : </b>".$business['langue']."</h6>
-      <br/>
-      <h6><b>Pays : </b>".$business['country']."</h6>
+      <h6>";
+      if($business['country'] === 'germany'){
+        echo '<p><b>Pays : </b> Allemagne</p>';
+      }elseif($business['country'] === 'belgium'){
+        echo '<p><b>Pays : </b> Belgique</p>';
+      }elseif($business['country'] === 'canada'){
+        echo '<p><b>Pays : </b> Canada</p>';
+      }elseif($business['country'] === 'espagne'){
+        echo '<p><b>Pays : </b> Espagne</p>';
+      }elseif($business['country'] === 'united_states'){
+        echo '<p><b>Pays : </b> États-Unis</p>';
+      }elseif($business['country'] === 'france'){
+        echo '<p><b>Pays : </b> France</p>';
+      }elseif($business['country'] === 'italy'){
+        echo '<p><b>Pays : </b> Italie</p>';
+      }elseif($business['country'] === 'luxembourg'){
+        echo '<p><b>Pays : </b> Luxembourg</p>';
+      }elseif($business['country'] === 'malta'){
+        echo '<p><b>Pays : </b> Malte</p>';
+      }elseif($business['country'] === 'netherlands'){
+        echo '<p><b>Pays : </b> Pays-Bas</p>';
+      }elseif($business['country'] === 'portugal'){
+        echo '<p><b>Pays : </b> Portugal</p>';
+      }elseif($business['country'] === 'united_kingdom'){
+        echo '<p><b>Pays : </b> Royaume-Uni</p>';
+      }
+      echo "</h6>
       <br/>
       <h6><b>Adresse de l'entreprise : </b>".$business['address']."</h6>
       <br/>
@@ -201,15 +250,6 @@ echo "<div id='modal_new' class='modal modal-fixed-footer'>
         <div class='input-field col s12'>
           <input name='vat_number' id='vat_number' type='text' class='validate'>
           <label for='vat_number'>Numéro de TVA</label>
-        </div>
-      </div>
-      <div class='row'>
-        <div class='input-field col s12'>
-        <select name='langue'>
-          <option value='english' selected>Anglais</option>
-          <option value='french'>Français</option>
-        </select>
-        <label>Langue</label>
         </div>
       </div>
       <div class='row'>

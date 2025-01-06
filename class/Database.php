@@ -155,6 +155,7 @@ class Database{
         CREATE TABLE `Bank` (
         `id` int(11) NOT NULL,
         `SIREN` varchar(64) NOT NULL,
+        `turnover_excluding_tax` varchar(16) NOT NULL,
         `bic1_excluding_tax` varchar(16) NOT NULL,
         `bic2_excluding_tax` varchar(16) NOT NULL,
         `bnc_excluding_tax` varchar(16) NOT NULL,
@@ -168,7 +169,6 @@ class Database{
         `trade_name` varchar(128) NOT NULL,
         `SIRET` varchar(64) NOT NULL,
         `vat_number` varchar(64) NOT NULL,
-        `langue` varchar(16) NOT NULL,
         `country` varchar(16) NOT NULL,
         `address` varchar(64) NOT NULL,
         `address_supplement` varchar(16) NOT NULL,
@@ -245,6 +245,8 @@ class Database{
         `type` varchar(16) NOT NULL,
         `SIREN` varchar(64) NOT NULL,
         `SIRET` varchar(64) NOT NULL,
+        `date_creation` varchar(64) NOT NULL,
+        `taxation` varchar(64) NOT NULL,
         `first_name` varchar(128) NOT NULL,
         `last_name` varchar(128) NOT NULL,
         `identifier` varchar(128) NOT NULL,
@@ -343,6 +345,30 @@ class Database{
         $q->execute([
         'setting_name' => 'turnover_bnc_max',
         'setting_set' => '77700'
+        ]);
+
+        $q = $db->prepare("INSERT INTO Setting(`setting_name`,`setting_set`) VALUES(:setting_name,:setting_set)");
+        $q->execute([
+        'setting_name' => 'monthly_tax_date_start',
+        'setting_set' => '(À définir)'
+        ]);
+
+        $q = $db->prepare("INSERT INTO Setting(`setting_name`,`setting_set`) VALUES(:setting_name,:setting_set)");
+        $q->execute([
+        'setting_name' => 'monthly_tax_date_end',
+        'setting_set' => '(À définir)'
+        ]);
+
+        $q = $db->prepare("INSERT INTO Setting(`setting_name`,`setting_set`) VALUES(:setting_name,:setting_set)");
+        $q->execute([
+        'setting_name' => 'quarterly_tax_date_start',
+        'setting_set' => '(À définir)'
+        ]);
+
+        $q = $db->prepare("INSERT INTO Setting(`setting_name`,`setting_set`) VALUES(:setting_name,:setting_set)");
+        $q->execute([
+        'setting_name' => 'quarterly_tax_date_end',
+        'setting_set' => '(À définir)'
         ]);
 
         $q = $db->prepare("INSERT INTO Setting(`setting_name`,`setting_set`) VALUES(:setting_name,:setting_set)");

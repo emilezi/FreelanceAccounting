@@ -50,8 +50,11 @@ require("actions/start/new_business.php");
                   </div>
                   <div class='row'>
                     <div class='input-field col s12'>
-                      <input disabled name='eirl' id='eirl' type='text' class='validate'>
-                      <label for='eirl'>Status : EIRL</label>
+                    <select name='status'>
+                      <option value='ei' selected>EI (Entrepreneur individuel, anciennement appelé EIRL)</option>
+                      <option value='eurl'>EURL (Entreprise unipersonnelle à responsabilité limitée, possibilité de commutation vers SARL)</option>
+                    </select>
+                    <label>Status</label>
                     </div>
                   </div>
                   <div class='row'>
@@ -64,6 +67,21 @@ require("actions/start/new_business.php");
                     <div class='input-field col s12'>
                       <input name='SIRET' id='SIRET' type='text' class='validate'>
                       <label for='SIRET'>SIRET</label>
+                    </div>
+                  </div>
+                  <div class='row'>
+                    <div class='input-field col s12'>
+                      <input name='date_creation' id='date_creation' type='date' class='validate'>
+                      <label for='date_creation'>Date de création de l'entreprise</label>
+                    </div>
+                  </div>
+                  <div class='row'>
+                    <div class='input-field col s12'>
+                    <select name='taxation'>
+                      <option value='month' selected>Chaque mois</option>
+                      <option value='quarterly'>Trimestriel</option>
+                    </select>
+                    <label>Imposition</label>
                     </div>
                   </div>
                   <div class='row'>

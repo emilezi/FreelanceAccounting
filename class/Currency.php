@@ -86,12 +86,54 @@ class Currency extends Database{
 
     }
 
+    /**
+        * Pay currency method
+        *
+        */
 
+    public function payCurrency(){
 
-    public function editCurrency(){
+        $db = self::getDatabase();
 
+        $u = $db->prepare("SELECT * FROM User WHERE id=:id");
+        $u->execute([
+            'id' => $_SESSION['id']
+            ]);
 
+        $user = $u->fetch();
+        
+        $q = $db->prepare("UPDATE `Currency` SET state=:state WHERE SIREN=:SIREN AND id=:id");
+        $q->execute([
+        'id' => $this->currency['value'],
+        'SIREN' => $user['SIREN'],
+        'state' => "paid"
+        ]);
 
+    }
+
+    /**
+        * Cancel currency method
+        *
+        */
+
+    public function cancelCurrency(){
+
+        $db = self::getDatabase();
+
+        $u = $db->prepare("SELECT * FROM User WHERE id=:id");
+        $u->execute([
+            'id' => $_SESSION['id']
+            ]);
+
+        $user = $u->fetch();
+        
+        $q = $db->prepare("UPDATE `Currency` SET state=:state WHERE SIREN=:SIREN AND id=:id");
+        $q->execute([
+        'id' => $this->currency['value'],
+        'SIREN' => $user['SIREN'],
+        'state' => "cancel"
+        ]);
+        
     }
 
     /**
@@ -114,7 +156,7 @@ class Currency extends Database{
         $q->execute([
         'id' => $this->currency['value'],
         'SIREN' => $user['SIREN'],
-        'state' => "cancel"
+        'state' => "delete"
         ]);
         
     }
