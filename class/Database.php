@@ -141,16 +141,6 @@ class Database{
         $db = self::getDatabase();
 
         $q = $db->prepare("
-        CREATE TABLE `Applications` (
-        `id` int(11) NOT NULL,
-        `category` varchar(64) NOT NULL,
-        `version` varchar(64) NOT NULL,
-        `name` varchar(255) NOT NULL,
-        `qualified_name` varchar(255) NOT NULL,
-        `installed` varchar(16) NOT NULL,
-        `db_require` varchar(16) NOT NULL,
-        `source` varchar(255) NOT NULL
-        ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
         CREATE TABLE `Bank` (
         `id` int(11) NOT NULL,
@@ -185,7 +175,7 @@ class Database{
         `name` varchar(128) NOT NULL,
         `category` varchar(64) NOT NULL,
         `price` varchar(8) NOT NULL,
-        `state` varchar(8) NOT NULL,
+        `state` varchar(12) NOT NULL,
         `description` text NULL,
         `date` timestamp NOT NULL DEFAULT current_timestamp()
         ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -213,10 +203,13 @@ class Database{
         `SIREN` varchar(64) NOT NULL,
         `customer_name` varchar(128) NOT NULL,
         `service_name` varchar(128) NOT NULL,
+        `category` varchar(64) NOT NULL,
         `start_date` varchar(32) NOT NULL,
         `end_date` varchar(32) NOT NULL,
         `hours_days` varchar(8) NOT NULL,
         `number_days` varchar(4) NOT NULL,
+        `costhour` varchar(8) NOT NULL,
+        `price_ht` varchar(12) NOT NULL,
         `state` varchar(8) NOT NULL,
         `description` text NULL,
         `date` timestamp NOT NULL DEFAULT current_timestamp()
@@ -258,9 +251,6 @@ class Database{
         `date` timestamp NOT NULL DEFAULT current_timestamp()
         ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
-        ALTER TABLE `Applications`
-        ADD PRIMARY KEY (`id`);
-
         ALTER TABLE `Bank`
         ADD PRIMARY KEY (`id`),
         ADD UNIQUE KEY `SIREN` (`SIREN`);
@@ -287,9 +277,6 @@ class Database{
         ADD PRIMARY KEY (`id`),
         ADD UNIQUE KEY `SIREN` (`SIREN`),
         ADD UNIQUE KEY `email` (`email`);
-
-        ALTER TABLE `Applications`
-        MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
         ALTER TABLE `Bank`
         MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;

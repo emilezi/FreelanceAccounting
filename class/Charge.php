@@ -30,10 +30,9 @@ class Charge extends Database{
 
         $user = $u->fetch();
 
-        $q = $db->prepare("SELECT * FROM Charge WHERE SIREN=:SIREN AND state=:state");
+        $q = $db->prepare("SELECT * FROM Charge WHERE SIREN=:SIREN");
         $q->execute([
-            'SIREN' => $user['SIREN'],
-            'state' => 'active'
+            'SIREN' => $user['SIREN']
         ]);
 
         $charge_list = null;

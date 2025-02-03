@@ -1,8 +1,10 @@
 <?php
+require("class/Bank.php");
 require("class/Client.php");
 require("class/Service.php");
 require("class/Currency.php");
 
+$Bank = new Bank();
 $Client = new Client();
 $Service = new Service();
 $Currency = new Currency();
@@ -20,6 +22,7 @@ echo "<table>
         <th>Nom du service</th>
         <th>Date de début :</th>
         <th>Date de fin :</th>
+        <th>Prix HT :</th>
         <th>Crée le :</th>
         <th>Action :</th>
     </tr></thead>
@@ -38,11 +41,12 @@ if($Currency->getCurrency() != null){
         <td>".$currency['service_name']."</td>
         <td>".$currency['start_date']."</td>
         <td>".$currency['end_date']."</td>
+        <td>".$currency['price_ht']."€</td>
         <td>".$currency['date']."</td>";
         if($currency['state'] === 'unpaid'){
-          echo "<td><a class='waves-effect waves-light btn red modal-trigger' data-target='modal_cancel_".$i."'>Annuler la facture</a><a class='waves-effect waves-light btn modal-trigger' data-target='modal_description_".$i."'>Information</a><a class='waves-effect waves-light btn modal-trigger' data-target='modal_edit_".$i."'>Finaliser le paiement</a></td>";
-        }elseif($currency['state'] === 'cancel'){
-          echo "<td><p>Annulé</p></td>";
+          echo "<td><a class='waves-effect waves-light btn red modal-trigger' data-target='modal_cancel_".$i."'>Annuler la facture</a><a class='waves-effect waves-light btn modal-trigger' data-target='modal_description_".$i."'>Information</a><a class='waves-effect waves-light btn modal-trigger' data-target='modal_validation_".$i."'>Finaliser le paiement</a></td>";
+        }else{
+          echo "<td><a class='waves-effect waves-light btn modal-trigger' data-target='modal_description_".$i."'>Information</a></td>";
         }
         echo "<td></td>
         </tr>";
@@ -82,35 +86,52 @@ if($Currency->getCurrency() != null){
       </form>
       </div>";
       
-        echo "<div id='modal_description_".$i."' class='modal modal-fixed-footer'>
+      echo "<div id='modal_description_".$i."' class='modal modal-fixed-footer'>
+      <div class='modal-content'>
+        <h4>Informations sur la facture</h4>
+        <br/>
+        <h6><b>Nom du client : </b>".$currency['customer_name']."</h6>
+        <br/>
+        <h6><b>Nom du service : </b>".$currency['service_name']."</h6>
+        <br/>
+        <h6><b>Date de début : </b>".$currency['start_date']."</h6>
+        <br/>
+        <h6><b>Date de fin : </b>".$currency['end_date']."</h6>
+        <br/>
+        <h6><b>Prix HT : </b>".$currency['price_ht']."€</h6>
+        <br/>
+        <h6><b>Nombre d'heures/Jour : </b>".$currency['hours_days']."</h6>
+        <br/>
+        <h6><b>Nombre de jours : </b>".$currency['number_days']."</h6>
+        <br/>
+        <h6><b>Statut : </b>";
+        if($currency['state'] === 'paid'){
+          echo "Payée";
+        }elseif($currency['state'] === 'unpaid'){
+          echo "Non payée";
+        }elseif($currency['state'] === 'cancel'){
+          echo "Annulé";
+        }
+        echo "</h6>
+        <br/>
+        <h6><b>Description :</b></h6>
+        <p>".$currency['description']."</p>
+      </div>
+      </div>";
+
+        echo "<div id='modal_validation_".$i."' class='modal modal-fixed-footer'>
+        <form class='col s6' method='post'>
         <div class='modal-content'>
-            <h4>Informations sur la facture</h4>
-            <br/>
-            <h6><b>Nom du client : </b>".$currency['customer_name']."</h6>
-            <br/>
-            <h6><b>Nom du service : </b>".$currency['service_name']."</h6>
-            <br/>
-            <h6><b>Date de début : </b>".$currency['start_date']."</h6>
-            <br/>
-            <h6><b>Date de fin : </b>".$currency['end_date']."</h6>
-            <br/>
-            <h6><b>Nombre d'heures/Jour : </b>".$currency['hours_days']."</h6>
-            <br/>
-            <h6><b>Nombre de jours : </b>".$currency['number_days']."</h6>
-            <br/>
-            <h6><b>Statut : </b>";
-            if($currency['state'] === 'paid'){
-              echo "Payée";
-            }elseif($currency['state'] === 'unpaid'){
-              echo "Non payée";
-            }elseif($currency['state'] === 'cancel'){
-              echo "Annulé";
-            }
-            echo "</h6>
-            <br/>
-            <h6><b>Description :</b></h6>
-            <p>".$currency['description']."</p>
+          <h4>Validation de paiement</h4>
+          <p>Êtes-vous sûr de vouloir valider le paiement sélectionné ?</p>
+          <p>Toutes les validations de paiement seront définitives !</p>
         </div>
+        <div class='modal-footer'>
+            <input class='waves-effect waves-green btn' id='submit_pay' type='submit' name='submit_pay' value='Oui' class='validate'>
+            <input class='modal-close waves-effect waves-green btn red' id='cancel' type='submit' name='cancel' value='Non' class='validate'>
+        </div>
+        <input id='value' type='hidden' name='value' value=".$currency['id'].">
+        </form>
         </div>";
 
     }

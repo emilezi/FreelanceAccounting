@@ -11,11 +11,23 @@ require("actions/start/new_database.php");
       <div class="icon-block">
 
       <div class='offset-m2 l6 offset-l3'>
+          <div class='card-panel grey lighten-5 z-depth-1'>
+            <div class='row valign-wrapper'>
+              <div class='col s12'>
+                <span class='black-text'>
+                    <h3 class='center'>FreelanceAccounting</h3>
+                </span>
+              </div>
+            </div>
+          </div>
+      </div>
+
+      <div class='offset-m2 l6 offset-l3'>
         <div class='card-panel grey lighten-5 z-depth-1'>
           <div class='row valign-wrapper'>
             <div class='col s12'>
               <span class='black-text'>
-              <h5>Pour commencer, vous devez créer la base de données !</h5>
+              <h4>Pour commencer, vous devez créer la base de données !</h4>
               <div class='row'>
                 <form class='col s6' method='post'>
                   <div class='row'>

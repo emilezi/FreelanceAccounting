@@ -2,6 +2,10 @@
 
 if(isset($_POST['submit_pay'])){
 
-    $Currency->validateCurrency();
+    $Bank->addBank();
+
+    $Bank->addTurnover();
+
+    $Currency->payCurrency();
     
 }

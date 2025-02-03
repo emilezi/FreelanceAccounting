@@ -1,10 +1,8 @@
 <?php
 
-require("class/Application.php");
 require("class/Setting.php");
 require("class/User.php");
 
-$Application = new Application();
 $Setting = new Setting();
 $User = new User();
 
@@ -37,18 +35,6 @@ require("actions/admin/rate/edit_protraining_rate.php");
               <div class='col s12'>
                 <span class='black-text'>
                   <h3>Administration</h3>
-                </span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class='offset-m2 l6 offset-l3'>
-          <div class='card-panel grey lighten-5 z-depth-1'>
-            <div class='row valign-wrapper'>
-              <div class='col s12'>
-                <span class='black-text'>
-                    <h5>Applications</h5>
                 </span>
               </div>
             </div>

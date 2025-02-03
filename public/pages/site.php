@@ -16,6 +16,7 @@ $endmonthlydate = $Setting->getMonthlyTaxDateEnd();
 $startquarterlydate = $Setting->getQuarterlyTaxDateStart();
 $endquarterlydate = $Setting->getQuarterlyTaxDateEnd();
 $bankinfo = $Bank->getBank();
+$turnover = $Bank->getAnnualTurnover();
 
 ?>
 
@@ -58,7 +59,8 @@ $bankinfo = $Bank->getBank();
               <div class='col s12'>
                 <span class='black-text'>
                   <p><b>Chiffre d'affaire :</b></p>
-                  <p>Montant : <?=$bankinfo['turnover_excluding_tax']?>€</p>
+                  <p>Montant total : <?=$bankinfo['turnover_excluding_tax']?>€</p>
+                  <p>Montant annuel : <?=$turnover?>€</p>
                   <p>Montant maximum annuel  : <?=$turnovermax?>€ hors taxes</p>
                   <?php
                   if($_SESSION['taxation'] === 'month'){

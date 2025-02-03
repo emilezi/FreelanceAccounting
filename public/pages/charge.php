@@ -1,7 +1,9 @@
 <?php
 require("class/Charge.php");
+require("class/Bank.php");
 
 $Charge = new Charge();
+$Bank = new Bank();
 
 require("actions/charge/add_charge.php");
 require("actions/charge/cancel_charge.php");
@@ -31,14 +33,18 @@ if($Charge->getCharge() != null){
         <td>";
         if($charge['category'] === 'invoice'){
             echo "Facture";
-          }elseif($charge['category'] === 'pay'){
+        }elseif($charge['category'] === 'taxation'){
+            echo "Imposition";
+        }elseif($charge['category'] === 'pay'){
             echo "Versement liberatoire";
-          }
+        }
         echo "</td>
         <td>".$charge['price']."€</td>
         <td>".$charge['date']."</td>";
         if($charge['state'] === 'active'){
             echo "<td><a class='waves-effect waves-light btn red modal-trigger' data-target='modal_cancel_".$i."'>Annuler la charge</a><a class='waves-effect waves-light btn modal-trigger' data-target='modal_edit_".$i."'>Modifier</a><a class='waves-effect waves-light btn modal-trigger' data-target='modal_description_".$i."'>Information</a><a class='waves-effect waves-light btn modal-trigger' data-target='modal_validate_".$i."'>Valider la charge</a></td>";
+        }else{
+            echo "<td><a class='waves-effect waves-light btn modal-trigger' data-target='modal_description_".$i."'>Information</a></td>";
         }
         echo "</tr>";
     
@@ -100,7 +106,7 @@ if($Charge->getCharge() != null){
             <label for='description'>Description de la charge</label>
             </div>
         </div>
-        </div>
+        </div>AND state=:state
         <div class='modal-footer'>
             <input class='waves-effect waves-green btn' id='submit_edit' type='submit' name='submit_edit' value='Modifier la charge' class='validate'>
         </div>
@@ -109,24 +115,50 @@ if($Charge->getCharge() != null){
         </div>";
 
         echo "<div id='modal_description_".$i."' class='modal modal-fixed-footer'>
-                <div class='modal-content'>
-                    <h4>Informations sur la charge</h4>
-                    <br/>
-                    <h6><b>Nom de la charge : </b>".$charge['name']."</h6>
-                    <br/>
-                    <h6><b>Catégorie : </b>";
-                    if($charge['category'] === 'invoice'){
-                      echo "Facture";
-                    }elseif($charge['category'] === 'pay'){
-                      echo "Versement liberatoire";
-                    }
-                    echo "</h6>
-                    <br/>
-                    <h6><b>Prix en € : </b>".$charge['price']."€</h6>
-                    <br/>
-                    <h6><b>Description :</b></h6>
-                    <p>".$charge['description']."</p>
-                </div>
+        <div class='modal-content'>
+            <h4>Informations sur la charge</h4>
+            <br/>
+            <h6><b>Nom de la charge : </b>".$charge['name']."</h6>
+            <br/>
+            <h6><b>Catégorie : </b>";
+            if($charge['category'] === 'invoice'){
+                echo "Facture";
+            }elseif($charge['category'] === 'taxation'){
+                echo "Imposition";
+            }elseif($charge['category'] === 'pay'){
+                echo "Versement liberatoire";
+            }
+            echo "</h6>
+            <br/>
+            <h6><b>Prix en € : </b>".$charge['price']."€</h6>
+            <br/>
+            <h6><b>Statut : </b>";
+            if($charge['state'] === 'active'){
+            echo "Non validé";
+            }elseif($charge['state'] === 'validated'){
+            echo "Validé";
+            }elseif($charge['state'] === 'cancel'){
+            echo "Annulé";
+            }
+            echo "</h6>
+            <br/>
+            <h6><b>Description :</b></h6>
+            <p>".$charge['description']."</p>
+        </div>
+        </div>";
+
+        echo "<div id='modal_validate_".$i."' class='modal modal-fixed-footer'>
+            <form class='col s6' method='post'>
+            <div class='modal-content'>
+            <h4>Validation de la charge sélectionnée</h4>
+            <p>Êtes-vous sûr de vouloir valider la charge sélectionnée ?</p>
+            </div>
+            <div class='modal-footer'>
+                <input class='waves-effect waves-green btn' id='submit_validate' type='submit' name='submit_validate' value='Oui' class='validate'>
+                <input class='modal-close waves-effect waves-green btn red' id='cancel' type='submit' name='cancel' value='Non' class='validate'>
+            </div>
+            <input id='value' type='hidden' name='value' value=".$charge['id'].">
+            </form>
             </div>";
     
     }
@@ -149,6 +181,7 @@ echo "<div id='modal_new' class='modal modal-fixed-footer'>
         <div class='input-field col s12'>
         <select name='category'>
           <option value='pay' selected>Versement liberatoire</option>
+          <option value='taxation'>Imposition</option>
           <option value='invoice'>Facture</option>
         </select>
         <label>Catégorie</label>

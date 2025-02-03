@@ -71,15 +71,29 @@ class Currency extends Database{
 
         $user = $u->fetch();
 
-        $q = $db->prepare("INSERT INTO Currency(`SIREN`,`customer_name`,`service_name`,`start_date`,`end_date`,`hours_days`,`number_days`,`state`,`description`) VALUES(:SIREN,:customer_name,:service_name,:start_date,:end_date,:hours_days,:number_days,:state,:description)");
+        $q = $db->prepare("SELECT * FROM Service WHERE SIREN=:SIREN AND name=:name");
         $q->execute([
+            'SIREN' => $user['SIREN'],
+            'name' => $this->currency['service_name']
+        ]);
+
+        $service_info = $q->fetch();
+        $number_hours = intval(substr($this->currency['hours_days'], 0, 2));
+        $number_minutes = intval(substr($this->currency['hours_days'], -2, -1));
+        $price_ht = $service_info['costhour']*$this->currency['number_days']*((($number_hours*60)+$number_minutes)/60);
+
+        $s = $db->prepare("INSERT INTO Currency(`SIREN`,`customer_name`,`service_name`,`category`,`start_date`,`end_date`,`hours_days`,`number_days`,`costhour`,`price_ht`,`state`,`description`) VALUES(:SIREN,:customer_name,:service_name,:category,:start_date,:end_date,:hours_days,:number_days,:costhour,:price_ht,:state,:description)");
+        $s->execute([
             'SIREN' => $user['SIREN'],
             'customer_name'=> $this->currency['customer_name'],
             'service_name' => $this->currency['service_name'],
+            'category' => $service_info['category'],
             'start_date' => $this->currency['start_date'],
             'end_date' => $this->currency['end_date'],
             'hours_days' => $this->currency['hours_days'],
             'number_days' => $this->currency['number_days'],
+            'costhour' => $service_info['costhour'],
+            'price_ht' => $price_ht,
             'state' => 'unpaid',
             'description' => $this->currency['description']
             ]);
