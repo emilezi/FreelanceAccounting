@@ -13,6 +13,9 @@ $startquarterlydate = $Setting->getQuarterlyTaxDateStart();
 $endquarterlydate = $Setting->getQuarterlyTaxDateEnd();
 $bankinfo = $Bank->getBank();
 $turnover = $Bank->getAnnualTurnover();
+$amountbic1 = $Bank->getAmountBIC1($Setting);
+$amountbic2 = $Bank->getAmountBIC2($Setting);
+$amountbnc = $Bank->getAmountBNC($Setting);
 
 ?>
 
@@ -72,11 +75,11 @@ $turnover = $Bank->getAnnualTurnover();
                 <span class='black-text'>
                     <h5>Taux d'imposition actuel</h5>
                     <p><b>Activité achat-vente de marchandises (BIC-1) : <?=$Setting->getBIC1Rate()?>%</b></p>
-                    <p>Montant à déclarer :</p>
+                    <p>Montant à déclarer : <?=$amountbic1?>€</p>
                     <p><b>Prestations de services commerciales et artisanales (BIC-2) : <?=$Setting->getBIC2Rate()?>%</b></p>
-                    <p>Montant à déclarer :</p>
+                    <p>Montant à déclarer : <?=$amountbic2?>€</p>
                     <p><b>Prestations de services et professions libérales (BNC) : <?=$Setting->getBNCRate()?>%</b></p>
-                    <p>Montant à déclarer :</p>
+                    <p>Montant à déclarer : <?=$amountbnc?>€</p>
                     <p><b>Versement liberatoire de l'impot sur le revenu (Prestations BIC) : <?=$Setting->getBIC1PayRate()?>%</b></p>
                     <p>Montant à déclarer :</p>
                     <p><b>Versement liberatoire de l'impot sur le revenu (vente BIC) : <?=$Setting->getBIC2PayRate()?>%</b></p>

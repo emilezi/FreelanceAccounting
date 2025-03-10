@@ -294,5 +294,341 @@ class Bank extends Database{
         ]);
 
     }
+
+    /**
+        * Amount BIC information
+        *
+        * @return string amount BIC information
+        *
+        */
+
+    public function getAmountBIC1($Setting){
+
+        $db = self::getDatabase();
+        $bankinfo = $this->getBank();
+        $startmonthlydate = $Setting->getMonthlyTaxDateStart();
+        $endmonthlydate = $Setting->getMonthlyTaxDateEnd();
+        $startquarterlydate = $Setting->getQuarterlyTaxDateStart();
+        $endquarterlydate = $Setting->getQuarterlyTaxDateEnd();
+        $setting_value = $Setting->getBIC1Rate();
+
+        $u = $db->prepare("SELECT * FROM User WHERE id=:id");
+        $u->execute([
+            'id' => $_SESSION['id']
+            ]);
+
+        $user = $u->fetch();
+
+        $amount = 0;
+
+        if($user['taxation'] == 'month'){
+
+            $q = $db->prepare("SELECT * FROM Currency WHERE SIREN=:SIREN AND category=:category AND state=:state AND date LIKE :date1 AND date LIKE :date2");
+            $q->execute([
+                'SIREN' => $user['SIREN'],
+                'category' => "BIC-1",
+                'state' => "paid",
+                'date1' => '%'.substr($startmonthlydate, 0, 6).'%',
+                'date2' => '%'.substr($endmonthlydate, 0, 6).'%'
+            ]);
+
+            if($q->rowCount() > 0){
+
+                while($currency = $q->fetch(PDO::FETCH_ASSOC)){
+
+                    $amount = $amount + $currency['price_ht'];
+            
+                }
+            
+            }
+
+        }elseif($user['taxation'] == 'quarterly'){
+
+            $q = $db->prepare("SELECT * FROM Currency WHERE SIREN=:SIREN AND category=:category AND state=:state AND date LIKE :date1 AND date LIKE :date2");
+            $q->execute([
+                'SIREN' => $user['SIREN'],
+                'category' => "BIC-1",
+                'state' => "paid",
+                'date1' => '%'.substr($startquarterlydate, 0, 6).'%',
+                'date2' => '%'.substr($endquarterlydate, 0, 6).'%'
+            ]);
+
+            if($q->rowCount() > 0){
+
+                while($currency = $q->fetch(PDO::FETCH_ASSOC)){
+
+                    $amount = $amount + $currency['price_ht'];
+            
+                }
+            
+            }
+
+        }
+
+        $amount = ($amount/100)*$setting_value;
+
+        return $amount;
+
+    }
+
+    /**
+        * Amount BIC information
+        *
+        * @return string amount BIC information
+        *
+        */
+
+    public function getAmountBIC2($Setting){
+
+        $db = self::getDatabase();
+        $bankinfo = $this->getBank();
+        $startmonthlydate = $Setting->getMonthlyTaxDateStart();
+        $endmonthlydate = $Setting->getMonthlyTaxDateEnd();
+        $startquarterlydate = $Setting->getQuarterlyTaxDateStart();
+        $endquarterlydate = $Setting->getQuarterlyTaxDateEnd();
+        $setting_value = $Setting->getBIC2Rate();
+
+        $u = $db->prepare("SELECT * FROM User WHERE id=:id");
+        $u->execute([
+            'id' => $_SESSION['id']
+            ]);
+
+        $user = $u->fetch();
+
+        $amount = 0;
+
+        if($user['taxation'] == 'month'){
+
+            $q = $db->prepare("SELECT * FROM Currency WHERE SIREN=:SIREN AND category=:category AND state=:state AND date LIKE :date1 AND date LIKE :date2");
+            $q->execute([
+                'SIREN' => $user['SIREN'],
+                'category' => "BIC-2",
+                'state' => "paid",
+                'date1' => '%'.substr($startmonthlydate, 0, 6).'%',
+                'date2' => '%'.substr($endmonthlydate, 0, 6).'%'
+            ]);
+
+            if($q->rowCount() > 0){
+
+                while($currency = $q->fetch(PDO::FETCH_ASSOC)){
+
+                    $amount = $amount + $currency['price_ht'];
+            
+                }
+            
+            }
+
+        }elseif($user['taxation'] == 'quarterly'){
+
+            $q = $db->prepare("SELECT * FROM Currency WHERE SIREN=:SIREN AND category=:category AND state=:state AND date LIKE :date1 AND date LIKE :date2");
+            $q->execute([
+                'SIREN' => $user['SIREN'],
+                'category' => "BIC-2",
+                'state' => "paid",
+                'date1' => '%'.substr($startquarterlydate, 0, 6).'%',
+                'date2' => '%'.substr($endquarterlydate, 0, 6).'%'
+            ]);
+
+            if($q->rowCount() > 0){
+
+                while($currency = $q->fetch(PDO::FETCH_ASSOC)){
+
+                    $amount = $amount + $currency['price_ht'];
+            
+                }
+            
+            }
+
+        }
+
+        $amount = ($amount/100)*$setting_value;
+
+        return $amount;
+
+    }
+
+    /**
+        * Amount BNC information
+        *
+        * @return string amount BNC information
+        *
+        */
+
+    public function getAmountBNC($Setting){
+
+        $db = self::getDatabase();
+        $bankinfo = $this->getBank();
+        $startmonthlydate = $Setting->getMonthlyTaxDateStart();
+        $endmonthlydate = $Setting->getMonthlyTaxDateEnd();
+        $startquarterlydate = $Setting->getQuarterlyTaxDateStart();
+        $endquarterlydate = $Setting->getQuarterlyTaxDateEnd();
+        $setting_value = $Setting->getBNCRate();
+
+        $u = $db->prepare("SELECT * FROM User WHERE id=:id");
+        $u->execute([
+            'id' => $_SESSION['id']
+            ]);
+
+        $user = $u->fetch();
+
+        $amount = 0;
+
+        if($user['taxation'] == 'month'){
+
+            $q = $db->prepare("SELECT * FROM Currency WHERE SIREN=:SIREN AND category=:category AND state=:state AND date LIKE :date1 AND date LIKE :date2");
+            $q->execute([
+                'SIREN' => $user['SIREN'],
+                'category' => "BNC",
+                'state' => "paid",
+                'date1' => '%'.substr($startmonthlydate, 0, 6).'%',
+                'date2' => '%'.substr($endmonthlydate, 0, 6).'%'
+            ]);
+
+            if($q->rowCount() > 0){
+
+                while($currency = $q->fetch(PDO::FETCH_ASSOC)){
+
+                    $amount = $amount + $currency['price_ht'];
+            
+                }
+            
+            }
+
+        }elseif($user['taxation'] == 'quarterly'){
+
+            $q = $db->prepare("SELECT * FROM Currency WHERE SIREN=:SIREN AND category=:category AND state=:state AND date LIKE :date1 AND date LIKE :date2");
+            $q->execute([
+                'SIREN' => $user['SIREN'],
+                'category' => "BNC",
+                'state' => "paid",
+                'date1' => '%'.substr($startquarterlydate, 0, 6).'%',
+                'date2' => '%'.substr($endquarterlydate, 0, 6).'%'
+            ]);
+
+            if($q->rowCount() > 0){
+
+                while($currency = $q->fetch(PDO::FETCH_ASSOC)){
+
+                    $amount = $amount + $currency['price_ht'];
+            
+                }
+            
+            }
+
+        }
+
+        $amount = ($amount/100)*$setting_value;
+
+        return $amount;
+
+    }
+
+    /**
+        * Amount BIC pay information
+        *
+        * @return string amount BIC pay information
+        *
+        */
+
+    public function getAmountBIC1Pay(){
+
+        $db = self::getDatabase();
+        $bankinfo = $this->getBank();
+        $startmonthlydate = $Setting->getMonthlyTaxDateStart();
+        $endmonthlydate = $Setting->getMonthlyTaxDateEnd();
+        $startquarterlydate = $Setting->getQuarterlyTaxDateStart();
+        $endquarterlydate = $Setting->getQuarterlyTaxDateEnd();
+
+        $u = $db->prepare("SELECT * FROM User WHERE id=:id");
+        $u->execute([
+            'id' => $_SESSION['id']
+            ]);
+
+        $user = $u->fetch();
+
+        $setting_value = $Setting->getBIC1PayRate();
+
+    }
+
+    /**
+        * Amount BIC pay information
+        *
+        * @return string amount BIC pay information
+        *
+        */
+
+    public function getAmountBIC2Pay(){
+
+        $db = self::getDatabase();
+        $bankinfo = $this->getBank();
+        $startmonthlydate = $Setting->getMonthlyTaxDateStart();
+        $endmonthlydate = $Setting->getMonthlyTaxDateEnd();
+        $startquarterlydate = $Setting->getQuarterlyTaxDateStart();
+        $endquarterlydate = $Setting->getQuarterlyTaxDateEnd();
+
+        $u = $db->prepare("SELECT * FROM User WHERE id=:id");
+        $u->execute([
+            'id' => $_SESSION['id']
+            ]);
+
+        $user = $u->fetch();
+
+        $setting_value = $Setting->getBIC2PayRate();
+
+    }
+
+    /**
+        * Amount BNC pay information
+        *
+        * @return string amount BNC pay information
+        *
+        */
+
+    public function getAmountBNCPay(){
+
+        $db = self::getDatabase();
+        $bankinfo = $this->getBank();
+        $startmonthlydate = $Setting->getMonthlyTaxDateStart();
+        $endmonthlydate = $Setting->getMonthlyTaxDateEnd();
+        $startquarterlydate = $Setting->getQuarterlyTaxDateStart();
+        $endquarterlydate = $Setting->getQuarterlyTaxDateEnd();
+
+        $u = $db->prepare("SELECT * FROM User WHERE id=:id");
+        $u->execute([
+            'id' => $_SESSION['id']
+            ]);
+
+        $user = $u->fetch();
+
+        $setting_value = $Setting->getBNCPayRate();
+
+    }
+
+    /**
+        * Amount ProfessionalTraining information
+        *
+        * @return string amount ProfessionalTraining information
+        *
+        */
+
+    public function getAmountProfessionalTraining(){
+
+        $db = self::getDatabase();
+        $bankinfo = $this->getBank();
+        $startmonthlydate = $Setting->getMonthlyTaxDateStart();
+        $endmonthlydate = $Setting->getMonthlyTaxDateEnd();
+        $startquarterlydate = $Setting->getQuarterlyTaxDateStart();
+        $endquarterlydate = $Setting->getQuarterlyTaxDateEnd();
+
+        $u = $db->prepare("SELECT * FROM User WHERE id=:id");
+        $u->execute([
+            'id' => $_SESSION['id']
+            ]);
+
+        $user = $u->fetch();
+
+        $setting_value = $Setting->getProfessionalTrainingRate();
+
+    }
     
 }
