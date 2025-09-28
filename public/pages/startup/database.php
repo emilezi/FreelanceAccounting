@@ -15,7 +15,7 @@ require("actions/start/new_database.php");
             <div class='row valign-wrapper'>
               <div class='col s12'>
                 <span class='black-text'>
-                    <h3 class='center'>FreelanceAccounting</h3>
+                    <h3 class='center'>Freelance Accounting</h3>
                 </span>
               </div>
             </div>

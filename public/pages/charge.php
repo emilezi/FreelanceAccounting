@@ -35,8 +35,14 @@ if($Charge->getCharge() != null){
             echo "Facture";
         }elseif($charge['category'] === 'taxation'){
             echo "Imposition";
-        }elseif($charge['category'] === 'pay'){
-            echo "Versement liberatoire";
+        }elseif($charge['category'] === 'paybic1'){
+            echo "Versement liberatoire BIC-1";
+        }elseif($charge['category'] === 'paybic2'){
+            echo "Versement liberatoire BIC-2";
+        }elseif($charge['category'] === 'paybnc'){
+            echo "Versement liberatoire BNC";
+        }elseif($charge['category'] === 'training'){
+            echo "Formation prof.liberale";
         }
         echo "</td>
         <td>".$charge['price']."€</td>
@@ -125,8 +131,14 @@ if($Charge->getCharge() != null){
                 echo "Facture";
             }elseif($charge['category'] === 'taxation'){
                 echo "Imposition";
-            }elseif($charge['category'] === 'pay'){
-                echo "Versement liberatoire";
+            }elseif($charge['category'] === 'paybic1'){
+                echo "Versement liberatoire BIC-1";
+            }elseif($charge['category'] === 'paybic2'){
+                echo "Versement liberatoire BIC-2";
+            }elseif($charge['category'] === 'paybnc'){
+                echo "Versement liberatoire BNC";
+            }elseif($charge['category'] === 'training'){
+            echo "Formation prof.liberale";
             }
             echo "</h6>
             <br/>
@@ -180,7 +192,10 @@ echo "<div id='modal_new' class='modal modal-fixed-footer'>
     <div class='row'>
         <div class='input-field col s12'>
         <select name='category'>
-          <option value='pay' selected>Versement liberatoire</option>
+          <option value='training' selected>Formation prof.liberale</option>
+          <option value='paybic1'>Versement liberatoire BIC-1</option>
+          <option value='paybic2'>Versement liberatoire BIC-2</option>
+          <option value='paybnc'>Versement liberatoire BNC</option>
           <option value='taxation'>Imposition</option>
           <option value='invoice'>Facture</option>
         </select>

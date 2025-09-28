@@ -16,6 +16,10 @@ $turnover = $Bank->getAnnualTurnover();
 $amountbic1 = $Bank->getAmountBIC1($Setting);
 $amountbic2 = $Bank->getAmountBIC2($Setting);
 $amountbnc = $Bank->getAmountBNC($Setting);
+$amountbic1pay = $Bank->getAmountBIC1Pay($Setting);
+$amountbic2pay = $Bank->getAmountBIC2Pay($Setting);
+$amountbncpay = $Bank->getAmountBNCPay($Setting);
+$amountproftraining = $Bank->getAmountProfessionalTraining($Setting);
 
 ?>
 
@@ -81,13 +85,13 @@ $amountbnc = $Bank->getAmountBNC($Setting);
                     <p><b>Prestations de services et professions libérales (BNC) : <?=$Setting->getBNCRate()?>%</b></p>
                     <p>Montant à déclarer : <?=$amountbnc?>€</p>
                     <p><b>Versement liberatoire de l'impot sur le revenu (Prestations BIC) : <?=$Setting->getBIC1PayRate()?>%</b></p>
-                    <p>Montant à déclarer :</p>
+                    <p>Montant à déclarer : <?=$amountbic1pay?>€</p>
                     <p><b>Versement liberatoire de l'impot sur le revenu (vente BIC) : <?=$Setting->getBIC2PayRate()?>%</b></p>
-                    <p>Montant à déclarer :</p>
+                    <p>Montant à déclarer : <?=$amountbic2pay?>€</p>
                     <p><b>Versement liberatoire de l'impot sur le revenu (Prestations BNC) : <?=$Setting->getBNCPayRate()?>%</b></p>
-                    <p>Montant à déclarer :</p>
+                    <p>Montant à déclarer : <?=$amountbncpay?>€</p>
                     <p><b>Formation prof.liberale obligatoire : <?=$Setting->getProfessionalTrainingRate()?>%</b></p>
-                    <p>Montant à déclarer :</p>
+                    <p>Montant à déclarer : <?=$amountproftraining?>€</p>
                 </span>
               </div>
             </div>

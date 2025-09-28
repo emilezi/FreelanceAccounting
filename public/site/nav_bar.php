@@ -21,10 +21,9 @@
     </ul>
 
     <ul id="nav-mobile" class="sidenav">
+    <li><a href="index.php?link=bank">Banque</a></li>
     <li><a href="index.php?link=client">Clients</a></li>
     <li><a href="index.php?link=service">Services</a></li>
-    <li><a href="index.php?link=apps">Applications</a></li>
-    <li><a href="index.php?link=bank">Banque</a></li>
     <li><a href="index.php?link=currency">Devises</a></li>
     <li><a href="index.php?link=charge">Charges</a></li>
     <li><a href="index.php?link=user">Profil</a></li>

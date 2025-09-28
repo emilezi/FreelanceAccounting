@@ -18,6 +18,8 @@ if(isset($_POST['submit'])){
 
             $User -> firstUser();
 
+            $User -> UserLogin();
+
             header('Location: index.php');
 
         }else{
