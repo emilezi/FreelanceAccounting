@@ -255,8 +255,6 @@ class Form{
             !empty($this->post['category'])
             &&
             !empty($this->post['price'])
-            &&
-            !empty($this->post['description'])
             )
             {
                 if(
@@ -265,8 +263,6 @@ class Form{
                 preg_match("#^[^<>]+$#i", $this->post['category'])
                 &&
                 preg_match("#^[0-9]+$#i", $this->post['price'])
-                &&
-                preg_match("#^[^<>]+$#i", $this->post['description'])
                 )
                 {
                     return 0;
@@ -300,18 +296,6 @@ class Form{
             !empty($this->post['category'])
             &&
             !empty($this->post['langue'])
-            &&
-            !empty($this->post['country'])
-            &&
-            !empty($this->post['address'])
-            &&
-            !empty($this->post['address_supplement'])
-            &&
-            !empty($this->post['postal_code'])
-            &&
-            !empty($this->post['city'])
-            &&
-            !empty($this->post['description'])
             )
             {
                 if(
@@ -326,16 +310,6 @@ class Form{
                 preg_match("#^[^<>]+$#i", $this->post['langue'])
                 &&
                 preg_match("#^[^<>]+$#i", $this->post['country'])
-                &&
-                preg_match("#^[^<>]+$#i", $this->post['address'])
-                &&
-                preg_match("#^[^<>]+$#i", $this->post['address_supplement'])
-                &&
-                preg_match("#^[^<>]+$#i", $this->post['postal_code'])
-                &&
-                preg_match("#^[^<>]+$#i", $this->post['city'])
-                &&
-                preg_match("#^[^<>]+$#i", $this->post['description'])
                 )
                 {
                     return 0;
@@ -371,8 +345,6 @@ class Form{
             !empty($this->post['hours_days'])
             &&
             !empty($this->post['number_days'])
-            &&
-            !empty($this->post['description'])
             )
             {
                 if(
@@ -387,8 +359,6 @@ class Form{
                 preg_match("#^[^<>]+$#i", $this->post['hours_days'])
                 &&
                 preg_match("#^[0-9]+$#i", $this->post['number_days'])
-                &&
-                preg_match("#^[^<>]+$#i", $this->post['description'])
                 )
                 {
                     return 0;
@@ -418,8 +388,6 @@ class Form{
             !empty($this->post['category'])
             &&
             !empty($this->post['costhour'])
-            &&
-            !empty($this->post['description'])
             )
             {
                 if(
@@ -428,8 +396,6 @@ class Form{
                 preg_match("#^[^<>]+$#i", $this->post['category'])
                 &&
                 preg_match("#^[0-9]+$#i", $this->post['costhour'])
-                &&
-                preg_match("#^[^<>]+$#i", $this->post['description'])
                 )
                 {
                     return 0;

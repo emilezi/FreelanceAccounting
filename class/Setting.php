@@ -19,7 +19,7 @@ class Setting extends Database{
         *
         */
 
-    public function getTurnover(){
+    public function getTurnoverMax(){
 
         $db = self::getDatabase();
 

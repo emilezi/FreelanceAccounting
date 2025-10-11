@@ -6,13 +6,19 @@ require("class/Bank.php");
 $Setting = new Setting();
 $Bank = new Bank();
 
-$turnovermax = $Setting->getTurnover();
+$bankinfo = $Bank->getBank();
+$turnovermax = $Setting->getTurnoverMax();
 $startmonthlydate = $Setting->getMonthlyTaxDateStart();
 $endmonthlydate = $Setting->getMonthlyTaxDateEnd();
 $startquarterlydate = $Setting->getQuarterlyTaxDateStart();
 $endquarterlydate = $Setting->getQuarterlyTaxDateEnd();
-$bankinfo = $Bank->getBank();
-$turnover = $Bank->getAnnualTurnover();
+$turnoverbic1 = $Bank->getTurnoverBIC1($Setting);
+$turnoverbic2 = $Bank->getTurnoverBIC2($Setting);
+$turnoverbnc = $Bank->getTurnoverBNC($Setting);
+$bic1liberatorypayment = $Bank->getBIC1LiberatoryPayment($Setting);
+$bic2liberatorypayment = $Bank->getBIC2LiberatoryPayment($Setting);
+$bncliberatorypayment = $Bank->getBNCLiberatoryPayment($Setting);
+$liberalprofessionaltraining = $Bank->getLiberalProfessionalTraining($Setting);
 $amountbic1 = $Bank->getAmountBIC1($Setting);
 $amountbic2 = $Bank->getAmountBIC2($Setting);
 $amountbnc = $Bank->getAmountBNC($Setting);
@@ -51,7 +57,9 @@ $amountproftraining = $Bank->getAmountProfessionalTraining($Setting);
                 <span class='black-text'>
                     <h5>Chiffre d'affaire :</h5>
                     <p>Montant total : <?=$bankinfo['turnover_excluding_tax']?>€</p>
-                    <p>Montant annuel : <?=$turnover?>€</p>
+                    <p>Montant BIC-1 : <?=$turnoverbic1?>€</p>
+                    <p>Montant BIC-2 : <?=$turnoverbic2?>€</p>
+                    <p>Montant BNC : <?=$turnoverbnc?>€</p>
                     <p>Montant maximum annuel  : <?=$turnovermax?>€ hors taxes</p>
                     <?php
                     if($_SESSION['taxation'] === 'month'){
@@ -66,6 +74,22 @@ $amountproftraining = $Bank->getAmountProfessionalTraining($Setting);
                       echo "<p>Date : ".$endquarterlydate."</p>";
                     }
                     ?>
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class='offset-m2 l6 offset-l3'>
+          <div class='card-panel grey lighten-5 z-depth-1'>
+            <div class='row valign-wrapper'>
+              <div class='col s12'>
+                <span class='black-text'>
+                    <h5>Charges :</h5>
+                    <p>Versement liberatoire BIC-1 : <?=$bic1liberatorypayment?>€</p>
+                    <p>Versement liberatoire BIC-2 : <?=$bic2liberatorypayment?>€</p>
+                    <p>Versement liberatoire BNC : <?=$bncliberatorypayment?>€</p>
+                    <p>Formation prof.liberale : <?=$liberalprofessionaltraining?>€</p>
                 </span>
               </div>
             </div>
@@ -92,6 +116,18 @@ $amountproftraining = $Bank->getAmountProfessionalTraining($Setting);
                     <p>Montant à déclarer : <?=$amountbncpay?>€</p>
                     <p><b>Formation prof.liberale obligatoire : <?=$Setting->getProfessionalTrainingRate()?>%</b></p>
                     <p>Montant à déclarer : <?=$amountproftraining?>€</p>
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class='offset-m2 l6 offset-l3'>
+          <div class='card-panel grey lighten-5 z-depth-1'>
+            <div class='row valign-wrapper'>
+              <div class='col s12'>
+                <span class='black-text'>
+                    <h5>Format CSV</h5>
                 </span>
               </div>
             </div>
