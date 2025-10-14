@@ -1,6 +1,10 @@
 <?php
 
+require 'class/Form.php';
+require 'class/User.php';
+
 require("actions/user/user_disconnect.php");
+require("actions/user/user_edit_password.php");
 require("actions/user/user_edit.php");
 
 ?>
@@ -55,7 +59,7 @@ require("actions/user/user_edit.php");
                     <p><b>Identifiant :</b> <?=$_SESSION['identifier']?></p>
                     <p><b>Email :</b> <?=$_SESSION['email']?></p>
                     <p><b>Téléphone :</b> <?=$_SESSION['phone']?></p>
-                    <a class='waves-effect waves-light btn modal-trigger' data-target='modal_edit'>Modifier</a><a class='waves-effect waves-light btn red modal-trigger' data-target='modal_disconnect'>Se déconnecter</a>
+                    <a class='waves-effect waves-light btn modal-trigger' data-target='modal_edit'>Modifier</a><a class='waves-effect waves-light btn modal-trigger' data-target='modal_edit_password'>Modifier le mot de passe</a><a class='waves-effect waves-light btn red modal-trigger' data-target='modal_disconnect'>Se déconnecter</a>
                 </span>
               </div>
             </div>
@@ -102,6 +106,30 @@ require("actions/user/user_edit.php");
     </div>
     <div class='modal-footer'>
           <input class='waves-effect waves-green btn' id='submit_edit' type='submit' name='submit_edit' value='Modifier le profil' class='validate'>
+      </div>
+    </form>
+</div>
+
+<div id='modal_edit_password' class='modal modal-fixed-footer'>
+    <form class='col s6' method='post'>
+    <div class='modal-content'>
+    <h4>Modifier le mot de passe</h4>
+      <div class='row'>
+        <div class='input-field col s12'>
+          <input name='password' id='password' type='password' class='validate'>
+          <label for='password'>Mot de passe</label>
+        </div>
+      </div>
+      <div class='row'>
+        <div class='input-field col s12'>
+          <input name='repassword' id='repassword' type='password' class='validate'>
+          <label for='repassword'>Retaper le mot de passe</label>
+        </div>
+      </div>
+      <div class='row'>
+        <div class='input-field col s6'>
+          <input class='waves-effect waves-light btn' id='submit_edit_password' type='submit' name='submit_edit_password' value='Modifier le mot de passe' class='validate'>
+        </div>
       </div>
     </form>
 </div>

@@ -77,7 +77,26 @@ if($Database->setConnection() == 0) {
 
 			}elseif($Session->UserSession() == 1){
 
-				include("public/pages/authentication.php");
+				if(!isset($_GET['link'])){
+					$_GET['link'] = 'authentication';
+				}
+
+				$link = $_GET['link'];
+
+				switch($link){
+					case 'account_recovery':{
+						include("public/pages/account_recovery.php");
+						break;
+					}
+					case 'password_recovery':{
+						include("public/pages/password_recovery.php");
+						break;
+					}
+					default :{
+						include("public/pages/authentication.php");
+						break;
+					}
+				}
 
 			}elseif($Session->UserSession() == 2) {
 

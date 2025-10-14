@@ -42,6 +42,76 @@ class Bank extends Database{
     }
 
     /**
+        * Annual turnover information
+        *
+        * @return string annual turnover information
+        *
+        */
+
+    public function getAnnualTurnover($Setting){
+
+        $db = self::getDatabase();
+        $startmonthlydate = $Setting->getMonthlyTaxDateStart();
+        $endmonthlydate = $Setting->getMonthlyTaxDateEnd();
+        $startquarterlydate = $Setting->getQuarterlyTaxDateStart();
+        $endquarterlydate = $Setting->getQuarterlyTaxDateEnd();
+
+        $u = $db->prepare("SELECT * FROM User WHERE id=:id");
+        $u->execute([
+            'id' => $_SESSION['id']
+            ]);
+
+        $user = $u->fetch();
+
+        $amount = 0;
+
+        if($user['taxation'] == 'month'){
+
+            $q = $db->prepare("SELECT * FROM Currency WHERE SIREN=:SIREN AND state=:state AND date LIKE :date1 AND date LIKE :date2");
+            $q->execute([
+                'SIREN' => $user['SIREN'],
+                'state' => "paid",
+                'date1' => '%'.substr($startmonthlydate, 0, 6).'%',
+                'date2' => '%'.substr($endmonthlydate, 0, 6).'%'
+            ]);
+
+            if($q->rowCount() > 0){
+
+                while($currency = $q->fetch(PDO::FETCH_ASSOC)){
+
+                    $amount = $amount + $currency['price_ht'];
+            
+                }
+            
+            }
+
+        }elseif($user['taxation'] == 'quarterly'){
+
+            $q = $db->prepare("SELECT * FROM Currency WHERE SIREN=:SIREN AND state=:state AND date LIKE :date1 AND date LIKE :date2");
+            $q->execute([
+                'SIREN' => $user['SIREN'],
+                'state' => "paid",
+                'date1' => '%'.substr($startquarterlydate, 0, 6).'%',
+                'date2' => '%'.substr($endquarterlydate, 0, 6).'%'
+            ]);
+
+            if($q->rowCount() > 0){
+
+                while($currency = $q->fetch(PDO::FETCH_ASSOC)){
+
+                    $amount = $amount + $currency['price_ht'];
+            
+                }
+            
+            }
+
+        }
+
+        return $amount;
+
+    }
+
+    /**
         * Turnover BIC-1 information
         *
         * @return string turnover BIC-1 information

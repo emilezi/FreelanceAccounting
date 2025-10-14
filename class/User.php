@@ -192,5 +192,137 @@ class User extends Database{
             }
         
     }
+
+    /**
+        * Set password method
+        *
+        */
+
+    public function setPassword(){
+
+        $db = parent::getDatabase();
+
+        $options = [
+        'cost' => 12
+        ];
+
+        $q = $db->prepare("UPDATE User SET password=:password WHERE id=:id");
+        $q->execute([
+            'id' => $_SESSION['id'],
+            'password' => password_hash($this->user['password'], PASSWORD_BCRYPT, $options)
+            ]);
+        
+    }
+
+    /**
+        * Set key method
+        *
+        */
+
+    protected function setKey(){
+
+        $db = parent::getDatabase();
+
+        $q = $db->prepare("UPDATE User SET key=:key WHERE id=:id");
+        $q->execute([
+            'id' => $_SESSION['id'],
+            'key' => md5(microtime(TRUE)*100000)
+            ]);
+        
+    }
+
+    /**
+        * Get user
+        *
+        * @return array user
+        *
+        */
+
+    protected function getUser(){
+
+        $db = parent::getDatabase();
+
+        $q = $db->prepare("SELECT * FROM User WHERE email=:email");
+        $q->execute([
+        'email' => $_SESSION['email']
+        ]);
+
+        $user = $q->fetch();
+        
+    }
+
+    /**
+        * Check user mail
+        *
+        * @return boolean
+        *
+        */
+
+    public function checkUserMail(){
+
+        $db = parent::getDatabase();
+
+        $q = $db->prepare("SELECT * FROM User WHERE email=:email");
+        $q->execute([
+        'email' => $this->user['email']
+        ]);
+
+        if($user == TRUE){
+            return 1;
+        }else{
+            return 0;
+        }
+        
+    }
+
+    /**
+        * Key mail verification
+        *
+        * @return boolean
+        *
+        */
+
+    public function checkKeyMail($user_key,$key){
+
+        $db = parent::getDatabase();
+
+        $q = $db->prepare("SELECT * FROM User WHERE user_key=:user_key AND key=:key");
+        $q->execute([
+        'user_key' => $user_key,
+        'key' => $key
+        ]);
+
+        if($user == TRUE){
+            return 1;
+        }else{
+            return 0;
+        }
+        
+    }
+
+    /**
+        * Recovery key verification
+        *
+        * @return boolean
+        *
+        */
+
+    public function checkRecoveryKey($user_key,$key){
+
+        $db = parent::getDatabase();
+
+        $q = $db->prepare("SELECT * FROM User WHERE user_key=:user_key AND key=:key");
+        $q->execute([
+        'user_key' => $user_key,
+        'key' => $key
+        ]);
+
+        if($user == TRUE){
+            return 1;
+        }else{
+            return 0;
+        }
+        
+    }
     
 }

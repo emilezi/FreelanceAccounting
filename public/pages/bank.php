@@ -7,6 +7,7 @@ $Setting = new Setting();
 $Bank = new Bank();
 
 $bankinfo = $Bank->getBank();
+$annualturnover = $Bank->getAnnualTurnover($Setting);
 $turnovermax = $Setting->getTurnoverMax();
 $startmonthlydate = $Setting->getMonthlyTaxDateStart();
 $endmonthlydate = $Setting->getMonthlyTaxDateEnd();
@@ -56,7 +57,7 @@ $amountproftraining = $Bank->getAmountProfessionalTraining($Setting);
               <div class='col s12'>
                 <span class='black-text'>
                     <h5>Chiffre d'affaire :</h5>
-                    <p>Montant total : <?=$bankinfo['turnover_excluding_tax']?>€</p>
+                    <p>Montant total annuel: <?=$annualturnover?>€</p>
                     <p>Montant BIC-1 : <?=$turnoverbic1?>€</p>
                     <p>Montant BIC-2 : <?=$turnoverbic2?>€</p>
                     <p>Montant BNC : <?=$turnoverbnc?>€</p>

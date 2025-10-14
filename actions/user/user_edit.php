@@ -1,8 +1,5 @@
 <?php
 
-require 'class/Form.php';
-require 'class/User.php';
-
 $Form = new Form();
 $User = new User();
 

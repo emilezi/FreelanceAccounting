@@ -1,7 +1,3 @@
-<?php
-require("actions/auth/authentication.php");
-?>
-
 <div class="container">
   <div class="section">
     
@@ -27,7 +23,7 @@ require("actions/auth/authentication.php");
           <div class='row valign-wrapper'>
             <div class='col s12'>
               <span class='black-text'>
-              <h4>Authentification</h4>
+              <h4>Récupération du compte</h4>
               <div class='row'>
                 <form class='col s12' method='post'>
                   <div class='row'>
@@ -37,15 +33,8 @@ require("actions/auth/authentication.php");
                     </div>
                   </div>
                   <div class='row'>
-                    <div class='input-field col s12'>
-                      <input name='password' id='password' type='password' class='validate'>
-                      <label for='password'>Mot de passe</label>
-                    </div>
-                  </div>
-                  <p><a href="index.php?link=account_recovery">Mot de passe oublié ?</a></p>
-                  <div class='row'>
                     <div class='input-field col s6'>
-                      <input class='waves-effect waves-light btn' name='submit' id='submit' type='submit' value='Connexion'>
+                      <input class='waves-effect waves-light btn' name='submit' id='submit' type='submit' value='Envoyer'>
                     </div>
                   </div>
                 </form>
