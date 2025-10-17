@@ -126,10 +126,9 @@ require("actions/user/user_edit.php");
           <label for='repassword'>Retaper le mot de passe</label>
         </div>
       </div>
-      <div class='row'>
-        <div class='input-field col s6'>
+      </div>
+      <div class='modal-footer'>
           <input class='waves-effect waves-light btn' id='submit_edit_password' type='submit' name='submit_edit_password' value='Modifier le mot de passe' class='validate'>
         </div>
-      </div>
     </form>
 </div>
