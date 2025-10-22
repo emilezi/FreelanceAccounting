@@ -126,6 +126,16 @@ class Bank extends Database{
         $startquarterlydate = $Setting->getQuarterlyTaxDateStart();
         $endquarterlydate = $Setting->getQuarterlyTaxDateEnd();
 
+        $substr = intval(substr($startmonthlydate, 4, 6), 10);
+
+        if(substr($startmonthlydate, 4, 6) < 12){
+            $substr = $substr + 1;
+        }else{
+            $substr = $substr - 1;
+        }
+
+        $mediumquarterlydate = substr($startmonthlydate, 0, 4) . $substr;
+
         $u = $db->prepare("SELECT * FROM User WHERE id=:id");
         $u->execute([
             'id' => $_SESSION['id']
@@ -158,13 +168,14 @@ class Bank extends Database{
 
         }elseif($user['taxation'] == 'quarterly'){
 
-            $q = $db->prepare("SELECT * FROM Currency WHERE SIREN=:SIREN AND category=:category AND state=:state AND date LIKE :date1 AND date LIKE :date2");
+            $q = $db->prepare("SELECT * FROM Currency WHERE SIREN=:SIREN AND category=:category AND state=:state AND date LIKE :date1 AND date LIKE :date2 AND date LIKE :date3");
             $q->execute([
                 'SIREN' => $user['SIREN'],
                 'category' => "BIC-1",
                 'state' => "paid",
                 'date1' => '%'.substr($startquarterlydate, 0, 6).'%',
-                'date2' => '%'.substr($endquarterlydate, 0, 6).'%'
+                'date2' => '%'.$mediumquarterlydate.'%',
+                'date3' => '%'.substr($endquarterlydate, 0, 6).'%'
             ]);
 
             if($q->rowCount() > 0){
@@ -198,6 +209,16 @@ class Bank extends Database{
         $startquarterlydate = $Setting->getQuarterlyTaxDateStart();
         $endquarterlydate = $Setting->getQuarterlyTaxDateEnd();
 
+        $substr = intval(substr($startmonthlydate, 4, 6), 10);
+
+        if(substr($startmonthlydate, 4, 6) < 12){
+            $substr = $substr + 1;
+        }else{
+            $substr = $substr - 1;
+        }
+
+        $mediumquarterlydate = substr($startmonthlydate, 0, 4) . $substr;
+
         $u = $db->prepare("SELECT * FROM User WHERE id=:id");
         $u->execute([
             'id' => $_SESSION['id']
@@ -230,13 +251,14 @@ class Bank extends Database{
 
         }elseif($user['taxation'] == 'quarterly'){
 
-            $q = $db->prepare("SELECT * FROM Currency WHERE SIREN=:SIREN AND category=:category AND state=:state AND date LIKE :date1 AND date LIKE :date2");
+            $q = $db->prepare("SELECT * FROM Currency WHERE SIREN=:SIREN AND category=:category AND state=:state AND date LIKE :date1 AND date LIKE :date2 AND date LIKE :date3");
             $q->execute([
                 'SIREN' => $user['SIREN'],
                 'category' => "BIC-2",
                 'state' => "paid",
                 'date1' => '%'.substr($startquarterlydate, 0, 6).'%',
-                'date2' => '%'.substr($endquarterlydate, 0, 6).'%'
+                'date2' => '%'.$mediumquarterlydate.'%',
+                'date3' => '%'.substr($endquarterlydate, 0, 6).'%'
             ]);
 
             if($q->rowCount() > 0){
@@ -270,6 +292,16 @@ class Bank extends Database{
         $startquarterlydate = $Setting->getQuarterlyTaxDateStart();
         $endquarterlydate = $Setting->getQuarterlyTaxDateEnd();
 
+        $substr = intval(substr($startmonthlydate, 4, 6), 10);
+
+        if(substr($startmonthlydate, 4, 6) < 12){
+            $substr = $substr + 1;
+        }else{
+            $substr = $substr - 1;
+        }
+
+        $mediumquarterlydate = substr($startmonthlydate, 0, 4) . $substr;
+
         $u = $db->prepare("SELECT * FROM User WHERE id=:id");
         $u->execute([
             'id' => $_SESSION['id']
@@ -302,13 +334,14 @@ class Bank extends Database{
 
         }elseif($user['taxation'] == 'quarterly'){
 
-            $q = $db->prepare("SELECT * FROM Currency WHERE SIREN=:SIREN AND category=:category AND state=:state AND date LIKE :date1 AND date LIKE :date2");
+            $q = $db->prepare("SELECT * FROM Currency WHERE SIREN=:SIREN AND category=:category AND state=:state AND date LIKE :date1 AND date LIKE :date2 AND date LIKE :date3");
             $q->execute([
                 'SIREN' => $user['SIREN'],
                 'category' => "BNC",
                 'state' => "paid",
                 'date1' => '%'.substr($startquarterlydate, 0, 6).'%',
-                'date2' => '%'.substr($endquarterlydate, 0, 6).'%'
+                'date2' => '%'.$mediumquarterlydate.'%',
+                'date3' => '%'.substr($endquarterlydate, 0, 6).'%'
             ]);
 
             if($q->rowCount() > 0){
@@ -342,6 +375,16 @@ class Bank extends Database{
         $startquarterlydate = $Setting->getQuarterlyTaxDateStart();
         $endquarterlydate = $Setting->getQuarterlyTaxDateEnd();
 
+        $substr = intval(substr($startmonthlydate, 4, 6), 10);
+
+        if(substr($startmonthlydate, 4, 6) < 12){
+            $substr = $substr + 1;
+        }else{
+            $substr = $substr - 1;
+        }
+
+        $mediumquarterlydate = substr($startmonthlydate, 0, 4) . $substr;
+
         $u = $db->prepare("SELECT * FROM User WHERE id=:id");
         $u->execute([
             'id' => $_SESSION['id']
@@ -374,13 +417,14 @@ class Bank extends Database{
 
         }elseif($user['taxation'] == 'quarterly'){
 
-            $q = $db->prepare("SELECT * FROM Charge WHERE SIREN=:SIREN AND category=:category AND state=:state AND date LIKE :date1 AND date LIKE :date2");
+            $q = $db->prepare("SELECT * FROM Charge WHERE SIREN=:SIREN AND category=:category AND state=:state AND date LIKE :date1 AND date LIKE :date2 AND date LIKE :date3");
             $q->execute([
                 'SIREN' => $user['SIREN'],
                 'category' => "paybic1",
                 'state' => "validated",
                 'date1' => '%'.substr($startquarterlydate, 0, 6).'%',
-                'date2' => '%'.substr($endquarterlydate, 0, 6).'%'
+                'date2' => '%'.$mediumquarterlydate.'%',
+                'date3' => '%'.substr($endquarterlydate, 0, 6).'%'
             ]);
 
             if($q->rowCount() > 0){
@@ -415,6 +459,16 @@ class Bank extends Database{
         $endquarterlydate = $Setting->getQuarterlyTaxDateEnd();
         $setting_value = $Setting->getBIC1PayRate();
 
+        $substr = intval(substr($startmonthlydate, 4, 6), 10);
+
+        if(substr($startmonthlydate, 4, 6) < 12){
+            $substr = $substr + 1;
+        }else{
+            $substr = $substr - 1;
+        }
+
+        $mediumquarterlydate = substr($startmonthlydate, 0, 4) . $substr;
+
         $u = $db->prepare("SELECT * FROM User WHERE id=:id");
         $u->execute([
             'id' => $_SESSION['id']
@@ -447,13 +501,14 @@ class Bank extends Database{
 
         }elseif($user['taxation'] == 'quarterly'){
 
-            $q = $db->prepare("SELECT * FROM Charge WHERE SIREN=:SIREN AND category=:category AND state=:state AND date LIKE :date1 AND date LIKE :date2");
+            $q = $db->prepare("SELECT * FROM Charge WHERE SIREN=:SIREN AND category=:category AND state=:state AND date LIKE :date1 AND date LIKE :date2 AND date LIKE :date3");
             $q->execute([
                 'SIREN' => $user['SIREN'],
                 'category' => "paybic2",
                 'state' => "validated",
                 'date1' => '%'.substr($startquarterlydate, 0, 6).'%',
-                'date2' => '%'.substr($endquarterlydate, 0, 6).'%'
+                'date2' => '%'.$mediumquarterlydate.'%',
+                'date3' => '%'.substr($endquarterlydate, 0, 6).'%'
             ]);
 
             if($q->rowCount() > 0){
@@ -488,6 +543,16 @@ class Bank extends Database{
         $endquarterlydate = $Setting->getQuarterlyTaxDateEnd();
         $setting_value = $Setting->getBIC1PayRate();
 
+        $substr = intval(substr($startmonthlydate, 4, 6), 10);
+
+        if(substr($startmonthlydate, 4, 6) < 12){
+            $substr = $substr + 1;
+        }else{
+            $substr = $substr - 1;
+        }
+
+        $mediumquarterlydate = substr($startmonthlydate, 0, 4) . $substr;
+
         $u = $db->prepare("SELECT * FROM User WHERE id=:id");
         $u->execute([
             'id' => $_SESSION['id']
@@ -520,13 +585,14 @@ class Bank extends Database{
 
         }elseif($user['taxation'] == 'quarterly'){
 
-            $q = $db->prepare("SELECT * FROM Charge WHERE SIREN=:SIREN AND category=:category AND state=:state AND date LIKE :date1 AND date LIKE :date2");
+            $q = $db->prepare("SELECT * FROM Charge WHERE SIREN=:SIREN AND category=:category AND state=:state AND date LIKE :date1 AND date LIKE :date2 AND date LIKE :date3");
             $q->execute([
                 'SIREN' => $user['SIREN'],
                 'category' => "paybnc",
                 'state' => "validated",
                 'date1' => '%'.substr($startquarterlydate, 0, 6).'%',
-                'date2' => '%'.substr($endquarterlydate, 0, 6).'%'
+                'date2' => '%'.$mediumquarterlydate.'%',
+                'date3' => '%'.substr($endquarterlydate, 0, 6).'%'
             ]);
 
             if($q->rowCount() > 0){
@@ -561,6 +627,16 @@ class Bank extends Database{
         $endquarterlydate = $Setting->getQuarterlyTaxDateEnd();
         $setting_value = $Setting->getBIC1PayRate();
 
+        $substr = intval(substr($startmonthlydate, 4, 6), 10);
+
+        if(substr($startmonthlydate, 4, 6) < 12){
+            $substr = $substr + 1;
+        }else{
+            $substr = $substr - 1;
+        }
+
+        $mediumquarterlydate = substr($startmonthlydate, 0, 4) . $substr;
+
         $u = $db->prepare("SELECT * FROM User WHERE id=:id");
         $u->execute([
             'id' => $_SESSION['id']
@@ -593,13 +669,14 @@ class Bank extends Database{
 
         }elseif($user['taxation'] == 'quarterly'){
 
-            $q = $db->prepare("SELECT * FROM Charge WHERE SIREN=:SIREN AND category=:category AND state=:state AND date LIKE :date1 AND date LIKE :date2");
+            $q = $db->prepare("SELECT * FROM Charge WHERE SIREN=:SIREN AND category=:category AND state=:state AND date LIKE :date1 AND date LIKE :date2 AND date LIKE :date3");
             $q->execute([
                 'SIREN' => $user['SIREN'],
                 'category' => "training",
                 'state' => "validated",
                 'date1' => '%'.substr($startquarterlydate, 0, 6).'%',
-                'date2' => '%'.substr($endquarterlydate, 0, 6).'%'
+                'date2' => '%'.$mediumquarterlydate.'%',
+                'date3' => '%'.substr($endquarterlydate, 0, 6).'%'
             ]);
 
             if($q->rowCount() > 0){
