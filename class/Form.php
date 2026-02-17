@@ -29,7 +29,7 @@ class Form{
             !empty($this->post['password'])
             )
             {
-                if(preg_match("#^[a-z0-9.]+@[a-z0-9.]+$#i", $this->post['email']))
+                if(preg_match("#^[^<>]+$#i", $this->post['email']))
                 {
                     return 0;
                 }else{

@@ -3,6 +3,7 @@
 require 'class/Form.php';
 require 'class/User.php';
 
+require("actions/user/user_delete.php");
 require("actions/user/user_disconnect.php");
 require("actions/user/user_edit_password.php");
 require("actions/user/user_edit.php");
@@ -60,6 +61,19 @@ require("actions/user/user_edit.php");
                     <p><b>Email :</b> <?=$_SESSION['email']?></p>
                     <p><b>Téléphone :</b> <?=$_SESSION['phone']?></p>
                     <a class='waves-effect waves-light btn modal-trigger' data-target='modal_edit'>Modifier</a><a class='waves-effect waves-light btn modal-trigger' data-target='modal_edit_password'>Modifier le mot de passe</a><a class='waves-effect waves-light btn red modal-trigger' data-target='modal_disconnect'>Se déconnecter</a>
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class='offset-m2 l6 offset-l3'>
+          <div class='card-panel grey lighten-5 z-depth-1'>
+            <div class='row valign-wrapper'>
+              <div class='col s12'>
+                <span class='black-text'>
+                    <h5>Autres actions</h5>
+                    <a class='waves-effect waves-light btn red modal-trigger' data-target='modal_delete'>Supprimer mon compte</a>
                 </span>
               </div>
             </div>
@@ -132,3 +146,16 @@ require("actions/user/user_edit.php");
         </div>
     </form>
 </div>
+
+<div id='modal_delete' class='modal modal-fixed-footer'>
+    <form class='col s6' method='post'>
+    <div class='modal-content'>
+      <h4>Suppression du compte</h4>
+      <p>Êtes-vous sûr de vouloir supprimer le compte ?</p>
+    </div>
+    <div class='modal-footer'>
+        <input class='waves-effect waves-green btn' id='submit_delete' type='submit' name='submit_delete' value='Oui' class='validate'>
+        <input class='modal-close waves-effect waves-green btn red' id='cancel' type='submit' name='cancel' value='Non' class='validate'>
+    </div>
+    </form>
+    </div>

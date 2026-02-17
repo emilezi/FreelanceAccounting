@@ -32,7 +32,7 @@ require("actions/auth/authentication.php");
                 <form class='col s12' method='post'>
                   <div class='row'>
                     <div class='input-field col s12'>
-                      <input name='email' id='email' type='email' class='validate'>
+                      <input name='email' id='email' type='text' class='validate'>
                       <label for='email'>Email</label>
                     </div>
                   </div>

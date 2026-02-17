@@ -1,11 +1,16 @@
 <?php
 
 require("class/Setting.php");
+require("class/Form.php");
 require("class/User.php");
 
 $Setting = new Setting();
 $User = new User();
 
+require("actions/admin/user/new_user.php");
+require("actions/admin/user/delete_user.php");
+require("actions/admin/user/edit_password_user.php");
+require("actions/admin/user/edit_user.php");
 require("actions/admin/interface/reset.php");
 require("actions/admin/date/edit_monthly_start.php");
 require("actions/admin/date/edit_monthly_end.php");
@@ -47,6 +52,54 @@ require("actions/admin/rate/edit_protraining_rate.php");
               <div class='col s12'>
                 <span class='black-text'>
                     <h5>Utilisateurs</h5>
+                    <?php
+                    $i = 0;
+
+                    foreach($User->getUsers() as $user) {
+
+                    $i = $i + 1;
+
+                    echo "<h5><b>".$user['first_name']." ".$user['last_name']."</b></h5>";
+                    
+                    if($user['type'] === 'admin'){
+                      echo '<p><b>Type de compte :</b> Administrateur</p>';
+                    }elseif($user['type'] === 'user'){
+                      echo '<p><b>Type de compte :</b> Utilisateur</p>';
+                    }else{
+                      echo '<p><b>Statut juridique :</b> Nulle</p>';
+                    }
+                    echo "<p><b>N° SIREN :</b> ".$user['SIREN']."</p>
+                    <p><b>N° SIRET :</b> ".$user['SIRET']."</p>";
+                    if($user['status'] === 'ei'){
+                      echo '<p><b>Statut juridique :</b> EI (Entrepreneur individuel)</p>';
+                    }elseif($user['status'] === 'eurl'){
+                      echo '<p><b>Statut juridique :</b> EURL (Entreprise unipersonnelle à responsabilité limitée, possibilité de commutation vers SARL)</p>';
+                    }else{
+                      echo '<p><b>Statut juridique :</b> Nulle</p>';
+                    }
+                    echo "<p><b>Date de création de l'entreprise :</b> ".$user['date_creation']."</p>";
+                    if($user['taxation'] === 'month'){
+                      echo "<p><b>Période d'imposition :</b> Chaque mois</p>";
+                    }elseif($user['taxation'] === 'quarterly'){
+                      echo "<p><b>Période d'imposition :</b> Trimestriel</p>";
+                    }else{
+                      echo "<p><b>Période d'imposition :</b> Nulle</p>";
+                    }
+                    echo "<p><b>Identifiant :</b> ".$user['identifier']."</p>
+                    <p><b>Email :</b> ".$user['email']."</p>
+                    <p><b>Téléphone :</b> ".$user['phone']."</p>";
+
+                    echo "<tr>
+                    <td><a class='waves-effect waves-light btn modal-trigger' data-target='modal_edit_".$i."'>Modifier</a><a class='waves-effect waves-light btn modal-trigger' data-target='modal_edit_password_".$i."'>Modifier le mot de passe</a><a class='waves-effect waves-light btn red modal-trigger' data-target='modal_delete_".$i."'>Supprimer</a></td>
+                    </tr>";
+
+                    echo "<br/><br/>";
+
+                    }
+
+                    echo "<a class='waves-effect waves-light btn modal-trigger' data-target='modal_new'>Créer une nouvelle entreprise</a>";
+
+                    ?>
                 </span>
               </div>
             </div>
@@ -122,6 +175,169 @@ require("actions/admin/rate/edit_protraining_rate.php");
 
     </div>
 </div>
+
+<div id='modal_new' class='modal modal-fixed-footer'>
+    <form class='col s6' method='post'>
+    <div class='modal-content'>
+      <h4>Créer une nouvelle entreprise</h4>
+      <div class='row'>
+        <div class='row'>
+          <div class='input-field col s12'>
+            <input name='first_name' id='first_name' type='text' class='validate'>
+            <label for='first_name'>Prénom</label>
+          </div>
+        </div>
+        <div class='row'>
+          <div class='input-field col s12'>
+            <input name='last_name' id='last_name' type='text' class='validate'>
+            <label for='last_name'>Nom</label>
+          </div>
+        </div>
+        <div class='row'>
+          <div class='input-field col s12'>
+            <input name='identifier' id='identifier' type='text' class='validate'>
+            <label for='identifier'>Identifiant</label>
+          </div>
+        </div>
+        <div class='row'>
+          <div class='input-field col s12'>
+            <input name='email' id='email' type='email' class='validate'>
+            <label for='email'>Email</label>
+          </div>
+        </div>
+        <div class='row'>
+          <div class='input-field col s12'>
+            <input name='phone' id='phone' type='tel' class='validate'>
+            <label for='phone'>Téléphone</label>
+          </div>
+        </div>
+        <div class='row'>
+          <div class='input-field col s12'>
+          <select name='status'>
+            <option value='ei' selected>EI (Entrepreneur individuel, anciennement appelé EIRL)</option>
+            <option value='eurl'>EURL (Entreprise unipersonnelle à responsabilité limitée, possibilité de commutation vers SARL)</option>
+          </select>
+          <label>Status</label>
+          </div>
+        </div>
+        <div class='row'>
+          <div class='input-field col s12'>
+            <input name='SIREN' id='SIREN' type='text' class='validate'>
+            <label for='SIREN'>SIREN</label>
+          </div>
+        </div>
+        <div class='row'>
+          <div class='input-field col s12'>
+            <input name='SIRET' id='SIRET' type='text' class='validate'>
+            <label for='SIRET'>SIRET</label>
+          </div>
+        </div>
+        <div class='row'>
+          <div class='input-field col s12'>
+            <input name='date_creation' id='date_creation' type='date' class='validate'>
+            <label for='date_creation'>Date de création de l'entreprise</label>
+          </div>
+        </div>
+        <div class='row'>
+          <div class='input-field col s12'>
+          <select name='taxation'>
+            <option value='month' selected>Chaque mois</option>
+            <option value='quarterly'>Trimestriel</option>
+          </select>
+          <label>Imposition</label>
+          </div>
+        </div>
+        <div class='row'>
+          <div class='input-field col s12'>
+            <input name='password' id='password' type='password' class='validate'>
+            <label for='password'>Mot de passe</label>
+          </div>
+        </div>
+        <div class='row'>
+          <div class='input-field col s12'>
+            <input name='repassword' id='repassword' type='password' class='validate'>
+            <label for='repassword'>Retaper le mot de passe</label>
+          </div>
+        </div>
+        </div>
+    </div>
+    <div class='modal-footer'>
+        <input class='waves-effect waves-green btn' id='submit_new' type='submit' name='submit_new' value='Créer le profil' class='validate'>
+    </div>
+    </form>
+</div>
+
+<?php
+$i = 0;
+
+foreach($User->getUsers() as $user) {
+
+$i = $i + 1;
+
+echo "<div id='modal_edit_".$i."' class='modal modal-fixed-footer'>
+    <form class='col s6' method='post'>
+    <div class='modal-content'>
+    <h4>Modifier le profil</h4>
+      <div class='row'>
+        <div class='input-field col s12'>
+          <input name='email' id='email' type='text' value='".$user['email']."' class='validate'>
+          <label for='email'>Adresse email</label>
+        </div>
+      </div>
+      <div class='row'>
+        <div class='input-field col s12'>
+          <input name='phone' id='phone' type='text' value='".$user['phone']."' class='validate'>
+          <label for='phone'>Numéro de téléphone</label>
+        </div>
+      </div>
+    </div>
+    <div class='modal-footer'>
+          <input class='waves-effect waves-green btn' id='submit_edit' type='submit' name='submit_edit' value='Modifier le profil' class='validate'>
+      </div>
+      <input id='value' type='hidden' name='value' value=".$user['id'].">
+    </form>
+</div>";
+
+echo "<div id='modal_edit_password_".$i."' class='modal modal-fixed-footer'>
+    <form class='col s6' method='post'>
+    <div class='modal-content'>
+    <h4>Modifier le mot de passe</h4>
+      <div class='row'>
+        <div class='input-field col s12'>
+          <input name='password' id='password' type='password' class='validate'>
+          <label for='password'>Mot de passe</label>
+        </div>
+      </div>
+      <div class='row'>
+        <div class='input-field col s12'>
+          <input name='repassword' id='repassword' type='password' class='validate'>
+          <label for='repassword'>Retaper le mot de passe</label>
+        </div>
+      </div>
+      </div>
+      <div class='modal-footer'>
+          <input class='waves-effect waves-light btn' id='submit_edit_password' type='submit' name='submit_edit_password' value='Modifier le mot de passe' class='validate'>
+        </div>
+      <input id='value' type='hidden' name='value' value=".$user['id'].">
+    </form>
+</div>";
+
+echo "<div id='modal_delete_".$i."' class='modal modal-fixed-footer'>
+    <form class='col s6' method='post'>
+    <div class='modal-content'>
+      <h4>Suppression de l'utilisateur</h4>
+      <p>Êtes-vous sûr de vouloir supprimer l'utilisateur sélectionné ?</p>
+    </div>
+    <div class='modal-footer'>
+        <input class='waves-effect waves-green btn' id='submit_delete' type='submit' name='submit_delete' value='Oui' class='validate'>
+        <input class='modal-close waves-effect waves-green btn red' id='cancel' type='submit' name='cancel' value='Non' class='validate'>
+    </div>
+    <input id='value' type='hidden' name='value' value=".$user['id'].">
+    </form>
+    </div>";
+
+}
+?>
 
 <div id='modal_monthly_start_edit' class='modal modal-fixed-footer'>
     <form class='col s6' method='post'>

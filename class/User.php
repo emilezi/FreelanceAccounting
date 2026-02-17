@@ -13,6 +13,40 @@ class User extends Database{
     }
 
     /**
+        * Get users
+        *
+        * @return array tab users informations list
+        *
+        */
+
+    public function getUsers(){
+
+        $db = parent::getDatabase();
+
+        $q = $db->prepare("SELECT * FROM User WHERE 1");
+        $q->execute();
+
+        $users_list = null;
+
+        if($q->rowCount() > 0){
+
+            $i = 0;
+
+            while($user = $q->fetch(PDO::FETCH_ASSOC)){
+
+                $i = $i + 1;
+
+                $users_list[$i] = $user;
+        
+            }
+        
+        }
+
+        return $users_list;
+        
+    }
+
+    /**
         * Check login verification
         *
         * @param array login information
@@ -25,9 +59,10 @@ class User extends Database{
 
         $db = parent::getDatabase();
 
-        $login = $db->prepare("SELECT * FROM User WHERE email=:email");
+        $login = $db->prepare("SELECT * FROM User WHERE email=:email OR identifier=:identifier");
         $login->execute([
-        'email' => $this->user['email']
+        'email' => $this->user['email'],
+        'identifier' => $this->user['email']
         ]);
 
         $user = $login->fetch();
@@ -98,11 +133,11 @@ class User extends Database{
     }
 
     /**
-        * New user method
+        * Edit users method
         *
         */
 
-    public function newUser(){
+    public function editUsers(){
 
         $db = parent::getDatabase();
 
@@ -110,38 +145,12 @@ class User extends Database{
         'cost' => 12
         ];
                     
-        $i = $db->prepare("INSERT INTO User(`status`,`type`,`SIREN`,`SIRET`,`date_creation`,`taxation`,`first_name`,`last_name`,`identifier`,`email`,`phone`,`password`,`user_key`) VALUES(:status,:type,:SIREN,:SIRET,:date_creation,:taxation,:first_name,:last_name,:identifier,:email,:phone,:password,:user_key)");
-        $i->execute([
-            'status' => $this->user['status'],
-            'type'=> 'user',
-            'SIREN' => $this->user['SIREN'],
-            'SIRET' => $this->user['SIRET'],
-            'date_creation' => $this->user['date_creation'],
-            'taxation' => $this->user['taxation'],
-            'first_name' => $this->user['first_name'],
-            'last_name' => $this->user['last_name'],
-            'identifier' => $this->user['identifier'],
+        $q = $db->prepare("UPDATE User SET email=:email, phone=:phone WHERE id=:id");
+        $q->execute([
+            'id' => $this->user['value'],
             'email' => $this->user['email'],
-            'phone' => $this->user['phone'],
-            'password' => password_hash($this->user['password'], PASSWORD_BCRYPT, $options),
-            'user_key' => md5(microtime(TRUE)*100000)
+            'phone' => $this->user['phone']
             ]);
-        
-        $j = $db->prepare("INSERT INTO Bank(`SIREN`,`turnover_excluding_tax`,`bic1_excluding_tax`,`bic2_excluding_tax`,`bnc_excluding_tax`,`treasury`) VALUES(:SIREN,:bic1_excluding_tax,:bic2_excluding_tax,:bnc_excluding_tax,:treasury)");
-        $j->execute([
-            'SIREN' => $this->user['SIREN'],
-            'turnover_excluding_tax' => '0',
-            'bic1_excluding_tax' => '0',
-            'bic2_excluding_tax' => '0',
-            'bnc_excluding_tax' => '0',
-            'treasury' => '0'
-            ]);
-            
-        if(!file_exists("uploads/users/" . $this->user['identifier'])){
-                
-            mkdir("uploads/users/" . $this->user['identifier']);
-
-            }
         
     }
 
@@ -194,11 +203,59 @@ class User extends Database{
     }
 
     /**
-        * Set password method
+        * New user method
         *
         */
 
-    public function setPassword(){
+    public function newUser(){
+
+        $db = parent::getDatabase();
+
+        $options = [
+        'cost' => 12
+        ];
+                    
+        $i = $db->prepare("INSERT INTO User(`status`,`type`,`SIREN`,`SIRET`,`date_creation`,`taxation`,`first_name`,`last_name`,`identifier`,`email`,`phone`,`password`,`user_key`) VALUES(:status,:type,:SIREN,:SIRET,:date_creation,:taxation,:first_name,:last_name,:identifier,:email,:phone,:password,:user_key)");
+        $i->execute([
+            'status' => $this->user['status'],
+            'type'=> 'user',
+            'SIREN' => $this->user['SIREN'],
+            'SIRET' => $this->user['SIRET'],
+            'date_creation' => $this->user['date_creation'],
+            'taxation' => $this->user['taxation'],
+            'first_name' => $this->user['first_name'],
+            'last_name' => $this->user['last_name'],
+            'identifier' => $this->user['identifier'],
+            'email' => $this->user['email'],
+            'phone' => $this->user['phone'],
+            'password' => password_hash($this->user['password'], PASSWORD_BCRYPT, $options),
+            'user_key' => md5(microtime(TRUE)*100000)
+            ]);
+        
+        $j = $db->prepare("INSERT INTO Bank(`SIREN`,`turnover_excluding_tax`,`bic1_excluding_tax`,`bic2_excluding_tax`,`bnc_excluding_tax`,`treasury`) VALUES(:SIREN,:turnover_excluding_tax,:bic1_excluding_tax,:bic2_excluding_tax,:bnc_excluding_tax,:treasury)");
+        $j->execute([
+            'SIREN' => $this->user['SIREN'],
+            'turnover_excluding_tax' => '0',
+            'bic1_excluding_tax' => '0',
+            'bic2_excluding_tax' => '0',
+            'bnc_excluding_tax' => '0',
+            'treasury' => '0'
+            ]);
+            
+        if(!file_exists("uploads/users/" . $this->user['identifier'])){
+                
+            mkdir("uploads/users/" . $this->user['identifier']);
+
+            }
+        
+    }
+
+    /**
+        * Set user password method
+        *
+        */
+
+    public function setUserPassword(){
 
         $db = parent::getDatabase();
 
@@ -215,39 +272,152 @@ class User extends Database{
     }
 
     /**
-        * Set key method
+        * Set users password method
         *
         */
 
-    protected function setKey(){
+    public function setUsersPassword(){
 
         $db = parent::getDatabase();
 
-        $q = $db->prepare("UPDATE User SET key=:key WHERE id=:id");
+        $options = [
+        'cost' => 12
+        ];
+
+        $q = $db->prepare("UPDATE User SET password=:password WHERE id=:id");
         $q->execute([
-            'id' => $_SESSION['id'],
-            'key' => md5(microtime(TRUE)*100000)
+            'id' => $this->user['value'],
+            'password' => password_hash($this->user['password'], PASSWORD_BCRYPT, $options)
             ]);
         
     }
 
     /**
-        * Get user
-        *
-        * @return array user
+        * Delete user method
         *
         */
 
-    protected function getUser(){
+    public function deleteUser(){
 
         $db = parent::getDatabase();
 
-        $q = $db->prepare("SELECT * FROM User WHERE email=:email");
+        $options = [
+        'cost' => 12
+        ];
+
+        $q = $db->prepare("DELETE FROM `User` WHERE id=:id");
         $q->execute([
-        'email' => $_SESSION['email']
+            'id' => $_SESSION['id']
+            ]);
+
+        $s = $db->prepare("DELETE FROM `Bank` WHERE SIREN=:SIREN");
+        $s->execute([
+            'SIREN' => $_SESSION['SIREN']
+            ]);
+        
+    }
+
+    /**
+        * Delete users method
+        *
+        */
+
+    public function deleteUsers(){
+
+        $db = parent::getDatabase();
+
+        $options = [
+        'cost' => 12
+        ];
+
+        $q = $db->prepare("DELETE FROM `User` WHERE id=:id");
+        $q->execute([
+            'id' => $this->user['value']
+            ]);
+
+        $s = $db->prepare("DELETE FROM `Bank` WHERE id=:id");
+        $s->execute([
+            'id' => $this->user['value']
+            ]);
+        
+    }
+
+    /**
+        * Check user type
+        *
+        * @return boolean
+        *
+        */
+
+    public function checkUserType(){
+
+        $db = parent::getDatabase();
+
+        $q = $db->prepare("SELECT * FROM User WHERE id=:id");
+        $q->execute([
+        'id' => $_SESSION['id']
         ]);
 
         $user = $q->fetch();
+
+        if($user['type'] == "admin"){
+            return 1;
+        }else{
+            return 0;
+        }
+        
+    }
+
+    /**
+        * Check users type
+        *
+        * @return boolean
+        *
+        */
+
+    public function checkUsersType(){
+
+        $db = parent::getDatabase();
+
+        $q = $db->prepare("SELECT * FROM User WHERE id=:id");
+        $q->execute([
+        'id' => $this->user['value']
+        ]);
+
+        $user = $q->fetch();
+
+        if($user['type'] == "admin"){
+            return 1;
+        }else{
+            return 0;
+        }
+        
+    }
+
+    /**
+        * Check user
+        *
+        * @return boolean
+        *
+        */
+
+    public function checkUser(){
+
+        $db = parent::getDatabase();
+
+        $q = $db->prepare("SELECT * FROM User WHERE email=:email OR identifier=:identifier");
+        $q->execute([
+        'email' => $this->user['email'],
+        'identifier' => $this->user['identifier'],
+        ]);
+
+        $user = $q->fetch();
+
+        if($user == TRUE){
+            return 1;
+        }else{
+            return 0;
+        }
         
     }
 
@@ -272,6 +442,23 @@ class User extends Database{
         }else{
             return 0;
         }
+        
+    }
+
+    /**
+        * Set key method
+        *
+        */
+
+    protected function setKey(){
+
+        $db = parent::getDatabase();
+
+        $q = $db->prepare("UPDATE User SET key=:key WHERE id=:id");
+        $q->execute([
+            'id' => $_SESSION['id'],
+            'key' => md5(microtime(TRUE)*100000)
+            ]);
         
     }
 

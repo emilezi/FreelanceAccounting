@@ -4,9 +4,13 @@ $User = new User();
 
 if(isset($_POST['submit_delete'])){
 
-    if($User->checkUsersType() == 0){
+    if($User->checkUserType() == 0){
 
-        $User->deleteUsers();
+        $User->deleteUser();
+
+        session_destroy();
+
+        header('Location: index.php');
 
     }else{
         

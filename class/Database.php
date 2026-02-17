@@ -277,6 +277,8 @@ class Database{
         ALTER TABLE `User`
         ADD PRIMARY KEY (`id`),
         ADD UNIQUE KEY `SIREN` (`SIREN`),
+        ADD UNIQUE KEY `SIRET` (`SIRET`),
+        ADD UNIQUE KEY `identifier` (`identifier`),
         ADD UNIQUE KEY `email` (`email`);
 
         ALTER TABLE `Bank`
@@ -301,7 +303,7 @@ class Database{
         MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
         ALTER TABLE `User`
-        MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+        MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
         ");
 
         $q->execute();

@@ -7,7 +7,7 @@ if(isset($_POST['submit_edit_password'])){
 
     if($Form->checkPassword() == 0){
 
-        $User->setUserPassword();
+        $User->setUsersPassword();
 
     }elseif($Form->checkPassword() == 1){
 

@@ -15,11 +15,6 @@ if($Database->setConnection() == 0) {
 
     if($Database->setDatabase() == 0) {
 
-        $db = new PDO("mysql:host=" . DB_HOST . ";dbname=" . DB_NAME, USER, PASS);
-        $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
-        global $db;
-
         if($Database->setTables() == 0) {
 
 			$Session = new Session();
@@ -33,7 +28,9 @@ if($Database->setConnection() == 0) {
 				$link = $_GET['link'];
 
 				include("public/site/nav_bar.php");
-				
+
+				if($_SESSION['type'] == 'admin'){
+
 				switch($link){
 					case 'admin':{
 						include("public/pages/admin.php");
@@ -73,12 +70,51 @@ if($Database->setConnection() == 0) {
 					}
 				}
 
+				}else{
+
+					switch($link){
+					case 'bank':{
+						include("public/pages/bank.php");
+						break;
+					}
+					case 'charge':{
+						include("public/pages/charge.php");
+						break;
+					}
+					case 'client':{
+						include("public/pages/client.php");
+						break;
+					}
+					case 'currency':{
+						include("public/pages/currency.php");
+						break;
+					}
+					case 'business':{
+						include("public/pages/business.php");
+						break;
+					}
+					case 'service':{
+						include("public/pages/service.php");
+						break;
+					}
+					case 'user':{
+						include("public/pages/user.php");
+						break;
+					}
+					default :{
+						include("public/pages/site.php");
+						break;
+					}
+				}
+
+				}
+
 				
 
 			}elseif($Session->UserSession() == 1){
 
 				if(!isset($_GET['link'])){
-					$_GET['link'] = 'authentication';
+					$_GET['link'] = 'site';
 				}
 
 				$link = $_GET['link'];

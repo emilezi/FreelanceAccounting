@@ -1,6 +1,8 @@
 <ul id="dropdown1" class="dropdown-content">
   <li><a href="index.php?link=user">Profil</a></li>
-  <li><a href="index.php?link=admin">Admin</a></li>
+  <?php
+  if($_SESSION['type'] == "admin"){echo "<li><a href='index.php?link=admin'>Admin</a></li>";}
+  ?>
 </ul>
 <ul id="dropdown2" class="dropdown-content">
   <li><a href="index.php?link=bank">Banque</a></li>

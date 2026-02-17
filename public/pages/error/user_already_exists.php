@@ -1,0 +1,1 @@
+<p>Un utilisateur possédant cet identifiant ou cette adresse e-mail existe déjà.</p>
