@@ -1,3 +1,7 @@
+<?php
+require("actions/start/user_recovery.php");
+?>
+
 <div class="container">
   <div class="section">
     

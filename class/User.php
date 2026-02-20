@@ -47,9 +47,27 @@ class User extends Database{
     }
 
     /**
-        * Check login verification
+        * Get user
         *
-        * @param array login information
+        * @return array tab user informations
+        *
+        */
+
+    public function getUser(){
+
+        $db = parent::getDatabase();
+
+        $q = $db->prepare("SELECT * FROM User WHERE email=:email");
+        $q->execute(['email' => $this->user['email']]);
+
+        $user = $q->fetch();
+
+        return $user;
+        
+    }
+
+    /**
+        * Check login verification
         *
         * @return int if the fields are correctly filled in otherwise return the error number
         *
@@ -272,6 +290,28 @@ class User extends Database{
     }
 
     /**
+        * Set recovery user password method
+        *
+        */
+
+    public function setRecoveryPassword(){
+
+        $db = parent::getDatabase();
+
+        $options = [
+        'cost' => 12
+        ];
+
+        $q = $db->prepare("UPDATE User SET password=:password WHERE user_key=:user_key AND recovery_key=:recovery_key");
+        $q->execute([
+            'user_key' => $_GET['get1'],
+            'recovery_key' => $_GET['get2'],
+            'password' => password_hash($this->user['password'], PASSWORD_BCRYPT, $options)
+            ]);
+        
+    }
+
+    /**
         * Set users password method
         *
         */
@@ -301,10 +341,6 @@ class User extends Database{
 
         $db = parent::getDatabase();
 
-        $options = [
-        'cost' => 12
-        ];
-
         $q = $db->prepare("DELETE FROM `User` WHERE id=:id");
         $q->execute([
             'id' => $_SESSION['id']
@@ -325,10 +361,6 @@ class User extends Database{
     public function deleteUsers(){
 
         $db = parent::getDatabase();
-
-        $options = [
-        'cost' => 12
-        ];
 
         $q = $db->prepare("DELETE FROM `User` WHERE id=:id");
         $q->execute([
@@ -437,27 +469,46 @@ class User extends Database{
         'email' => $this->user['email']
         ]);
 
+        $user = $q->fetch();
+
         if($user == TRUE){
-            return 1;
-        }else{
             return 0;
+        }else{
+            return 1;
         }
         
     }
 
     /**
-        * Set key method
+        * Set recovery key method
         *
         */
 
-    protected function setKey(){
+    public function setRecoveryKeyChecked(){
 
         $db = parent::getDatabase();
 
-        $q = $db->prepare("UPDATE User SET key=:key WHERE id=:id");
+        $q = $db->prepare("UPDATE User SET recovery_key=:recovery_key WHERE user_key=:user_key");
         $q->execute([
-            'id' => $_SESSION['id'],
-            'key' => md5(microtime(TRUE)*100000)
+            'user_key' => $_GET['get1'],
+            'recovery_key' => md5(microtime(TRUE)*100000)
+            ]);
+        
+    }
+
+    /**
+        * Set recovery key method
+        *
+        */
+
+    public function setRecoveryKey(){
+
+        $db = parent::getDatabase();
+
+        $q = $db->prepare("UPDATE User SET recovery_key=:recovery_key WHERE email=:email");
+        $q->execute([
+            'email' => $this->user['email'],
+            'recovery_key' => md5(microtime(TRUE)*100000)
             ]);
         
     }
@@ -469,20 +520,22 @@ class User extends Database{
         *
         */
 
-    public function checkKeyMail($user_key,$key){
+    public function checkEmailKey(){
 
         $db = parent::getDatabase();
 
-        $q = $db->prepare("SELECT * FROM User WHERE user_key=:user_key AND key=:key");
+        $q = $db->prepare("SELECT * FROM User WHERE user_key=:user_key AND email_key=:email_key");
         $q->execute([
-        'user_key' => $user_key,
-        'key' => $key
+        'user_key' => $_GET['get1'],
+        'email_key' => $_GET['get2']
         ]);
 
+        $user = $q->fetch();
+
         if($user == TRUE){
-            return 1;
-        }else{
             return 0;
+        }else{
+            return 1;
         }
         
     }
@@ -494,20 +547,22 @@ class User extends Database{
         *
         */
 
-    public function checkRecoveryKey($user_key,$key){
+    public function checkRecoveryKey(){
 
         $db = parent::getDatabase();
 
-        $q = $db->prepare("SELECT * FROM User WHERE user_key=:user_key AND key=:key");
+        $q = $db->prepare("SELECT * FROM User WHERE user_key=:user_key AND recovery_key=:recovery_key");
         $q->execute([
-        'user_key' => $user_key,
-        'key' => $key
+        'user_key' => $_GET['get1'],
+        'recovery_key' => $_GET['get2']
         ]);
 
+        $user = $q->fetch();
+
         if($user == TRUE){
-            return 1;
-        }else{
             return 0;
+        }else{
+            return 1;
         }
         
     }

@@ -15,8 +15,6 @@ class Form{
     /**
         * Authentification verification form
         *
-        * @param array form post authentification information
-        *
         * @return int if the fields are correctly filled in otherwise return the error number
         *
         */
@@ -44,8 +42,6 @@ class Form{
 
     /**
         * New user verification form
-        *
-        * @param array form post new user information
         *
         * @return int if the fields are correctly filled in otherwise return the error number
         *
@@ -108,8 +104,6 @@ class Form{
     /**
         * Edit user verification form
         *
-        * @param array form post edit user information
-        *
         * @return int if the fields are correctly filled in otherwise return the error number
         *
         */
@@ -139,9 +133,30 @@ class Form{
     }
 
     /**
-        * Check password verification form
+        * Check email verification form
         *
-        * @param array form post check password information
+        * @return int if the fields are correctly filled in otherwise return the error number
+        *
+        */
+
+    public function checkEmail(){
+
+        if(!empty($this->post['email']))
+        {
+            if(preg_match("#^[a-z0-9.]+@[a-z0-9.]+$#i", $this->post['email']))
+            {
+                return 0;
+            }else{
+                return 1;
+            }
+        }else{
+            return 2;
+        }
+
+    }
+
+    /**
+        * Check password verification form
         *
         * @return int if the fields are correctly filled in otherwise return the error number
         *
@@ -175,8 +190,6 @@ class Form{
 
     /**
         * Check business verification form
-        *
-        * @param array form post check business information
         *
         * @return int if the fields are correctly filled in otherwise return the error number
         *
@@ -241,8 +254,6 @@ class Form{
     /**
         * Check charge verification form
         *
-        * @param array form post check charge information
-        *
         * @return int if the fields are correctly filled in otherwise return the error number
         *
         */
@@ -277,8 +288,6 @@ class Form{
 
     /**
         * Check client verification form
-        *
-        * @param array form post check client information
         *
         * @return int if the fields are correctly filled in otherwise return the error number
         *
@@ -324,8 +333,6 @@ class Form{
 
     /**
         * Check currency verification form
-        *
-        * @param array form post check currency information
         *
         * @return int if the fields are correctly filled in otherwise return the error number
         *
@@ -373,8 +380,6 @@ class Form{
 
     /**
         * Check service verification form
-        *
-        * @param array form post check service information
         *
         * @return int if the fields are correctly filled in otherwise return the error number
         *

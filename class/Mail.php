@@ -8,15 +8,15 @@ class Mail extends User{
     
     public function MailVerification(){
 
-        self->setKey();
-        $user = self->getUser();
+        $this->setKey();
+        $user = $this->getUser();
 
         $sujet = "FreelanceAccounting - Verification de l'adresse mail";
-        $entete = "From: service@" . HTTP_HOST;
+        $entete = "From: service@" . EMAIL_HOST;
         
         $message = "Pour verifier l'adresse mail, merci de cliquer sur ce lien
         
-        https://" . HTTP_HOST . "/index.php?page=mail_verification&get1=".urlencode($user['user_key'])."get2=".urlencode($user['key'])."
+        http://" . HTTP_HOST . "/index.php?link=mail_verification&get1=".urlencode($user['user_key'])."get2=".urlencode($user['recovery_key'])."
         
         ---------------
         Ce mail est un mail automatique, merci de ne pas répondre";
@@ -25,17 +25,17 @@ class Mail extends User{
 
     }
 
-    public function MailRecovery($user){
+    public function MailRecovery(){
 
-        self->setKey();
-        $user = self->getUser();
+        $this->setRecoveryKey();
+        $user = $this->getUser();
     
-        $sujet = HTTP_HOST . " - Recupération de votre compte";
-        $entete = "From: service@" . HTTP_HOST;
+        $sujet = "FreelanceAccounting - Recupération de votre compte";
+        $entete = "From: service@" . EMAIL_HOST;
         
         $message = "Pour recupérer votre compte, merci de cliquer sur ce lien
         
-        https://" . HTTP_HOST . "/index.php?page=password_recovery&get1=".urlencode($user['user_key'])."&get2=".urlencode($user['key'])."
+        http://" . HTTP_HOST . "/link.php?page=password_recovery&get1=".urlencode($user['user_key'])."&get2=".urlencode($user['recovery_key'])."
         
         ---------------
         Ce mail est un mail automatique, merci de ne pas répondre";

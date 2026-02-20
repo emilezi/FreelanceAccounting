@@ -9,8 +9,6 @@ class Session extends Database{
     /**
         * Check session verification
         *
-        * @param array session information
-        *
         * @return int if the fields are correctly filled in otherwise return the error number
         *
         */

@@ -244,11 +244,12 @@ class Database{
         `last_name` varchar(128) NOT NULL,
         `identifier` varchar(128) NOT NULL,
         `email` varchar(128) NOT NULL,
-        `email_verification` varchar(64) NULL,
+        `email_checked` varchar(64) NULL,
         `phone` varchar(12) NOT NULL,
         `password` varchar(255) NOT NULL,
         `user_key` varchar(255) NOT NULL,
-        `key` varchar(255) DEFAULT NULL,
+        `email_key` varchar(255) DEFAULT NULL,
+        `recovery_key` varchar(255) DEFAULT NULL,
         `date` timestamp NOT NULL DEFAULT current_timestamp()
         ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
