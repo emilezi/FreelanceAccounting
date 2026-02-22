@@ -244,7 +244,7 @@ class Database{
         `last_name` varchar(128) NOT NULL,
         `identifier` varchar(128) NOT NULL,
         `email` varchar(128) NOT NULL,
-        `email_checked` varchar(64) NULL,
+        `email_checked` varchar(64) NOT NULL,
         `phone` varchar(12) NOT NULL,
         `password` varchar(255) NOT NULL,
         `user_key` varchar(255) NOT NULL,

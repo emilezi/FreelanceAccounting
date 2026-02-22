@@ -57,6 +57,26 @@ class User extends Database{
 
         $db = parent::getDatabase();
 
+        $q = $db->prepare("SELECT * FROM User WHERE id=:id");
+        $q->execute(['id' => $_SESSION['id']]);
+
+        $user = $q->fetch();
+
+        return $user;
+        
+    }
+
+    /**
+        * Get recovery user
+        *
+        * @return array tab user informations
+        *
+        */
+
+    public function getRecoveryUser(){
+
+        $db = parent::getDatabase();
+
         $q = $db->prepare("SELECT * FROM User WHERE email=:email");
         $q->execute(['email' => $this->user['email']]);
 
@@ -141,10 +161,11 @@ class User extends Database{
         'cost' => 12
         ];
                     
-        $q = $db->prepare("UPDATE User SET email=:email, phone=:phone WHERE id=:id");
+        $q = $db->prepare("UPDATE User SET email=:email, email_checked=:email_checked, phone=:phone WHERE id=:id");
         $q->execute([
             'id' => $_SESSION['id'],
             'email' => $this->user['email'],
+            'email_checked' => "false",
             'phone' => $this->user['phone']
             ]);
         
@@ -163,10 +184,11 @@ class User extends Database{
         'cost' => 12
         ];
                     
-        $q = $db->prepare("UPDATE User SET email=:email, phone=:phone WHERE id=:id");
+        $q = $db->prepare("UPDATE User SET email=:email, email_checked=:email_checked, phone=:phone WHERE id=:id");
         $q->execute([
             'id' => $this->user['value'],
             'email' => $this->user['email'],
+            'email_checked' => "false",
             'phone' => $this->user['phone']
             ]);
         
@@ -185,7 +207,7 @@ class User extends Database{
         'cost' => 12
         ];
                     
-        $i = $db->prepare("INSERT INTO User(`status`,`type`,`SIREN`,`SIRET`,`date_creation`,`taxation`,`first_name`,`last_name`,`identifier`,`email`,`phone`,`password`,`user_key`) VALUES(:status,:type,:SIREN,:SIRET,:date_creation,:taxation,:first_name,:last_name,:identifier,:email,:phone,:password,:user_key)");
+        $i = $db->prepare("INSERT INTO User(`status`,`type`,`SIREN`,`SIRET`,`date_creation`,`taxation`,`first_name`,`last_name`,`identifier`,`email`,`email_checked`,`phone`,`password`,`user_key`) VALUES(:status,:type,:SIREN,:SIRET,:date_creation,:taxation,:first_name,:last_name,:identifier,:email,:email_checked,:phone,:password,:user_key)");
         $i->execute([
             'status' => $this->user['status'],
             'type'=> 'admin',
@@ -197,6 +219,7 @@ class User extends Database{
             'last_name' => $this->user['last_name'],
             'identifier' => $this->user['identifier'],
             'email' => $this->user['email'],
+            'email_checked' => "false",
             'phone' => $this->user['phone'],
             'password' => password_hash($this->user['password'], PASSWORD_BCRYPT, $options),
             'user_key' => md5(microtime(TRUE)*100000)
@@ -233,7 +256,7 @@ class User extends Database{
         'cost' => 12
         ];
                     
-        $i = $db->prepare("INSERT INTO User(`status`,`type`,`SIREN`,`SIRET`,`date_creation`,`taxation`,`first_name`,`last_name`,`identifier`,`email`,`phone`,`password`,`user_key`) VALUES(:status,:type,:SIREN,:SIRET,:date_creation,:taxation,:first_name,:last_name,:identifier,:email,:phone,:password,:user_key)");
+        $i = $db->prepare("INSERT INTO User(`status`,`type`,`SIREN`,`SIRET`,`date_creation`,`taxation`,`first_name`,`last_name`,`identifier`,`email`,`email_checked`,`phone`,`password`,`user_key`) VALUES(:status,:type,:SIREN,:SIRET,:date_creation,:taxation,:first_name,:last_name,:identifier,:email,:email_checked,:phone,:password,:user_key)");
         $i->execute([
             'status' => $this->user['status'],
             'type'=> 'user',
@@ -245,6 +268,7 @@ class User extends Database{
             'last_name' => $this->user['last_name'],
             'identifier' => $this->user['identifier'],
             'email' => $this->user['email'],
+            'email_checked' => "false",
             'phone' => $this->user['phone'],
             'password' => password_hash($this->user['password'], PASSWORD_BCRYPT, $options),
             'user_key' => md5(microtime(TRUE)*100000)
@@ -437,8 +461,10 @@ class User extends Database{
 
         $db = parent::getDatabase();
 
-        $q = $db->prepare("SELECT * FROM User WHERE email=:email OR identifier=:identifier");
+        $q = $db->prepare("SELECT * FROM User WHERE SIREN=:SIREN OR SIRET=:SIRET OR email=:email OR identifier=:identifier");
         $q->execute([
+        'SIREN' => $this->user['SIREN'],
+        'SIRET' => $this->user['SIRET'],
         'email' => $this->user['email'],
         'identifier' => $this->user['identifier'],
         ]);
@@ -476,6 +502,40 @@ class User extends Database{
         }else{
             return 1;
         }
+        
+    }
+
+    /**
+        * Set email key method
+        *
+        */
+
+    public function setEmailKeyChecked(){
+
+        $db = parent::getDatabase();
+
+        $q = $db->prepare("UPDATE User SET email_key=:email_key WHERE user_key=:user_key");
+        $q->execute([
+            'user_key' => $_GET['get1'],
+            'email_key' => md5(microtime(TRUE)*100000)
+            ]);
+        
+    }
+
+    /**
+        * Set email key method
+        *
+        */
+
+    public function setEmailKey(){
+
+        $db = parent::getDatabase();
+
+        $q = $db->prepare("UPDATE User SET email_key=:email_key WHERE email=:email");
+        $q->execute([
+            'email' => $_SESSION['email'],
+            'email_key' => md5(microtime(TRUE)*100000)
+            ]);
         
     }
 

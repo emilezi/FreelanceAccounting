@@ -32,6 +32,10 @@ if($Database->setConnection() == 0) {
 				if($_SESSION['type'] == 'admin'){
 
 				switch($link){
+					case 'mail_verification':{
+						include("public/pages/mail_verification.php");
+						break;
+					}
 					case 'admin':{
 						include("public/pages/admin.php");
 						break;
@@ -73,6 +77,10 @@ if($Database->setConnection() == 0) {
 				}else{
 
 					switch($link){
+					case 'mail_verification':{
+						include("public/pages/mail_verification.php");
+						break;
+					}
 					case 'bank':{
 						include("public/pages/bank.php");
 						break;

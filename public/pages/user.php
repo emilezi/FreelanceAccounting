@@ -2,11 +2,17 @@
 
 require 'class/Form.php';
 require 'class/User.php';
+require 'class/Mail.php';
 
+require("actions/user/check_mail.php");
 require("actions/user/user_delete.php");
 require("actions/user/user_disconnect.php");
 require("actions/user/user_edit_password.php");
 require("actions/user/user_edit.php");
+
+$User = new User();
+
+$user = $User->getUser();
 
 ?>
 
@@ -58,8 +64,18 @@ require("actions/user/user_edit.php");
                     }
                     ?>
                     <p><b>Identifiant :</b> <?=$_SESSION['identifier']?></p>
-                    <p><b>Email :</b> <?=$_SESSION['email']?></p>
-                    <p><b>Téléphone :</b> <?=$_SESSION['phone']?></p>
+                    <p><b>Email :</b> <?=$user['email']?></p>
+                    <?php
+                    if($user['email_checked'] === "false"){
+                      echo "<form class='col s6' method='post'>
+                      <input class='waves-effect waves-green btn' id='submit_email' type='submit' name='submit_email' value='Verifier' class='validate'>
+                      </form>";
+                    }else{
+                      echo "<p>L'adresse e-mail a été vérifiée avec succès.</p>";
+                    }
+                    ?>
+                    <br/><br/>
+                    <p><b>Téléphone :</b> <?=$user['phone']?></p>
                     <a class='waves-effect waves-light btn modal-trigger' data-target='modal_edit'>Modifier</a><a class='waves-effect waves-light btn modal-trigger' data-target='modal_edit_password'>Modifier le mot de passe</a><a class='waves-effect waves-light btn red modal-trigger' data-target='modal_disconnect'>Se déconnecter</a>
                 </span>
               </div>
@@ -107,13 +123,13 @@ require("actions/user/user_edit.php");
     <h4>Modifier le profil</h4>
       <div class='row'>
         <div class='input-field col s12'>
-          <input name='email' id='email' type='text' value='<?=$_SESSION['email']?>' class='validate'>
+          <input name='email' id='email' type='text' value='<?=$user['email']?>' class='validate'>
           <label for='email'>Adresse email</label>
         </div>
       </div>
       <div class='row'>
         <div class='input-field col s12'>
-          <input name='phone' id='phone' type='text' value='<?=$_SESSION['phone']?>' class='validate'>
+          <input name='phone' id='phone' type='text' value='<?=$user['phone']?>' class='validate'>
           <label for='phone'>Numéro de téléphone</label>
         </div>
       </div>

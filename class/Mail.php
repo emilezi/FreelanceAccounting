@@ -8,7 +8,7 @@ class Mail extends User{
     
     public function MailVerification(){
 
-        $this->setKey();
+        $this->setEmailKey();
         $user = $this->getUser();
 
         $sujet = "FreelanceAccounting - Verification de l'adresse mail";
@@ -28,7 +28,7 @@ class Mail extends User{
     public function MailRecovery(){
 
         $this->setRecoveryKey();
-        $user = $this->getUser();
+        $user = $this->getRecoveryUser();
     
         $sujet = "FreelanceAccounting - Recupération de votre compte";
         $entete = "From: service@" . EMAIL_HOST;
