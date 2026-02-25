@@ -1,0 +1,1 @@
+<p>Un e-mail de vérification a été envoyé.</p>

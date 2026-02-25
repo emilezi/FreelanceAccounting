@@ -451,6 +451,62 @@ class User extends Database{
     }
 
     /**
+        * Check user email or phone number
+        *
+        * @return boolean
+        *
+        */
+
+    public function checkEmailPhoneUser(){
+
+        $db = parent::getDatabase();
+
+        $q = $db->prepare("SELECT * FROM User WHERE id<>:id AND email=:email OR id<>:id AND phone=:phone");
+        $q->execute([
+        'id' => $_SESSION['id'],
+        'email' => $this->user['email'],
+        'phone' => $this->user['phone']
+        ]);
+
+        $user = $q->fetch();
+
+        if($user == TRUE){
+            return 1;
+        }else{
+            return 0;
+        }
+        
+    }
+
+    /**
+        * Check user email or phone number
+        *
+        * @return boolean
+        *
+        */
+
+    public function checkEmailPhoneUsers(){
+
+        $db = parent::getDatabase();
+
+        $q = $db->prepare("SELECT * FROM User WHERE id<>:id AND email=:email OR id<>:id AND phone=:phone");
+        $q->execute([
+        'id' => $this->user['value'],
+        'email' => $this->user['email'],
+        'phone' => $this->user['phone']
+        ]);
+
+        $user = $q->fetch();
+
+        if($user == TRUE){
+            return 1;
+        }else{
+            return 0;
+        }
+        
+    }
+
+    /**
         * Check user
         *
         * @return boolean

@@ -7,7 +7,15 @@ if(isset($_POST['submit_edit'])){
 
     if($Form->editUser() == 0){
 
-        $User->editUser();
+        if($User->checkEmailPhoneUser() == 0){
+
+            $User->editUser();
+
+        }else{
+
+            include("public/pages/error/user_already_email_phone_exists.php");
+
+        }
 
     }elseif($Form->editUser() == 1){
 

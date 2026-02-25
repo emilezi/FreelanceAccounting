@@ -16,6 +16,8 @@ if(isset($_POST['submit'])){
 
             $Mail->MailRecovery();
 
+            include("public/pages/message/recovery_email_sent.php");
+
         }else{
 
             include("public/pages/error/user_not_found.php");
